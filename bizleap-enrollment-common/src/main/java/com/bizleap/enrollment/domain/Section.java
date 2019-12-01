@@ -11,6 +11,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.bizleap.enrollment.domain.SystemConstant.DayType;
+
 @Entity
 @Table(name = "section")
 public class Section extends AbstractEntity {
