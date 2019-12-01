@@ -13,6 +13,7 @@ import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.bizleap.enrollment.domain.SystemConstant.Position;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -39,9 +40,6 @@ public class Employee extends Person {
 		super(boId);
 	}
 	public List<Section> getSectionList() {
-
-		if (sectionList=null)
-			this.sectionList<Section>();
 		
 		return sectionList;
 	}

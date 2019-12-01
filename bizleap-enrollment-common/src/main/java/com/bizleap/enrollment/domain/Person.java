@@ -2,7 +2,7 @@ package com.bizleap.enrollment.domain;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class Person {
+public class Person extends AbstractEntity{
 
 	private String address;
 	private int age;
@@ -13,10 +13,10 @@ public class Person {
 	    	
 	    }
 	    
-	    /*public Person(String boId,String id,String name) {
-	    	super(boId,id,name);
+	    public Person(String boId) {
+	    	super(boId);
 	    	
-	    }*/
+	    }
 	
 	public String getAddress() {
 		return address;
