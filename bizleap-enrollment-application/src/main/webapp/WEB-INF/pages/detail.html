@@ -1,0 +1,176 @@
+<div id="detail-table" class="hide">
+
+	<!-- Department Form -->
+	<div class="hide" id="departmentForm">
+		<form action="javascript:saveDepartment();" id="newDepartmentForm">
+			<label for="Department-name" id="label">Department Name:</label> <input
+				type="text" id="department-name" style="width: 200px" /><br /> <input
+				type="submit" value="Save" id="saveDepartmentForm" /> <input
+				type="button" value="Cancel" id="cancelDepartmentForm"
+				onclick="document.getElementById('departmentForm').className = 'hide';
+			document.getElementById('department-detail-table').className = 'show';" />
+		</form>
+	</div>
+	<!-- Department Form -->
+
+	<!-- Teacher Form -->
+	<div class="hide" id="teacherForm">
+		<form action="javascript:saveTeacher();" id="newTeacherForm">
+			<label for="Teacher-name" id="label">Teacher Name:</label> <input
+				type="text" id="teacher-name" style="width: 200px" /><br /> <label
+				for="selectDepartment" id="label1">Select Department:</label> <select
+				id="department" name="department">
+				<option th:each="department : ${departmentList}"
+					th:value="${department.boId}" th:text="${department.name}">
+				</option>
+			</select> <input type="submit" value="Save" id="saveTeacherForm" /> <input
+				type="button" value="Cancel" id="cancelTeacherForm"
+				onclick="document.getElementById('teacherForm').className = 'hide';
+			document.getElementById('teacher-detail-table').className = 'show';" />
+		</form>
+	</div>
+	<!-- Teacher Form -->
+
+	<!-- Staff Form -->
+	<div class="hide" id="staffForm">
+		<form action="javascript:saveStaff();" id="newStaffForm">
+			<label for="Staff-name" id="label">Staff Name:</label> <input
+				type="text" id="staff-name" style="width: 200px" /><br /> <label
+				for="selectDepartment" id="label2">Select Department:</label> <select
+				id="department1" name="department">
+				<option th:each="department : ${departmentList}"
+					th:value="${department.boId}" th:text="${department.name}">
+				</option>
+			</select> <input type="submit" value="Save" id="saveStaffForm" /> <input
+				type="button" value="Cancel" id="cancelStaffForm"
+				onclick="document.getElementById('staffForm').className = 'hide';
+			document.getElementById('staff-detail-table').className = 'show';" />
+		</form>
+	</div>
+	<!-- Staff Form -->
+
+	<!-- Major Form -->
+	<div class="hide" id="majorForm">
+		<form action="javascript:saveMajor();" id="newMajorForm">
+			<label for="Major-name" id="label">Major Name:</label> <input
+				type="text" id="major-name" style="width: 200px" /><br /> <input
+				type="submit" value="Save" id="saveMajorForm" /> <input
+				type="button" value="Cancel" id="cancelMajorForm"
+				onclick="document.getElementById('majorForm').className = 'hide';
+			document.getElementById('major-detail-table').className = 'show';" />
+		</form>
+	</div>
+	<!-- Major Form -->
+
+	<!-- Student Form -->
+	<div class="hide" id="studentForm">
+		<form action="javascript:saveStudent();" id="newStudentForm">
+			<label for="Student-name" id="label">Student Name:</label> <input
+				type="text" id="student-name" style="width: 200px" /><br /> <label
+				for="selectMajor" id="label3">Select Major:</label> <select
+				id="major" name="major">
+				<option th:each="major : ${majorList}" th:value="${major.boId}"
+					th:text="${major.name}"></option>
+			</select> <input type="submit" value="Save" id="saveStudentForm" /> <input
+				type="button" value="Cancel" id="cancelStudentForm"
+				onclick="document.getElementById('studentForm').className = 'hide';
+			document.getElementById('student-detail-table').className = 'show';" />
+		</form>
+	</div>
+	<!-- Student Form -->
+
+	<div th:if="${department!=NULL}" id="department-detail-table"
+		class="hide">
+		<table style="width: 40%;">
+			<tr th:if="${department!='INVALID'}" th:value="${department.id}"
+				id="detail-department-id">
+				<td>Department BoId:</td>
+				<td th:text="${department.boId}"></td>
+				<td><input type="submit" value="Add New" id="addNewButton"
+					onclick="addNewDepartment()" /></td>
+			</tr>
+			<tr th:if="${department!='INVALID'}">
+				<td>Department Name:</td>
+				<td th:text="${department.name}"></td>
+			</tr>
+		</table>
+	</div>
+
+	<div th:if="${teacher!=NULL}" id="teacher-detail-table" class="hide">
+		<table style="width: 40%;">
+			<tr th:if="${teacher!='INVALID'}" th:value="${teacher.id}"
+				id="detail-teacher-id">
+				<td>Teacher BoId:</td>
+				<td th:text="${teacher.boId}" style=""></td>
+				<td><input type="submit" value="Add New" id="addNewButton1"
+					onclick="getNewTeacherForm()" /></td>
+			</tr>
+			<tr th:if="${teacher!='INVALID'}">
+				<td>Teacher Name:</td>
+				<td th:text="${teacher.name}"></td>
+			</tr>
+			<tr th:if="${teacher!='INVALID'}">
+				<td>Teacher Department Name:</td>
+				<td th:if="${teacher.department!=NULL}"
+					th:text="${teacher.department.name}"></td>
+			</tr>
+		</table>
+	</div>
+
+	<div th:if="${staff!=NULL}" id="staff-detail-table" class="hide">
+		<table style="width: 40%;">
+			<tr th:if="${staff!='INVALID'}" th:value="${staff.id}"
+				id="detail-staff-id">
+				<td>Staff BoId:</td>
+				<td th:text="${staff.boId}" style=""></td>
+				<td><input type="submit" value="Add New" id="addNewButton2"
+					onclick="getNewStaffForm()" /></td>
+			</tr>
+			<tr th:if="${staff!='INVALID'}">
+				<td>Staff Name:</td>
+				<td th:text="${staff.name}"></td>
+			</tr>
+			<tr th:if="${staff!='INVALID'}">
+				<td>Staff Department Name:</td>
+				<td th:if="${staff.department!=NULL}"
+					th:text="${staff.department.name}"></td>
+			</tr>
+		</table>
+	</div>
+
+	<div th:if="${major!=NULL}" id="major-detail-table" class="hide">
+		<table style="width: 40%;">
+			<tr th:if="${major!='INVALID'}" th:value="${major.id}"
+				id="detail-major-id">
+				<td>Major BoId:</td>
+				<td th:text="${major.boId}"></td>
+				<td><input type="submit" value="Add New" id="addNewButton"
+					onclick="addNewMajor()" /></td>
+			</tr>
+			<tr th:if="${major!='INVALID'}">
+				<td>Major Name:</td>
+				<td th:text="${major.name}"></td>
+			</tr>
+		</table>
+	</div>
+
+	<div th:if="${student!=NULL}" id="student-detail-table" class="hide">
+		<table style="width: 40%;">
+			<tr th:if="${student!='INVALID'}" th:value="${student.id}"
+				id="detail-student-id">
+				<td>Student BoId:</td>
+				<td th:text="${student.boId}" style=""></td>
+				<td><input type="submit" value="Add New" id="addNewButton"
+					onclick="getNewStudentForm()" /></td>
+			</tr>
+			<tr th:if="${student!='INVALID'}">
+				<td>Student Name:</td>
+				<td th:text="${student.name}"></td>
+			</tr>
+			<tr th:if="${student!='INVALID'}">
+				<td>Student Major Name:</td>
+				<td th:if="${student.major!=NULL}" th:text="${student.major.name}"></td>
+			</tr>
+		</table>
+	</div>
+</div>
