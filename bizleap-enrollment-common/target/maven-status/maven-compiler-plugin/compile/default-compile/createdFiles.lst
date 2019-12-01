@@ -1,1 +1,2 @@
-org\bizleap\enrollment\common\App.class
+com\bizleap\enrollment\domain\AbstractEntity.class
+com\bizleap\enrollment\domain\Section.class

@@ -1,6 +1,6 @@
-E:\Student Enrollment System\bizleap-enrollment-system\bizleap-enrollment-application\src\main\java\com\bizleap\ds\application\config\CoreConfig.java
-E:\Student Enrollment System\bizleap-enrollment-system\bizleap-enrollment-application\src\main\java\com\bizleap\ds\application\config\PropertiesLoader.java
-E:\Student Enrollment System\bizleap-enrollment-system\bizleap-enrollment-application\src\main\java\com\bizleap\ds\application\config\RepositoryConfig.java
-E:\Student Enrollment System\bizleap-enrollment-system\bizleap-enrollment-application\src\main\java\com\bizleap\ds\application\config\WebConfig.java
-E:\Student Enrollment System\bizleap-enrollment-system\bizleap-enrollment-application\src\main\java\com\bizleap\ds\application\config\AppConfig.java
-E:\Student Enrollment System\bizleap-enrollment-system\bizleap-enrollment-application\src\main\java\com\bizleap\ds\application\config\WebAppInitializer.java
+D:\StudentEnrollmentSystem\bizleapEnrollmentSystem\bizleap-enrollment-application\src\main\java\com\bizleap\enrollment\application\config\CoreConfig.java
+D:\StudentEnrollmentSystem\bizleapEnrollmentSystem\bizleap-enrollment-application\src\main\java\com\bizleap\enrollment\application\config\AppConfig.java
+D:\StudentEnrollmentSystem\bizleapEnrollmentSystem\bizleap-enrollment-application\src\main\java\com\bizleap\enrollment\application\config\WebAppInitializer.java
+D:\StudentEnrollmentSystem\bizleapEnrollmentSystem\bizleap-enrollment-application\src\main\java\com\bizleap\enrollment\application\config\RepositoryConfig.java
+D:\StudentEnrollmentSystem\bizleapEnrollmentSystem\bizleap-enrollment-application\src\main\java\com\bizleap\enrollment\application\config\WebConfig.java
+D:\StudentEnrollmentSystem\bizleapEnrollmentSystem\bizleap-enrollment-application\src\main\java\com\bizleap\enrollment\application\config\PropertiesLoader.java

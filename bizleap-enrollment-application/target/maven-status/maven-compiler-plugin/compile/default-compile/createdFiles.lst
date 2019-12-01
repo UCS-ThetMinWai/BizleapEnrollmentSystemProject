@@ -1,6 +1,6 @@
-com\bizleap\ds\application\config\CoreConfig.class
-com\bizleap\ds\application\config\AppConfig.class
-com\bizleap\ds\application\config\RepositoryConfig.class
-com\bizleap\ds\application\config\PropertiesLoader.class
-com\bizleap\ds\application\config\WebAppInitializer.class
-com\bizleap\ds\application\config\WebConfig.class
+com\bizleap\enrollment\application\config\WebConfig.class
+com\bizleap\enrollment\application\config\CoreConfig.class
+com\bizleap\enrollment\application\config\PropertiesLoader.class
+com\bizleap\enrollment\application\config\WebAppInitializer.class
+com\bizleap\enrollment\application\config\RepositoryConfig.class
+com\bizleap\enrollment\application\config\AppConfig.class
