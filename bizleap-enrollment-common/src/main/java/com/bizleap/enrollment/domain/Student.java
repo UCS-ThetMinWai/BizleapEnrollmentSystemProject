@@ -1,5 +1,6 @@
 package com.bizleap.enrollment.domain;
- import java.util.List;
+
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,33 +16,32 @@ import com.bizleap.enrollment.domain.SystemConstant.StudentStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="student")
-public class Student  {
-	
-	@Column(name="description")
+@Table(name = "student")
+public class Student extends Person {
+
+	@Column(name = "description")
 	private String description;
-	
+
 	@JsonIgnore
-	@JoinColumn(name="sectionId")
+	@JoinColumn(name = "sectionId")
 	@ManyToOne
-	@Column(name="section")
 	private Section section;
-	
-	//@Column(name="payment")
-	//private List<Payment> paymentList;
-	
-	@Column(name="enrollType")
+
+	// @Column(name="payment")
+	// private List<Payment> paymentList;
+
+	@Column(name = "enrollType")
 	@Enumerated(EnumType.STRING)
 	private StudentStatus studentStatus;
-	
+
 	public Student() {
 		super();
 	}
-	
+
 	public Student(String boId) {
 		super();
 	}
-	
+
 	public String getDescription() {
 		return description;
 	}
@@ -49,7 +49,7 @@ public class Student  {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-    	
+
 	public Section getSection() {
 		return section;
 	}
@@ -58,14 +58,14 @@ public class Student  {
 		this.section = section;
 	}
 
-//	public List<Payment> getPayment() {
-//		return paymentList;
-//	}
-//
-//	public void setPayment(List<Payment> paymentList) {
-//		this.paymentList = paymentList;
-//	}
-	
+	// public List<Payment> getPayment() {
+	// return paymentList;
+	// }
+	//
+	// public void setPayment(List<Payment> paymentList) {
+	// this.paymentList = paymentList;
+	// }
+
 	public StudentStatus getStudentStatus() {
 		return studentStatus;
 	}
@@ -74,13 +74,12 @@ public class Student  {
 		this.studentStatus = studentStatus;
 	}
 
-//	@Override
-//	public String toString() {
-//		return new ToStringBuilder(this).appendSuper(super.toString())
-//				.append("description",description).append("Section",section)
-//				.append("paymentList",paymentL).append("studentStatus",studentStatus)
-//				.toString();	
-//		}
+	// @Override
+	// public String toString() {
+	// return new ToStringBuilder(this).appendSuper(super.toString())
+	// .append("description",description).append("Section",section)
+	// .append("paymentList",paymentL).append("studentStatus",studentStatus)
+	// .toString();
+	// }
 
 }
-
