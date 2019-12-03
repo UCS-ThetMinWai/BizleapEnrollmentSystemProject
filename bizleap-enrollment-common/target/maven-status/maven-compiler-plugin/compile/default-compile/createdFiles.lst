@@ -1,2 +1,15 @@
-com\bizleap\enrollment\domain\AbstractEntity.class
+com\bizleap\enrollment\domain\Employee.class
+com\bizleap\enrollment\domain\SystemConstant$StudentStatus.class
+com\bizleap\enrollment\domain\Course.class
+com\bizleap\enrollment\domain\Student.class
+com\bizleap\enrollment\domain\SystemConstant$EntityType.class
 com\bizleap\enrollment\domain\Section.class
+com\bizleap\enrollment\domain\Payment.class
+com\bizleap\enrollment\domain\AbstractEntity.class
+com\bizleap\enrollment\exception\ServiceUnavailableException.class
+com\bizleap\enrollment\domain\Person.class
+com\bizleap\enrollment\domain\Batch.class
+com\bizleap\enrollment\domain\SystemConstant$Position.class
+com\bizleap\enrollment\domain\SystemConstant.class
+com\bizleap\enrollment\domain\SystemConstant$SectionStatus.class
+com\bizleap\enrollment\domain\SystemConstant$DayType.class

@@ -9,15 +9,20 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Entity
 @Table(name = "batch")
 public class Batch extends AbstractEntity {
+	
+	@Temporal(TemporalType.TIME)
 	@Column(name = "startDate")
 	Date startDate;
 	
+	@Temporal(TemporalType.TIME)
 	@Column(name = "endDate")
 	Date endDate;
 
