@@ -1,4 +1,4 @@
-package com.bizleap.enrollment.service.dao.impl;
+package com.bizleap.enrollment.dao.impl;
 
 import java.io.Serializable;
 import java.util.List;
@@ -12,8 +12,8 @@ import org.hibernate.transform.RootEntityResultTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.CannotCreateTransactionException;
 
+import com.bizleap.enrollment.dao.AbstractDao;
 import com.bizleap.enrollment.exception.ServiceUnavailableException;
-import com.bizleap.enrollment.service.dao.AbstractDao;
 
 @Transactional
 public abstract class AbstractDaoImpl<E, I extends Serializable> implements AbstractDao<E, I> {

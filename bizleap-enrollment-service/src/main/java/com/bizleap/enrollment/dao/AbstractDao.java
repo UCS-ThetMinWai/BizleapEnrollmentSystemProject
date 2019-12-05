@@ -1,4 +1,4 @@
-package com.bizleap.enrollment.service.dao;
+package com.bizleap.enrollment.dao;
 
 import java.io.Serializable;
 import java.util.List;
