@@ -26,8 +26,8 @@ public class Batch extends AbstractEntity {
 	@Column(name = "endDate")
 	Date endDate;
 
-	@OneToMany(mappedBy = "payment", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	List<Payment> paymentList;
+	@OneToMany(mappedBy = "batch", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	List<Section> sectionList;
 	
 	public Date getStartDate() {
 		return startDate;

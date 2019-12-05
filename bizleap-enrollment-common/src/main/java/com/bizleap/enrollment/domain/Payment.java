@@ -28,8 +28,8 @@ public class Payment extends AbstractEntity {
 	}
 	
 	@ManyToOne
-	@JoinColumn(name = "batchId")
-	private Batch batch;
+	@JoinColumn(name = "studentId")
+	private Student student;
 	
 	public double getFee() {
 		return fee;
