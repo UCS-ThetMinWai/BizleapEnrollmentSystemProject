@@ -9,14 +9,19 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import com.bizleap.enrollment.domain.SystemConstant.DayType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "section")
@@ -38,31 +43,39 @@ public class Section extends AbstractEntity {
 	@Column(name = "enddate")
 	private Date endDate;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Course course;
 
-	@ManyToMany(mappedBy = "sectionList")
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "batchId")
+	private Batch batch;
+
+	@ManyToMany(mappedBy = "sectionList", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Employee> employeeList;
 
-	 @OneToMany(mappedBy = "section", cascade = CascadeType.ALL, fetch =
-	 FetchType.LAZY)
-	 private List<Student> studentList;
+	@OneToMany(mappedBy = "section", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Student> studentList;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "days")
-	private DayType dayList;
+	private DayType dayType;
 
 	public Section() {
 		super();
 	}
 
-	public Section(Date startTime, Date endTime, Date startDate, Date endDate) {
+	public Section(Date startTime, Date endTime, Date startDate, Date endDate, Course course,
+			List<Employee> employeeList, List<Student> studentList, DayType dayType) {
 		super();
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.startDate = startDate;
 		this.endDate = endDate;
-		// this.dayList = dayList;
+		this.course = course;
+		this.employeeList = employeeList;
+		this.studentList = studentList;
+		this.dayType = dayType;
 	}
 
 	public Date getStartTime() {
@@ -96,17 +109,51 @@ public class Section extends AbstractEntity {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	//
-	// public List<Date> getDayList() {
-	// return dayList;
-	// }
-	//
-	// public void setDayList(List<Date> dayList) {
-	// this.dayList = dayList;
-	// }
 
-	// @Column(name= "status")
-	// @Enumerated(EnumType.STRING)
-	// private SectionStatus sectionStatus;
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
+	}
+
+	public List<Employee> getEmployeeList() {
+		return employeeList;
+	}
+
+	public void setEmployeeList(List<Employee> employeeList) {
+		this.employeeList = employeeList;
+	}
+
+	public List<Student> getStudentList() {
+		return studentList;
+	}
+
+	public void setStudentList(List<Student> studentList) {
+		this.studentList = studentList;
+	}
+
+	public DayType getDayType() {
+		return dayType;
+	}
+
+	public void setDayType(DayType dayType) {
+		this.dayType = dayType;
+	}
+	
+	
+	public Batch getBatch() {
+		return batch;
+	}
+
+	public void setBatch(Batch batch) {
+		this.batch = batch;
+	}
+
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this).appendSuper(super.toString()).append("Start Time", startTime).append("End Time", endTime).append("Start Date", startDate).append("End Date", endDate).toString();
+	}
 
 }
