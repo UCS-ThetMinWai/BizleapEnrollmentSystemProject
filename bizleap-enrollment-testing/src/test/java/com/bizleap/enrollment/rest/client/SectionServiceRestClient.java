@@ -61,7 +61,7 @@ public class SectionServiceRestClient {
 
 		try {
 			response = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.GET, entity, String.class);
-			logger.info("Find Department: " + response.getBody());
+			logger.info("Find Section: " + response.getBody());
 		} catch (Exception e) {
 			logger.error("ERRROR - " + e.getMessage() + ", " + response);
 		}

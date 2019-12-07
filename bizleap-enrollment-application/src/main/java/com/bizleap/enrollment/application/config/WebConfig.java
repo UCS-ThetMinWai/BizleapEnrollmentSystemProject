@@ -30,6 +30,7 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 @Configuration
 @Import({ CoreConfig.class })
@@ -152,6 +153,7 @@ public class WebConfig extends WebMvcConfigurationSupport {
 	  objectMapper.configure(MapperFeature.AUTO_DETECT_GETTERS, true);
 	  objectMapper.configure(MapperFeature.AUTO_DETECT_FIELDS, true);
 	  jsonConverter.setObjectMapper(objectMapper);
+	  objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
 	  return jsonConverter;
 	 }
 	 

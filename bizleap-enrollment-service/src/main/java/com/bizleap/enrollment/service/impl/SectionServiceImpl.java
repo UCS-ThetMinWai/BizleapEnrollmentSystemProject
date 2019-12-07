@@ -70,6 +70,7 @@ public class SectionServiceImpl extends AbstractServiceImpl implements SectionSe
 	}
 
 	private void hibernateInitializeSectionList(List<Section> sectionList) {
+		Hibernate.initialize(sectionList);
 		if (CollectionUtils.isEmpty(sectionList))
 			return;
 
@@ -79,6 +80,7 @@ public class SectionServiceImpl extends AbstractServiceImpl implements SectionSe
 	}
 
 	private void hibernateInitializeSection(Section section) {
+		Hibernate.initialize(section);
 		if (section == null)
 			return;
 

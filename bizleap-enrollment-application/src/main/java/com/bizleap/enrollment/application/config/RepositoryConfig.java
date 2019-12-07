@@ -34,15 +34,7 @@ public class RepositoryConfig {
 	@Value("${hibernate.hbm2ddl.auto}")
 	private String hibernateHbm2ddlAuto;
 
-	@Value("${tenant.id}")
-	private String tenantId;
-
-	@Value("${hibernate.search.directory}")
-	private String hibernateSearchDirectory;
-
-	@Value("${hibernate.search.indexBase}")
-	private String hibernateSearchIndexBase;
-
+	
 	@Bean()
 	public DataSource getDataSource() {
 		DriverManagerDataSource ds = new DriverManagerDataSource();
@@ -135,9 +127,5 @@ public class RepositoryConfig {
 	 * employmentStatusList.add(EmploymentStatus.valueOf(type.trim())); } return
 	 * employmentStatusList; }
 	 */
-	@Bean(name = "tenantId")
-	public String tenantId() {
-		return tenantId;
-	}
 
 }

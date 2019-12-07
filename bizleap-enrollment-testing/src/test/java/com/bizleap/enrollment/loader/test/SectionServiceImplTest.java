@@ -19,7 +19,7 @@ public class SectionServiceImplTest extends ServiceTest {
 	
 	private static Logger logger = Logger.getLogger(SectionServiceImplTest.class);
 
-	
+	@Ignore
 	@Test
 	public void testGetAllSection() {
 		try {
@@ -37,7 +37,7 @@ public class SectionServiceImplTest extends ServiceTest {
 
 	}
 	
-	@Ignore
+	
 	@Test
 	public void testFindBySectionBoId() {
 		try {

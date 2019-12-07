@@ -21,6 +21,8 @@ import javax.persistence.TemporalType;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import com.bizleap.enrollment.domain.SystemConstant.DayType;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -43,6 +45,8 @@ public class Section extends AbstractEntity {
 	@Column(name = "enddate")
 	private Date endDate;
 
+	// @JsonIgnore
+	@JoinColumn(name = "course_id")
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Course course;
 

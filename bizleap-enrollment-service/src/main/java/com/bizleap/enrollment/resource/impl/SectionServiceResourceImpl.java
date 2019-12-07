@@ -43,7 +43,7 @@ public class SectionServiceResourceImpl extends AbstractServiceResourceImpl impl
 //	}
 
 	@RequestMapping(method=RequestMethod.GET,value="/find/{boId}")
-	public @ResponseBody Section findBySectionBoId(HttpServletRequest request,@PathVariable String boId)
+	public @ResponseBody Section findBySectionBoId(HttpServletRequest request,@PathVariable("boId") String boId)
 			throws ServiceUnavailableException {
 		logger.info("In resource .......");
 		return sectionService.findBySectionBoIdSingle(boId);
