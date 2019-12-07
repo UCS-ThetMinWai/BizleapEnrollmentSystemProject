@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.bizleap.enrollment.dao.BatchDao;
 import com.bizleap.enrollment.domain.Batch;
-import com.bizleap.enrollment.domain.Section;
 import com.bizleap.enrollment.exception.ServiceUnavailableException;
 import com.bizleap.enrollment.service.BatchService;
 import com.bizleap.enrollment.service.SectionService;
@@ -19,9 +18,6 @@ public class BatchServiceImpl extends AbstractServiceImpl implements BatchServic
 	
 	@Autowired
 	SectionService sectionService;
-	
-	@Autowired
-	Section section;
 	
 	@Autowired
 	BatchDao batchDao;
