@@ -1,50 +1,29 @@
-package com.bizleap.enrollment.domain;
+package com.bizleap.enrollment.domain.simple;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.bizleap.enrollment.domain.AbstractEntity;
+import com.bizleap.enrollment.domain.Payment;
+import com.bizleap.enrollment.domain.Section;
 import com.bizleap.enrollment.domain.SystemConstant.StudentStatus;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity
-@Table(name = "student")
-public class Student extends Person {
-
-	@Column(name = "description")
+public class SimpleStudent extends AbstractEntity{
+	
 	private String description;
-
-	@JsonIgnore
-	@JoinColumn(name = "sectionId")
-	@ManyToOne
 	private Section section;
-
-	@OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Payment> paymentList;
-
-	@Column(name = "enrollType")
-	@Enumerated(EnumType.STRING)
 	private StudentStatus studentStatus;
-
-	public Student() {
+	
+	public SimpleStudent() {
 		super();
 	}
 
-	public Student(String boId) {
-		super();
+	public SimpleStudent(String boId) {
+		super(boId);
 	}
-
+	
 	public String getDescription() {
 		return description;
 	}
@@ -61,13 +40,13 @@ public class Student extends Person {
 		this.section = section;
 	}
 
-	 public List<Payment> getPaymentList() {
-	 return paymentList;
-	 }
-	
-	 public void setPaymentList(List<Payment> paymentList) {
-	 this.paymentList = paymentList;
-	 }
+	public List<Payment> getPaymentList() {
+		return paymentList;
+	}
+
+	public void setPaymentList(List<Payment> paymentList) {
+		this.paymentList = paymentList;
+	}
 
 	public StudentStatus getStudentStatus() {
 		return studentStatus;
@@ -77,12 +56,11 @@ public class Student extends Person {
 		this.studentStatus = studentStatus;
 	}
 
-	 @Override
+	@Override
 	 public String toString() {
 	 return new ToStringBuilder(this).appendSuper(super.toString())
 	 .append("description",description).append("Section",section)
 	 .append("paymentList",paymentList).append("studentStatus",studentStatus)
 	 .toString();
 	 }
-
 }

@@ -11,7 +11,7 @@ import com.bizleap.enrollment.domain.Section;
 import com.bizleap.enrollment.exception.ServiceUnavailableException;
 import com.bizleap.enrollment.service.SectionService;
 
-
+@Ignore
 public class SectionServiceImplTest extends ServiceTest {
 
 	@Autowired
