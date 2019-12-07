@@ -34,13 +34,13 @@ public class PaymentServiceImpl extends AbstractServiceImpl implements PaymentSe
 		return null;
 	}
 
-	@Transactional(readOnly = true)
-	public void savePayment(Payment payment) throws ServiceUnavailableException {
+//	@Transactional(readOnly = true)
+//	public void savePayment(Payment payment) throws ServiceUnavailableException {
 //			if (payment.isBoIdRequired()) {
 //				payment.setBoId(getNextBoId());
 //			}
 //			paymentDao.save(payment);
-	}
+//	}
 
 	public List<Payment> getAllPayment() throws ServiceUnavailableException {
 		List<Payment> paymentList = paymentDao.getAll("From Payment payment");

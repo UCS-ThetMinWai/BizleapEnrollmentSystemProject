@@ -8,7 +8,7 @@ import com.bizleap.enrollment.exception.ServiceUnavailableException;
 public interface PaymentService extends AbstractService {
 	public List<Payment> findByPaymentBoId(String boId)throws ServiceUnavailableException;
 	public Payment findByPaymentBoIdSingle(String boId)throws ServiceUnavailableException;
-	public void savePayment(Payment payment)throws ServiceUnavailableException;
+//	public void savePayment(Payment payment)throws ServiceUnavailableException;
 	public List<Payment> getAllPayment()throws ServiceUnavailableException;
 	
 }

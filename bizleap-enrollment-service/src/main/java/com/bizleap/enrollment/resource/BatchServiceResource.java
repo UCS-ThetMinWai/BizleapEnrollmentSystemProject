@@ -9,6 +9,6 @@ import com.bizleap.enrollment.exception.ServiceUnavailableException;
 
 public interface BatchServiceResource {
 	List<Batch> getAllBatch(HttpServletRequest request) throws ServiceUnavailableException;
-	Boolean createBatch(HttpServletRequest request,SimpleBatch simpleBatch);
+	//Boolean createBatch(HttpServletRequest request,SimpleBatch simpleBatch);
     Batch findByBatchBoId(HttpServletRequest request,String boId)throws ServiceUnavailableException;
 }

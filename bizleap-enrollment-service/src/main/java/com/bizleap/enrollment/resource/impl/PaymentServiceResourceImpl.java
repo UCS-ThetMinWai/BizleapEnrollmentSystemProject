@@ -41,8 +41,8 @@ public class PaymentServiceResourceImpl extends AbstractServiceResourceImpl impl
 		return paymentService.getAllPayment();
 	}
 
-	@RequestMapping(method = RequestMethod.POST, value = "/create")
-	public @ResponseBody boolean createPayment(HttpServletRequest request,@RequestParam String input) {
+//	@RequestMapping(method = RequestMethod.POST, value = "/create")
+//	public @ResponseBody boolean createPayment(HttpServletRequest request,@RequestParam String input) {
 //		JSONObject json = Parser.parseJSon(input);
 //		String name = (String) json.get("name");
 //		String sectionBoId = (String) json.get("sectionBoId");
@@ -62,8 +62,8 @@ public class PaymentServiceResourceImpl extends AbstractServiceResourceImpl impl
 //		} catch (ServiceUnavailableException e) {
 //			return false;
 //		}
-		return true;
-	}
+//		return true;
+//	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/find/{boId}")
 	public @ResponseBody List<Payment> findByPaymentBoId(HttpServletRequest request,@PathVariable  String boId)

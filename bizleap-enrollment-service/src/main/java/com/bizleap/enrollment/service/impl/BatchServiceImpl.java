@@ -70,13 +70,13 @@ public class BatchServiceImpl extends AbstractServiceImpl implements BatchServic
 		return null;
 	}
 
-	public void saveBatch(Batch batch) throws ServiceUnavailableException {
+//	public void saveBatch(Batch batch) throws ServiceUnavailableException {
 //		if(batch.isBoIdRequired()) {
 //			batch.setBoId(getNextBoId());
 //			ensureBoIdBatch(batch);
 //		}
 //		batchDao.save(batch);
-	}
+//	}
 
 	public List<Batch> getAllBatch() throws ServiceUnavailableException {
 		List<Batch> batchList = batchDao.getAll("From Batch batch");
