@@ -19,7 +19,7 @@ public class SectionServiceImplTest extends ServiceTest {
 	
 	private static Logger logger = Logger.getLogger(SectionServiceImplTest.class);
 
-	@Ignore
+	
 	@Test
 	public void testGetAllSection() {
 		try {
@@ -37,11 +37,11 @@ public class SectionServiceImplTest extends ServiceTest {
 
 	}
 	
-	
+	@Ignore
 	@Test
-	public void testFindByDepartmentBoId() {
+	public void testFindBySectionBoId() {
 		try {
-			System.out.println("starting testing testFindByDepartmentBoId method");
+			System.out.println("starting testing testFindByDepartmentSectionBoId method");
 			List<Section> sectionList = sectionService.findBySectionBoId("SECTION00001");
 			for(Section section : sectionList) {
 	
