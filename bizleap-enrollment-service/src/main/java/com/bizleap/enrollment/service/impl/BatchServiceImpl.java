@@ -27,11 +27,11 @@ public class BatchServiceImpl extends AbstractServiceImpl implements BatchServic
 	BatchDao batchDao;
 	
 	public void ensureBoIdDepartment(Batch batch) {
-		for(Section section : batch.getSectionList()) {
-			if(section.isBoIdRequired()) {
-				section.setBoId(sectionService.getNextBoId());
-			}
-		}
+//		for(Section section : batch.getSectionList()) {
+//			if(section.isBoIdRequired()) {
+//				section.setBoId(sectionService.getNextBoId());
+//			}
+//		}
 	}
 	
 	private void hibernateInitializeBatchList(List<Batch> batchList) {
@@ -49,9 +49,9 @@ public class BatchServiceImpl extends AbstractServiceImpl implements BatchServic
 		
 		Hibernate.initialize(batch);
 		
-		for(Section section : section.getSectionList()) {
-			Hibernate.initialize(section);
-		}
+//		for(Section section : section.getSectionList()) {
+//			Hibernate.initialize(section);
+//		}
 	}
 
 	public List<Batch> findByBatchBoId(String boId) throws ServiceUnavailableException {
