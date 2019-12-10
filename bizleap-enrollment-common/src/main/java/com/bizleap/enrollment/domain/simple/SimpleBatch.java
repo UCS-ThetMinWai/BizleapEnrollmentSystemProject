@@ -38,6 +38,10 @@ public class SimpleBatch extends AbstractEntity {
 //			 return simpleSectionList;
 //	 }
 	
+//	public void setSimpleSectionList(List<SimpleSection> simpleSectionList) {
+//		this.simpleSectionList = simpleSectionList;
+//	}
+	
 	public String toString() {
 		return new ToStringBuilder(this)
 				.appendSuper(super.toString())
