@@ -84,7 +84,7 @@ public class StudentServiceImpl extends AbstractServiceImpl implements StudentSe
 		Hibernate.initialize(student);
 
 		for (Payment payment : student.getPaymentList()) {
-			Hibernate.initialize(student);
+			Hibernate.initialize(payment);
 		}
 		Hibernate.initialize(student.getSection());
 	}
