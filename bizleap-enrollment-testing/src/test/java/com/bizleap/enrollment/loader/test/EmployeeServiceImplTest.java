@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.bizleap.enrollment.domain.Employee;
 import com.bizleap.enrollment.exception.ServiceUnavailableException;
 import com.bizleap.enrollment.service.EmployeeService;
-import com.bizleap.enrollment.service.StudentService;
+
 
 public class EmployeeServiceImplTest  extends ServiceTest {
 
@@ -35,9 +35,9 @@ public class EmployeeServiceImplTest  extends ServiceTest {
 	
 	//@Ignore
 	@Test
-	public void testFindByStudentBoId() {
+	public void testFindByEmployeeBoId() {
 		try {
-			System.out.println("starting testing testFindByStudentBoId method");
+			System.out.println("starting testing testFindByEmployeeBoId method");
 			List<Employee> employeeList = employeeService.findByEmployeeBoId("EMPLOYEE00001");
 			for(Employee employee : employeeList) {
 	
