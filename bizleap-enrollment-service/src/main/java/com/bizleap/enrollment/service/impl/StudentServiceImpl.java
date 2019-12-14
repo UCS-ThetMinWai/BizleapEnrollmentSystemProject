@@ -68,6 +68,7 @@ public class StudentServiceImpl extends AbstractServiceImpl implements StudentSe
 		return studentDao.getCount("select count(student) from Student student");
 	}
 
+	@Override
 	public void hibernateInitializeStudentList(List<Student> studentList) {
 		if (CollectionUtils.isEmpty(studentList))
 			return;
@@ -77,6 +78,7 @@ public class StudentServiceImpl extends AbstractServiceImpl implements StudentSe
 		}
 	}
 	
+	@Override
 	public void hibernateInitializeStudent(Student student) {
 		if (student == null)
 			return;
