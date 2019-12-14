@@ -2,10 +2,12 @@ package com.bizleap.enrollment.domain;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -24,7 +26,7 @@ public class Employee extends Person {
 	private Double salary;
 
 	@JsonIgnore
-	@ManyToMany
+	@ManyToMany(mappedBy="Employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name = "Employee_Section", joinColumns = { @JoinColumn(name = "section_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "employee_id") })
 	private List<Section> sectionList;

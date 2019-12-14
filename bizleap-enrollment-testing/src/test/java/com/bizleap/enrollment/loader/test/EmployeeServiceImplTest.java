@@ -11,6 +11,7 @@ import com.bizleap.enrollment.domain.Employee;
 import com.bizleap.enrollment.exception.ServiceUnavailableException;
 import com.bizleap.enrollment.service.EmployeeService;
 
+
 public class EmployeeServiceImplTest  extends ServiceTest {
 
 	@Autowired

@@ -73,8 +73,8 @@ public class EmployeeServiceImpl extends AbstractServiceImpl implements Employee
 		return employeeDao.getCount("select count(employee) from Employee employee");
 	}
 
-	
-	private void hibernateInitializeEmployeeList(List<Employee> employeeList) {
+	@Override
+	public void hibernateInitializeEmployeeList(List<Employee> employeeList) {
 		Hibernate.initialize(employeeList);
 		if (CollectionUtils.isEmpty(employeeList))
 			return;
@@ -84,7 +84,8 @@ public class EmployeeServiceImpl extends AbstractServiceImpl implements Employee
 		}
 		
 	}
-	private void hibernateInitializeEmployee(Employee employee) {
+	@Override
+	public void hibernateInitializeEmployee(Employee employee) {
 		Hibernate.initialize(employee);
 		if (employee == null)
 			return;
