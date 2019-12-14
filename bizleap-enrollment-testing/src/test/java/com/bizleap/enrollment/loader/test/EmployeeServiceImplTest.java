@@ -10,10 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.bizleap.enrollment.domain.Employee;
 import com.bizleap.enrollment.exception.ServiceUnavailableException;
 import com.bizleap.enrollment.service.EmployeeService;
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 
 public class EmployeeServiceImplTest  extends ServiceTest {
 
