@@ -114,7 +114,7 @@ public class SectionServiceImpl extends AbstractServiceImpl implements SectionSe
 	}
 
 	private void hibernateInitializeSection(Section section) {
-		// Hibernate.initialize(section);
+		Hibernate.initialize(section);
 		if (section == null)
 			return;
 
