@@ -13,7 +13,7 @@ public class SimpleStudent extends AbstractEntity{
 	
 	private String description;
 	private Section section;
-	private List<Payment> paymentList;
+	private List<SimplePayment> paymentList;
 	private StudentStatus studentStatus;
 	
 	public SimpleStudent() {
@@ -40,11 +40,11 @@ public class SimpleStudent extends AbstractEntity{
 		this.section = section;
 	}
 
-	public List<Payment> getPaymentList() {
+	public List<SimplePayment> getPaymentList() {
 		return paymentList;
 	}
 
-	public void setPaymentList(List<Payment> paymentList) {
+	public void setPaymentList(List<SimplePayment> paymentList) {
 		this.paymentList = paymentList;
 	}
 
