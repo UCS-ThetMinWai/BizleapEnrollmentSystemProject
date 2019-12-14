@@ -125,8 +125,13 @@ public class SectionServiceImpl extends AbstractServiceImpl implements SectionSe
 		}
 
 		for (Student student : section.getStudentList()) {
+<<<<<<< Updated upstream
 			//studentService.hibernateInitializeStudent(student);
 			//Hibernate.initialize(student);
+=======
+			
+			Hibernate.initialize(student);
+>>>>>>> Stashed changes
 		}
 		Hibernate.initialize(section.getCourse());
 		Hibernate.initialize(section.getBatch());
