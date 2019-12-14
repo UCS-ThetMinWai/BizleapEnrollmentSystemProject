@@ -26,7 +26,7 @@ public class Employee extends Person {
 	private Double salary;
 
 	@JsonIgnore
-	@ManyToMany(mappedBy="Employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name = "Employee_Section", joinColumns = { @JoinColumn(name = "section_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "employee_id") })
 	private List<Section> sectionList;

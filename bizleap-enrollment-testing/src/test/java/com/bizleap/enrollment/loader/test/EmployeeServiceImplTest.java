@@ -19,7 +19,7 @@ public class EmployeeServiceImplTest  extends ServiceTest {
 	
 	private static Logger logger = Logger.getLogger(EmployeeServiceImplTest.class);
 
-	@Ignore
+	//@Ignore
 	@Test
 	public void testGetAllEmployee() {
 		try {

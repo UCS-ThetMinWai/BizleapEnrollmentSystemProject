@@ -2,6 +2,7 @@ package com.bizleap.enrollment.service.impl;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,14 +17,28 @@ import com.bizleap.enrollment.domain.Student;
 import com.bizleap.enrollment.domain.SystemConstant.EntityType;
 import com.bizleap.enrollment.exception.ServiceUnavailableException;
 import com.bizleap.enrollment.service.EmployeeService;
+import com.bizleap.enrollment.service.SectionService;
 import com.bizleap.enrollment.service.StudentService;
 
 @Service("employeeService")
 @Transactional(readOnly = true)
-public class EmployeeServiceImpl extends AbstractServiceImpl implements EmployeeService{
+public class EmployeeServiceImpl extends AbstractServiceImpl implements EmployeeService {
 
 	@Autowired
 	EmployeeDao employeeDao;
+	@Autowired
+	SectionService sectionService;
+	private static final Logger logger = Logger.getLogger(SectionServiceImpl.class);
+	public void ensureBoIdEmployee(Employee employee) {
+
+		if (!CollectionUtils.isEmpty(employee.getSectionList())) {
+			for (Section section : employee.getSectionList()) {
+				if (section.isBoIdRequired()) {
+					section.setBoId(sectionService.getNextBoId(EntityType.SECTION));
+				}
+			}
+		}
+	}
 	
 	@Override
 	public List<Employee> findByEmployeeBoId(String boId) throws ServiceUnavailableException {
@@ -46,14 +61,18 @@ public class EmployeeServiceImpl extends AbstractServiceImpl implements Employee
 		}
 		return null;
 	}
-	
-	
 
 	@Override
 	public void saveEmployee(Employee employee) throws ServiceUnavailableException {
-		// TODO Auto-generated method stub
-		
+		logger.info("Employee" + employee);
+		if (employee.isBoIdRequired()) {
+			employee.setBoId(getNextBoId());
+			ensureBoIdEmployee(employee);
+		}
+		employeeDao.save(employee);
 	}
+
+
 
 	@Override
 	public List<Employee> getAllEmployee() throws ServiceUnavailableException {
@@ -63,7 +82,7 @@ public class EmployeeServiceImpl extends AbstractServiceImpl implements Employee
 		hibernateInitializeEmployeeList(employeeList);
 		return employeeList;
 	}
-	
+
 	private String getNextBoId() {
 		return getNextBoId(EntityType.STUDENT);
 	}
@@ -82,8 +101,9 @@ public class EmployeeServiceImpl extends AbstractServiceImpl implements Employee
 		for (Employee employee : employeeList) {
 			hibernateInitializeEmployee(employee);
 		}
-		
+
 	}
+
 	@Override
 	public void hibernateInitializeEmployee(Employee employee) {
 		Hibernate.initialize(employee);
@@ -95,5 +115,5 @@ public class EmployeeServiceImpl extends AbstractServiceImpl implements Employee
 		for (Section section : employee.getSectionList()) {
 			Hibernate.initialize(section);
 		}
-}
+	}
 }
