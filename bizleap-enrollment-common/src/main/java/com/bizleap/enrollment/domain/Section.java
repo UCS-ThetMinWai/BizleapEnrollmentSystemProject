@@ -55,9 +55,12 @@ public class Section extends AbstractEntity {
 	@JoinColumn(name = "batchId")
 	private Batch batch;
 
+	@JsonIgnore
 	@ManyToMany(mappedBy = "sectionList", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Employee> employeeList;
 
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "section", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Student> studentList;
 

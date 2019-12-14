@@ -27,6 +27,8 @@ import org.thymeleaf.spring3.SpringTemplateEngine;
 import org.thymeleaf.spring3.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,21 +36,17 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 
 @Configuration
 @Import({ CoreConfig.class })
-@ComponentScan(basePackages = { "com.bizleap.enrollment"})
+@ComponentScan(basePackages = { "com.bizleap.enrollment" })
 public class WebConfig extends WebMvcConfigurationSupport {
 	private ThymeleafViewResolver viewResolver;
 
 	@Value("${tenant.id}")
 	private String prefix;
-	
+
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**")
-		.allowedOrigins("*")
-		.allowedMethods("*")
-		.allowCredentials(false)
-		.maxAge(3600);
-		//registry.addMapping("/**");
+		registry.addMapping("/**").allowedOrigins("*").allowedMethods("*").allowCredentials(false).maxAge(3600);
+		// registry.addMapping("/**");
 	}
 
 	@Override
@@ -61,7 +59,7 @@ public class WebConfig extends WebMvcConfigurationSupport {
 		LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
 		localeChangeInterceptor.setParamName("lang");
 		registry.addInterceptor(localeChangeInterceptor);
-	}	
+	}
 
 	@Bean
 	public LocaleResolver localeResolver() {
@@ -84,13 +82,15 @@ public class WebConfig extends WebMvcConfigurationSupport {
 	public SpringTemplateEngine templateEngine() {
 		SpringTemplateEngine engine = new SpringTemplateEngine();
 		engine.setTemplateResolver(templateResolver());
-		//engine.addDialect(new MyDialet());
-		//engine.addDialect(new EmployeePermission());
-//		PropertiesLoader loader = new PropertiesLoader("attribute.properties");
-//		loader.merge(new PropertiesLoader("default.properties"));
-//		loader.merge(new PropertiesLoader(prefix + "/" + prefix + ".properties"));
+		// engine.addDialect(new MyDialet());
+		// engine.addDialect(new EmployeePermission());
+		// PropertiesLoader loader = new
+		// PropertiesLoader("attribute.properties");
+		// loader.merge(new PropertiesLoader("default.properties"));
+		// loader.merge(new PropertiesLoader(prefix + "/" + prefix +
+		// ".properties"));
 		StandardMessageResolver messageResolver = new StandardMessageResolver();
-//		messageResolver.setDefaultMessages(loader.getPerperties());
+		// messageResolver.setDefaultMessages(loader.getPerperties());
 		engine.addMessageResolver(messageResolver);
 		return engine;
 	}
@@ -129,38 +129,41 @@ public class WebConfig extends WebMvcConfigurationSupport {
 		messageSource.setCacheSeconds(0);
 		return messageSource;
 	}
-	
-//	@Override
-//	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-//		converters.add(converter());
-//		addDefaultHttpMessageConverters(converters);
-//	}	
-	
-//	@Bean(name = "converter")
-//	MappingJackson2HttpMessageConverter converter() {
-//		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-//		//do your customizations here...
-//		return converter;
-//	}	
-	
+
+	// @Override
+	// public void configureMessageConverters(List<HttpMessageConverter<?>>
+	// converters) {
+	// converters.add(converter());
+	// addDefaultHttpMessageConverters(converters);
+	// }
+
+	// @Bean(name = "converter")
+	// MappingJackson2HttpMessageConverter converter() {
+	// MappingJackson2HttpMessageConverter converter = new
+	// MappingJackson2HttpMessageConverter();
+	// //do your customizations here...
+	// return converter;
+	// }
 
 	@Bean
-	 public MappingJackson2HttpMessageConverter customJackson2HttpMessageConverter() {
-	  MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
-	  ObjectMapper objectMapper = new ObjectMapper();
-	  objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-	  //objectMapper.configure(MapperFeature.DEFAULT_VIEW_INCLUSION, true);	  
-	  objectMapper.configure(MapperFeature.AUTO_DETECT_GETTERS, true);
-	  objectMapper.configure(MapperFeature.AUTO_DETECT_FIELDS, true);
-	  jsonConverter.setObjectMapper(objectMapper);
-	  objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
-	  return jsonConverter;
-	 }
-	 
-	 @Override
-	 public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-	  converters.add(customJackson2HttpMessageConverter());
-	  super.addDefaultHttpMessageConverters( converters );
-	 }
-	 
+	public MappingJackson2HttpMessageConverter customJackson2HttpMessageConverter() {
+		MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
+		ObjectMapper objectMapper = new ObjectMapper();
+		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		objectMapper.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
+		objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+		// objectMapper.configure(MapperFeature.DEFAULT_VIEW_INCLUSION, true);
+		objectMapper.configure(MapperFeature.AUTO_DETECT_GETTERS, true);
+		objectMapper.configure(MapperFeature.AUTO_DETECT_FIELDS, true);
+		jsonConverter.setObjectMapper(objectMapper);
+		objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+		return jsonConverter;
+	}
+
+	@Override
+	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+		converters.add(customJackson2HttpMessageConverter());
+		super.addDefaultHttpMessageConverters(converters);
+	}
+
 }
