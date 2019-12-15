@@ -18,6 +18,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import com.bizleap.enrollment.domain.SystemConstant.StudentStatus;
 import com.bizleap.enrollment.domain.simple.SimplePayment;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "student")
@@ -31,6 +32,7 @@ public class Student extends Person {
 	@ManyToOne
 	private Section section;
 
+	@JsonManagedReference
 	@OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Payment> paymentList;
 

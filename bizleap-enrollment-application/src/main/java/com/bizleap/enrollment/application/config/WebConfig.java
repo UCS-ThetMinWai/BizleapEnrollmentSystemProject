@@ -150,13 +150,13 @@ public class WebConfig extends WebMvcConfigurationSupport {
 		MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		objectMapper.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
+		//objectMapper.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
 		objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
-		// objectMapper.configure(MapperFeature.DEFAULT_VIEW_INCLUSION, true);
+//		 objectMapper.configure(MapperFeature.DEFAULT_VIEW_INCLUSION, true);
 		objectMapper.configure(MapperFeature.AUTO_DETECT_GETTERS, true);
 		objectMapper.configure(MapperFeature.AUTO_DETECT_FIELDS, true);
 		jsonConverter.setObjectMapper(objectMapper);
-		objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+//		objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
 		return jsonConverter;
 	}
 

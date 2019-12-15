@@ -7,12 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bizleap.enrollment.domain.Section;
+import com.bizleap.enrollment.domain.simple.SimpleSection;
 import com.bizleap.enrollment.exception.ServiceUnavailableException;
 import com.bizleap.enrollment.resource.SectionServiceResource;
 import com.bizleap.enrollment.service.SectionService;
@@ -33,19 +35,22 @@ public class SectionServiceResourceImpl extends AbstractServiceResourceImpl impl
 //	public @ResponseBody Boolean createSection(HttpServletRequest request,@RequestBody SimpleSection simpleSection) {
 //		
 //		logger.info("Create Section>>>>>>>>>>>>>>>>>>>>>");
-//		try {
-//			sectionService.saveSection(ConvensionUtils.toSection(simpleSection));
-//			
-//		} catch(ServiceUnavailableException e) {
-//			return false;
-//		}
-//		return true;
+////		try {
+////		//	sectionService.saveSection(conversion.toSection(simpleSection));
+////			
+////		} catch(ServiceUnavailableException e) {
+////			return false;
+////		}
+////		return true;
+//    
 //	}
 
 	@RequestMapping(method=RequestMethod.GET,value="/find/{boId}")
 	public @ResponseBody Section findBySectionBoId(HttpServletRequest request,@PathVariable("boId") String boId)
 			throws ServiceUnavailableException {
 		logger.info("In resource .......");
+		logger.info("BoId: " + boId);
+		logger.info("Section: " + sectionService.findBySectionBoId(boId));
 		return sectionService.findBySectionBoIdSingle(boId);
 	}
 

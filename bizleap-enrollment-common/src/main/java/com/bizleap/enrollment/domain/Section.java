@@ -23,6 +23,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import com.bizleap.enrollment.domain.SystemConstant.DayType;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -50,17 +51,17 @@ public class Section extends AbstractEntity {
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Course course;
 
-	@JsonIgnore
-	@ManyToOne
+	//@JsonIgnore
+	@JsonBackReference
+	@ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "batchId")
 	private Batch batch;
 
-	@JsonIgnore
+	//@JsonIgnore
 	@ManyToMany(mappedBy = "sectionList", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Employee> employeeList;
 
-	
-	@JsonIgnore
+	//@JsonIgnore
 	@OneToMany(mappedBy = "section", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Student> studentList;
 
@@ -148,8 +149,7 @@ public class Section extends AbstractEntity {
 	public void setDayType(DayType dayType) {
 		this.dayType = dayType;
 	}
-	
-	
+
 	public Batch getBatch() {
 		return batch;
 	}
@@ -160,7 +160,8 @@ public class Section extends AbstractEntity {
 
 	@Override
 	public String toString() {
-		return new ToStringBuilder(this).appendSuper(super.toString()).append("Start Time", startTime).append("End Time", endTime).append("Start Date", startDate).append("End Date", endDate).toString();
+		return new ToStringBuilder(this).appendSuper(super.toString()).append("Start Time", startTime)
+				.append("End Time", endTime).append("Start Date", startDate).append("End Date", endDate).toString();
 	}
 
 }

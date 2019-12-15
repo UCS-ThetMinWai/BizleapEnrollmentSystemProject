@@ -18,6 +18,8 @@ import com.bizleap.enrollment.domain.Student;
 import com.bizleap.enrollment.domain.SystemConstant.EntityType;
 import com.bizleap.enrollment.exception.ServiceUnavailableException;
 import com.bizleap.enrollment.service.BatchService;
+import com.bizleap.enrollment.service.CourseService;
+import com.bizleap.enrollment.service.EmployeeService;
 import com.bizleap.enrollment.service.SectionService;
 import com.bizleap.enrollment.service.StudentService;
 //import com.bizleap.enrollment.service.EmployeeService;
@@ -31,12 +33,18 @@ public class SectionServiceImpl extends AbstractServiceImpl implements SectionSe
 	@Autowired
 	SectionDao sectionDao;
 
-	// @Autowired
-	// EmployeeService employeeService;
+	 @Autowired
+	 EmployeeService employeeService;
 
 	@Autowired
 	StudentService studentService;
-
+	
+	@Autowired
+	BatchService batchService;
+	
+	@Autowired
+	CourseService courseService;
+	
 	@Override
 	public long getCount() {
 		return sectionDao.getCount("select count(section) from Section section");
@@ -51,10 +59,10 @@ public class SectionServiceImpl extends AbstractServiceImpl implements SectionSe
 				}
 			}
 		}
-//		Course course = new Course();
-//		//course.setBoId(CourseService.get);
-//		Batch batch = new Batch () ;
-//		batch.setBoId(BatchService.getnext);
+		Course course = new Course();
+		course.setBoId(courseService.getNextBoId(EntityType.COURSE));;
+		Batch batch = new Batch () ;
+		batch.setBoId(batchService.getNextBoId(EntityType.BATCH));
 	}
 
 	@Override
@@ -79,6 +87,8 @@ public class SectionServiceImpl extends AbstractServiceImpl implements SectionSe
 		return null;
 	}
 
+	
+	@Transactional(readOnly = false)
 	@Override
 	public void saveSection(Section section) throws ServiceUnavailableException {
 		logger.info("Section" + section);
@@ -86,7 +96,7 @@ public class SectionServiceImpl extends AbstractServiceImpl implements SectionSe
 			section.setBoId(getNextBoId());
 			ensureBoIdSection(section);
 		}
-		
+		 
 		sectionDao.save(section);
 	}
 
@@ -129,7 +139,8 @@ public class SectionServiceImpl extends AbstractServiceImpl implements SectionSe
 			studentService.hibernateInitializeStudent(student);
 		}
 		Hibernate.initialize(section.getCourse());
-		Hibernate.initialize(section.getBatch());
+		//Hibernate.initialize(section.getBatch());
+		batchService.hibernateInitializeBatch(section.getBatch());
 	}
 
 }

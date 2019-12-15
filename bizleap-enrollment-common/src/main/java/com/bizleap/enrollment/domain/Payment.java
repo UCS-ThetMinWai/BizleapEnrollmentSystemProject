@@ -8,6 +8,8 @@ import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "payment")
 public class Payment extends AbstractEntity {
@@ -20,6 +22,7 @@ public class Payment extends AbstractEntity {
 	@Column(name = "discription")
 	private String discription;
 
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "studentId")
 	private Student student;
