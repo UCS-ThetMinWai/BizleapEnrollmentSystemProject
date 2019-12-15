@@ -12,6 +12,7 @@ public interface EmployeeService extends AbstractService {
 	public void saveEmployee(Employee employee) throws ServiceUnavailableException;
 
 	public List<Employee> getAllEmployee() throws ServiceUnavailableException;
+	public List<Employee> findByEmployeePassword(String email,String password) throws ServiceUnavailableException;
 	public void hibernateInitializeEmployeeList(List<Employee> employeeList);
 	public void hibernateInitializeEmployee(Employee employee);
 

@@ -49,6 +49,17 @@ public class EmployeeServiceImpl extends AbstractServiceImpl implements Employee
 		hibernateInitializeEmployeeList(employeeList);
 		return employeeList;
 	}
+   
+	
+	@Override
+	public List<Employee> findByEmployeePassword(String email,String password) throws ServiceUnavailableException {
+		String queryStr = "select employee from Employee employee where employee.email=:dataInput,employee.password=:dataInput1";
+		List<Employee> employeeList = employeeDao.findByString(queryStr, email,password);
+		if (CollectionUtils.isEmpty(employeeList))
+			return null;
+		hibernateInitializeEmployeeList(employeeList);
+		return employeeList;
+	}
 
 	@Override
 	public Employee findByEmployeeBoIdSingle(String boId) throws ServiceUnavailableException {
@@ -61,6 +72,7 @@ public class EmployeeServiceImpl extends AbstractServiceImpl implements Employee
 		}
 		return null;
 	}
+	
 
 	@Override
 	public void saveEmployee(Employee employee) throws ServiceUnavailableException {

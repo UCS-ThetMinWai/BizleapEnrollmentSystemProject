@@ -33,7 +33,8 @@ public class Employee extends Person {
 
 	@Enumerated(EnumType.STRING)
 	private Position position;
-
+	@Column(name = "password")
+    private String password;
 	public Employee() {
 
 	}
@@ -46,10 +47,17 @@ public class Employee extends Person {
 		return sectionList;
 	}
 
-	public void setSessionList(List<Section> sectionList) {
-		this.sectionList=sectionList;
+	public String getPassword() {
+		return password;
 	}
 
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setSectionList(List<Section> sectionList) {
+		this.sectionList = sectionList;
+	}
 	public Position getPosition() {
 		return position;
 	}
@@ -72,6 +80,7 @@ public class Employee extends Person {
 	@Override
 	public String toString() {
 		return new ToStringBuilder(this).appendSuper(super.toString()).append("Salary", salary)
+				.append("password", password)
 				.toString();
 	}
 

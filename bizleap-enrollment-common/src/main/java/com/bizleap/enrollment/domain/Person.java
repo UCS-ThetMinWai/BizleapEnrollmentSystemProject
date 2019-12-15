@@ -1,7 +1,9 @@
 package com.bizleap.enrollment.domain;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
+import javax.persistence.MappedSuperclass;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+@MappedSuperclass
 public class Person extends AbstractEntity{
 
 	private String address;
