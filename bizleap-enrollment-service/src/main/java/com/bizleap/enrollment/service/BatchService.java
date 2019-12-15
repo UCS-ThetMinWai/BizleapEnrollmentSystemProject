@@ -7,6 +7,8 @@ import com.bizleap.enrollment.exception.ServiceUnavailableException;
 
 
 public interface BatchService extends AbstractService {
+	public void hibernateInitializeBatchList(List<Batch> batchList);
+	public void hibernateInitializeBatch(Batch batch);
 	public List<Batch> findByBatchBoId(String boId)throws ServiceUnavailableException;
 	public Batch findByBatchBoIdSingle(String boId)throws ServiceUnavailableException;
 	//public void saveBatch(Batch batch)throws ServiceUnavailableException;

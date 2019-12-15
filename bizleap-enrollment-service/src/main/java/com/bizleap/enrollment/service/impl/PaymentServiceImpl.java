@@ -18,12 +18,14 @@ public class PaymentServiceImpl extends AbstractServiceImpl implements PaymentSe
 	@Autowired
 	PaymentDao paymentDao;
 
+	@Override
 	public List<Payment> findByPaymentBoId(String boId) throws ServiceUnavailableException {
 		String queryStr = "select payment from Payment payment where payment.boId=:dataInput";
 		List<Payment> paymentList = paymentDao.findByString(queryStr, boId);
 		return paymentList;
 	}
 
+	@Override
 	public Payment findByPaymentBoIdSingle(String boId) throws ServiceUnavailableException {
 		List<Payment> paymentList = findByPaymentBoId(boId);
 		if (!CollectionUtils.isEmpty(paymentList)) {
@@ -33,7 +35,7 @@ public class PaymentServiceImpl extends AbstractServiceImpl implements PaymentSe
 		}
 		return null;
 	}
-
+//  @Override
 //	@Transactional(readOnly = true)
 //	public void savePayment(Payment payment) throws ServiceUnavailableException {
 //			if (payment.isBoIdRequired()) {
@@ -42,6 +44,7 @@ public class PaymentServiceImpl extends AbstractServiceImpl implements PaymentSe
 //			paymentDao.save(payment);
 //	}
 
+	@Override
 	public List<Payment> getAllPayment() throws ServiceUnavailableException {
 		List<Payment> paymentList = paymentDao.getAll("From Payment payment");
 		return paymentList;

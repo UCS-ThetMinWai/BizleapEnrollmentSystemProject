@@ -30,7 +30,8 @@ public class BatchServiceImpl extends AbstractServiceImpl implements BatchServic
 //		}
 	}
 	
-	private void hibernateInitializeBatchList(List<Batch> batchList) {
+	@Override
+	public void hibernateInitializeBatchList(List<Batch> batchList) {
 		if(CollectionUtils.isEmpty(batchList))
 			return;
 		
@@ -39,7 +40,8 @@ public class BatchServiceImpl extends AbstractServiceImpl implements BatchServic
 		}
 	}
 	
-	private void hibernateInitializeBatch(Batch batch) {
+	@Override
+	public void hibernateInitializeBatch(Batch batch) {
 		if(batch == null)
 			return;
 		
@@ -50,6 +52,7 @@ public class BatchServiceImpl extends AbstractServiceImpl implements BatchServic
 //		}
 	}
 
+	@Override
 	public List<Batch> findByBatchBoId(String boId) throws ServiceUnavailableException {
 		String queryStr = "select department from Department department where department.boId=:dataInput";
 		List<Batch> batchList=batchDao.findByString(queryStr, boId);	
@@ -59,6 +62,7 @@ public class BatchServiceImpl extends AbstractServiceImpl implements BatchServic
 		return batchList;
 	}
 
+	@Override
 	public Batch findByBatchBoIdSingle(String boId) throws ServiceUnavailableException {
 		List<Batch> batchList = findByBatchBoId(boId);
 		if (!CollectionUtils.isEmpty(batchList)) {
@@ -70,6 +74,7 @@ public class BatchServiceImpl extends AbstractServiceImpl implements BatchServic
 		return null;
 	}
 
+//	@Override
 //	public void saveBatch(Batch batch) throws ServiceUnavailableException {
 //		if(batch.isBoIdRequired()) {
 //			batch.setBoId(getNextBoId());
@@ -78,6 +83,7 @@ public class BatchServiceImpl extends AbstractServiceImpl implements BatchServic
 //		batchDao.save(batch);
 //	}
 
+	@Override
 	public List<Batch> getAllBatch() throws ServiceUnavailableException {
 		List<Batch> batchList = batchDao.getAll("From Batch batch");
 		if(CollectionUtils.isEmpty(batchList)) 
