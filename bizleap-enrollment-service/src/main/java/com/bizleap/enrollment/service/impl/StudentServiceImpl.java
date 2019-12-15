@@ -2,6 +2,7 @@ package com.bizleap.enrollment.service.impl;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,18 +11,43 @@ import org.springframework.util.CollectionUtils;
 
 import com.bizleap.enrollment.dao.StudentDao;
 import com.bizleap.enrollment.domain.Payment;
+import com.bizleap.enrollment.domain.Section;
 import com.bizleap.enrollment.domain.Student;
 import com.bizleap.enrollment.domain.SystemConstant.EntityType;
 import com.bizleap.enrollment.exception.ServiceUnavailableException;
+import com.bizleap.enrollment.service.PaymentService;
+import com.bizleap.enrollment.service.SectionService;
 import com.bizleap.enrollment.service.StudentService;
 
 @Service("studentService")
 @Transactional(readOnly = true)
-public class StudentServiceImpl extends AbstractServiceImpl implements StudentService{
+public class StudentServiceImpl extends AbstractServiceImpl implements StudentService {
 
 	@Autowired
 	StudentDao studentDao;
 	
+	@Autowired
+	PaymentService paymentService;
+	
+	@Autowired
+	SectionService sectionService;
+
+	private static final Logger logger = Logger.getLogger(StudentServiceImpl.class);
+
+	public void ensureBoIdStudent(Student student) {
+
+		if (!CollectionUtils.isEmpty(student.getPaymentList())) {
+			for (Payment payment : student.getPaymentList()) {
+				if (payment.isBoIdRequired()) {
+					payment.setBoId(paymentService.getNextBoId(EntityType.PAYMENT));
+				}
+			}
+		}
+		Section section = new Section();
+		section.setBoId(sectionService.getNextBoId(EntityType.SECTION));
+		
+	}
+
 	@Override
 	public List<Student> findByStudentBoId(String boId) throws ServiceUnavailableException {
 		String queryStr = "select student from Student student where student.boId=:dataInput";
@@ -46,8 +72,14 @@ public class StudentServiceImpl extends AbstractServiceImpl implements StudentSe
 
 	@Override
 	public void saveStudent(Student student) throws ServiceUnavailableException {
-		// TODO Auto-generated method stub
-		
+		logger.info("Student" + student);
+		if (student.isBoIdRequired()) {
+			student.setBoId(getNextBoId());
+			ensureBoIdStudent(student);
+		}
+
+		studentDao.save(student);
+
 	}
 
 	@Override
@@ -58,7 +90,7 @@ public class StudentServiceImpl extends AbstractServiceImpl implements StudentSe
 		hibernateInitializeStudentList(studentList);
 		return studentList;
 	}
-	
+
 	private String getNextBoId() {
 		return getNextBoId(EntityType.STUDENT);
 	}
@@ -68,7 +100,8 @@ public class StudentServiceImpl extends AbstractServiceImpl implements StudentSe
 		return studentDao.getCount("select count(student) from Student student");
 	}
 
-	private void hibernateInitializeStudentList(List<Student> studentList) {
+	@Override
+	public void hibernateInitializeStudentList(List<Student> studentList) {
 		if (CollectionUtils.isEmpty(studentList))
 			return;
 
@@ -76,15 +109,16 @@ public class StudentServiceImpl extends AbstractServiceImpl implements StudentSe
 			hibernateInitializeStudent(student);
 		}
 	}
-	
-	private void hibernateInitializeStudent(Student student) {
+
+	@Override
+	public void hibernateInitializeStudent(Student student) {
 		if (student == null)
 			return;
 
 		Hibernate.initialize(student);
 
 		for (Payment payment : student.getPaymentList()) {
-			Hibernate.initialize(student);
+			Hibernate.initialize(payment);
 		}
 		Hibernate.initialize(student.getSection());
 	}

@@ -20,14 +20,22 @@ public class Batch extends AbstractEntity {
 	
 	@Temporal(TemporalType.TIME)
 	@Column(name = "startDate")
-	Date startDate;
+	private Date startDate;
 	
 	@Temporal(TemporalType.TIME)
 	@Column(name = "endDate")
-	Date endDate;
+	private Date endDate;
 
 	@OneToMany(mappedBy = "batch", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	List<Section> sectionList;
+	private List<Section> sectionList;
+	
+	public Batch() {
+		super();
+	}
+	
+	public Batch(String boId) {
+		super(boId);
+	}
 	
 	public Date getStartDate() {
 		return startDate;
@@ -43,6 +51,14 @@ public class Batch extends AbstractEntity {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+	
+	public List<Section> getSectionList() {
+		return sectionList;
+	}
+
+	public void setSectionList(List<Section> sectionList) {
+		this.sectionList = sectionList;
 	}
 	
 	public String toString() {

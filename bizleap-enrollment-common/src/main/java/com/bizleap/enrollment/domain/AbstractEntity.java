@@ -53,13 +53,13 @@ public class AbstractEntity {
 			return false;
 		return (this.getBoId().equals(entity.getBoId()));
 	}
-//	public boolean isBoIdRequired() {
-//		return boId==null || SystemConstant.BOID_REQUIRED.equals(getBoId());
-//	}
+
+	public boolean isBoIdRequired() {
+		return boId == null || SystemConstant.BOID_REQUIRED.equals(getBoId());
+	}
 
 	@Override
 	public String toString() {
 		return new ToStringBuilder(this).append("boId", boId).append("name", name).toString();
 	}
 }
-

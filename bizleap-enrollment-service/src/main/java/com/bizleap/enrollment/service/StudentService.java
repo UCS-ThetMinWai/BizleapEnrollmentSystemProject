@@ -14,4 +14,7 @@ public interface StudentService extends AbstractService {
 
 	public List<Student> getAllStudent() throws ServiceUnavailableException;
 
+	public void hibernateInitializeStudent(Student student);
+	
+	public void hibernateInitializeStudentList(List<Student> studentList);
 }

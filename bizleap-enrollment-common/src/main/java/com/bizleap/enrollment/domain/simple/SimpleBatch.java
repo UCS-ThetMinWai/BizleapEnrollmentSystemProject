@@ -34,13 +34,13 @@ public class SimpleBatch extends AbstractEntity {
 		this.endDate = endDate;
 	}
 	
-//	 public List<SimpleSection> getSectionList() {
-//			 return simpleSectionList;
-//	 }
+	 public List<SimpleSection> getSectionList() {
+			 return simpleSectionList;
+	 }
 	
-//	public void setSimpleSectionList(List<SimpleSection> simpleSectionList) {
-//		this.simpleSectionList = simpleSectionList;
-//	}
+	public void setSimpleSectionList(List<SimpleSection> simpleSectionList) {
+		this.simpleSectionList = simpleSectionList;
+	}
 	
 	public String toString() {
 		return new ToStringBuilder(this)
@@ -49,5 +49,4 @@ public class SimpleBatch extends AbstractEntity {
 				.append("End Date", endDate)
 				.toString();
 	}
-
 }

@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import com.bizleap.enrollment.domain.SystemConstant.StudentStatus;
+import com.bizleap.enrollment.domain.simple.SimplePayment;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -61,13 +62,13 @@ public class Student extends Person {
 		this.section = section;
 	}
 
-	 public List<Payment> getPaymentList() {
-	 return paymentList;
-	 }
-	
-	 public void setPaymentList(List<Payment> paymentList) {
-	 this.paymentList = paymentList;
-	 }
+	public List<Payment> getPaymentList() {
+		return paymentList;
+	}
+
+	public void setPaymentList(List<Payment> paymentList) {
+		this.paymentList = paymentList;
+	}
 
 	public StudentStatus getStudentStatus() {
 		return studentStatus;
@@ -77,12 +78,11 @@ public class Student extends Person {
 		this.studentStatus = studentStatus;
 	}
 
-	 @Override
-	 public String toString() {
-	 return new ToStringBuilder(this).appendSuper(super.toString())
-	 .append("description",description).append("Section",section)
-	 .append("paymentList",paymentList).append("studentStatus",studentStatus)
-	 .toString();
-	 }
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this).appendSuper(super.toString()).append("description", description)
+				.append("Section", section).append("paymentList", paymentList).append("studentStatus", studentStatus)
+				.toString();
+	}
 
 }

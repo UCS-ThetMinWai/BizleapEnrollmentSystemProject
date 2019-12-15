@@ -2,6 +2,7 @@ package com.bizleap.enrollment.service.impl;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,6 +10,7 @@ import org.springframework.util.CollectionUtils;
 
 import com.bizleap.enrollment.dao.CourseDao;
 import com.bizleap.enrollment.domain.Course;
+import com.bizleap.enrollment.domain.SystemConstant.EntityType;
 import com.bizleap.enrollment.exception.ServiceUnavailableException;
 import com.bizleap.enrollment.service.CourseService;
 
@@ -18,6 +20,9 @@ public class CourseServiceImpl extends AbstractServiceImpl implements CourseServ
 
 	@Autowired
 	CourseDao courseDao;
+	
+	private static final Logger logger = Logger.getLogger(CourseServiceImpl.class);
+
 	
 	@Override
 	public List<Course> findByCourseBoId(String boId) throws ServiceUnavailableException {
@@ -41,8 +46,12 @@ public class CourseServiceImpl extends AbstractServiceImpl implements CourseServ
 
 	@Override
 	public void saveCourse(Course course) throws ServiceUnavailableException {
-		// TODO Auto-generated method stub
-		
+		logger.info("Course" + course);
+		if (course.isBoIdRequired()) {
+			course.setBoId(getNextBoId(EntityType.COURSE));
+		}
+
+		courseDao.save(course);		
 	}
 
 	@Override

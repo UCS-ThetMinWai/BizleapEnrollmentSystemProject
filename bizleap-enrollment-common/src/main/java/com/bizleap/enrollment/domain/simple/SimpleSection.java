@@ -13,8 +13,8 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import com.bizleap.enrollment.domain.AbstractEntity;
 
 public class SimpleSection extends AbstractEntity {
-	// List<SimpleEmployee> employeeList;
-	// List<SimpleStudent> studentList;
+	List<SimpleEmployee> simpleEmployeeList;
+	List<SimpleStudent> simpleStudentList;
 
 	private Date startTime;
 
@@ -28,29 +28,31 @@ public class SimpleSection extends AbstractEntity {
 		super();
 	}
 
-	public SimpleSection(String boId) {
-		super(boId);
+	public SimpleSection(List<SimpleEmployee> simpleEmployeeList, List<SimpleStudent> simpleStudentList, Date startTime,
+			Date endTime, Date startDate, Date endDate) {
+		super();
+		this.simpleEmployeeList = simpleEmployeeList;
+		this.simpleStudentList = simpleStudentList;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.startDate = startDate;
+		this.endDate = endDate;
 	}
 
-	// public List<SimpleEmployee> getEmployeeList() {
-	// return employeeList;
-	// }
-	//
-	// public void setEmployeeList(List<SimpleEmployee> employeeList) {
-	// this.employeeList = employeeList;
-	// }
-	//
-	// public List<SimpleStudent> getStudentList() {
-	// return studentList;
-	// }
-	//
-	// public void setStudentList(List<SimpleStudent> studentList) {
-	// this.studentList = studentList;
-	// }
+	public List<SimpleEmployee> getSimpleEmployeeList() {
+		return simpleEmployeeList;
+	}
 
-	@Override
-	public String toString() {
-		return new ToStringBuilder(this).appendSuper(super.toString()).toString();
+	public void setSimpleEmployeeList(List<SimpleEmployee> simpleEmployeeList) {
+		this.simpleEmployeeList = simpleEmployeeList;
+	}
+
+	public List<SimpleStudent> getSimpleStudentList() {
+		return simpleStudentList;
+	}
+
+	public void setSimpleStudentList(List<SimpleStudent> simpleStudentList) {
+		this.simpleStudentList = simpleStudentList;
 	}
 
 	public Date getStartTime() {
@@ -85,4 +87,5 @@ public class SimpleSection extends AbstractEntity {
 		this.endDate = endDate;
 	}
 
+	
 }

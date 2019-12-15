@@ -11,7 +11,8 @@ public abstract interface SystemConstant {
 		EMPLOYEE("Employee","EMPLOYEE"),
 		SECTION("Section","SECTION"),
 		PAYMENT("Payment","PAYMENT"),
-		BATCH("Batch","BATCH");
+		BATCH("Batch","BATCH"),
+		COURSE("Course","COURSE");
 		
 		private String value;
 		
