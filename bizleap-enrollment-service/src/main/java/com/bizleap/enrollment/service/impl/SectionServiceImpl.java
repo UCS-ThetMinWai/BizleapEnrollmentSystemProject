@@ -33,25 +33,25 @@ public class SectionServiceImpl extends AbstractServiceImpl implements SectionSe
 	@Autowired
 	SectionDao sectionDao;
 
-	 @Autowired
-	 EmployeeService employeeService;
+	@Autowired
+	EmployeeService employeeService;
 
 	@Autowired
 	StudentService studentService;
-	
+
 	@Autowired
 	BatchService batchService;
-	
+
 	@Autowired
 	CourseService courseService;
-	
+
 	@Override
 	public long getCount() {
 		return sectionDao.getCount("select count(section) from Section section");
 	}
 
 	public void ensureBoIdSection(Section section) {
-		
+
 		if (!CollectionUtils.isEmpty(section.getStudentList())) {
 			for (Student student : section.getStudentList()) {
 				if (student.isBoIdRequired()) {
@@ -60,8 +60,9 @@ public class SectionServiceImpl extends AbstractServiceImpl implements SectionSe
 			}
 		}
 		Course course = new Course();
-		course.setBoId(courseService.getNextBoId(EntityType.COURSE));;
-		Batch batch = new Batch () ;
+		course.setBoId(courseService.getNextBoId(EntityType.COURSE));
+		;
+		Batch batch = new Batch();
 		batch.setBoId(batchService.getNextBoId(EntityType.BATCH));
 	}
 
@@ -87,7 +88,6 @@ public class SectionServiceImpl extends AbstractServiceImpl implements SectionSe
 		return null;
 	}
 
-	
 	@Transactional(readOnly = false)
 	@Override
 	public void saveSection(Section section) throws ServiceUnavailableException {
@@ -96,7 +96,7 @@ public class SectionServiceImpl extends AbstractServiceImpl implements SectionSe
 			section.setBoId(getNextBoId());
 			ensureBoIdSection(section);
 		}
-		 
+
 		sectionDao.save(section);
 	}
 
@@ -113,7 +113,8 @@ public class SectionServiceImpl extends AbstractServiceImpl implements SectionSe
 		return getNextBoId(EntityType.SECTION);
 	}
 
-	private void hibernateInitializeSectionList(List<Section> sectionList) {
+	@Override
+	public void hibernateInitializeSectionList(List<Section> sectionList) {
 		Hibernate.initialize(sectionList);
 		if (CollectionUtils.isEmpty(sectionList))
 			return;
@@ -123,7 +124,8 @@ public class SectionServiceImpl extends AbstractServiceImpl implements SectionSe
 		}
 	}
 
-	private void hibernateInitializeSection(Section section) {
+	@Override
+	public void hibernateInitializeSection(Section section) {
 		Hibernate.initialize(section);
 		if (section == null)
 			return;
@@ -139,7 +141,7 @@ public class SectionServiceImpl extends AbstractServiceImpl implements SectionSe
 			studentService.hibernateInitializeStudent(student);
 		}
 		Hibernate.initialize(section.getCourse());
-		//Hibernate.initialize(section.getBatch());
+		// Hibernate.initialize(section.getBatch());
 		batchService.hibernateInitializeBatch(section.getBatch());
 	}
 

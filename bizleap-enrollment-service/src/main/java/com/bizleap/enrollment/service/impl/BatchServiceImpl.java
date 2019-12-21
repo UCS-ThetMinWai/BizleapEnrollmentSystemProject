@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.bizleap.enrollment.dao.BatchDao;
 import com.bizleap.enrollment.domain.Batch;
+import com.bizleap.enrollment.domain.Section;
 import com.bizleap.enrollment.exception.ServiceUnavailableException;
 import com.bizleap.enrollment.service.BatchService;
 import com.bizleap.enrollment.service.SectionService;
@@ -44,12 +45,12 @@ public class BatchServiceImpl extends AbstractServiceImpl implements BatchServic
 	public void hibernateInitializeBatch(Batch batch) {
 		if(batch == null)
 			return;
-		
 		Hibernate.initialize(batch);
 		
-//		for(Section section : section.getSectionList()) {
-//			Hibernate.initialize(section);
-//		}
+		for(Section section : batch.getSectionList()) {
+			//sectionService.hibernateInitializeSection(section);
+			Hibernate.initialize(section);
+		}
 	}
 
 	@Override

@@ -79,20 +79,24 @@
 	</div>
 	<!-- Student Form -->
 
-	<div th:if="${department!=NULL}" id="department-detail-table"
-		class="hide">
+	<!--  get detail course -->
+	<div th:if="${course!=NULL}" id="course-detail-table" class="hide">
 		<table style="width: 40%;">
-			<tr th:if="${department!='INVALID'}" th:value="${department.id}"
-				id="detail-department-id">
-				<td>Department BoId:</td>
-				<td th:text="${department.boId}"></td>
-				<td><input type="submit" value="Add New" id="addNewButton"
-					onclick="addNewDepartment()" /></td>
+			<tr th:if="${course!='INVALID'}" th:value="${course.id}"
+				id="detail-course-id">
+				<td>Course BoId:</td>
+				<td th:text="${course.boId}"></td>
 			</tr>
-			<tr th:if="${department!='INVALID'}">
-				<td>Department Name:</td>
-				<td th:text="${department.name}"></td>
+			<tr th:if="${course!='INVALID'}">
+				<td>Course Name:</td>
+				<td th:text="${course.name}"></td>
 			</tr>
+
+			<tr th:if="${course!='INVALID'}">
+				<td>Course Fee:</td>
+				<td th:text="${course.fee}"></td>
+			</tr>
+			
 		</table>
 	</div>
 

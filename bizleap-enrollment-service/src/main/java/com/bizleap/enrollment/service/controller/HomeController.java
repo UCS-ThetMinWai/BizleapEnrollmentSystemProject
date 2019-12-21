@@ -12,6 +12,6 @@ public class HomeController {
 
 	@RequestMapping(value = { "/" }, method = RequestMethod.GET)
 	public String loginScreen(Model model, HttpServletRequest http) throws Exception {
-		return "index";
+		return "home";
 	}
 }

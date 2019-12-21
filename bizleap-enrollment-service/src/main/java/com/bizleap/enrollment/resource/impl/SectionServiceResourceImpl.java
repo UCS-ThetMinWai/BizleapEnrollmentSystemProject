@@ -35,13 +35,13 @@ public class SectionServiceResourceImpl extends AbstractServiceResourceImpl impl
 //	public @ResponseBody Boolean createSection(HttpServletRequest request,@RequestBody SimpleSection simpleSection) {
 //		
 //		logger.info("Create Section>>>>>>>>>>>>>>>>>>>>>");
-////		try {
-////		//	sectionService.saveSection(conversion.toSection(simpleSection));
-////			
-////		} catch(ServiceUnavailableException e) {
-////			return false;
-////		}
-////		return true;
+//		try {
+//		//	sectionService.saveSection(C.toSection(simpleSection));
+//			
+//		} catch(ServiceUnavailableException e) {
+//			return false;
+//		}
+//		return true;
 //    
 //	}
 
