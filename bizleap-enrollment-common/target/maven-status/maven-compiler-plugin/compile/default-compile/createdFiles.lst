@@ -11,6 +11,7 @@ com\bizleap\enrollment\exception\ServiceUnavailableException.class
 com\bizleap\enrollment\domain\Person.class
 com\bizleap\enrollment\domain\simple\SimplePayment.class
 com\bizleap\enrollment\domain\simple\SimpleEmployee.class
+com\bizleap\enrollment\domain\utils\ConvensionUtils.class
 com\bizleap\enrollment\domain\Batch.class
 com\bizleap\enrollment\domain\SystemConstant$Position.class
 com\bizleap\enrollment\domain\SystemConstant.class

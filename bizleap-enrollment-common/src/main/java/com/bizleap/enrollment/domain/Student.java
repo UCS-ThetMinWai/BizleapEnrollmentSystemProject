@@ -16,7 +16,6 @@ import javax.persistence.Table;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import com.bizleap.enrollment.domain.SystemConstant.StudentStatus;
-import com.bizleap.enrollment.domain.simple.SimplePayment;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 

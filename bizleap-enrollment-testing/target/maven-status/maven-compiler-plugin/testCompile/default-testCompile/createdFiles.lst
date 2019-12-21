@@ -1,0 +1,14 @@
+com\bizleap\enrollment\resource\impl\test\CourseServiceResourceImplTest.class
+com\bizleap\enrollment\rest\client\EmployeeServiceRestClient.class
+com\bizleap\enrollment\rest\client\CourseServiceRestClient.class
+com\bizleap\enrollment\test\ServiceTest.class
+com\bizleap\enrollment\rest\client\SectionServiceRestClient.class
+com\bizleap\enrollment\loader\test\SectionServiceImplTest.class
+com\bizleap\enrollment\loader\test\CourseServiceImplTest.class
+com\bizleap\enrollment\resource\impl\test\SectionServiceResourceImplTest.class
+com\bizleap\enrollment\loader\test\StudentServiceImplTest.class
+com\bizleap\enrollment\loader\test\ServiceTest.class
+com\bizleap\enrollment\resource\impl\test\StudentServiceResourceImplTest.class
+com\bizleap\enrollment\resource\impl\test\EmployeeServiceResourceTest.class
+com\bizleap\enrollment\rest\client\StudentServiceRestClient.class
+com\bizleap\enrollment\loader\test\EmployeeServiceImplTest.class
