@@ -14,4 +14,8 @@ public interface SectionService extends AbstractService {
 
 	public List<Section> getAllSection() throws ServiceUnavailableException;
 
+	public void hibernateInitializeSectionList(List<Section> sectionList);
+
+	public void hibernateInitializeSection(Section section);
+
 }
