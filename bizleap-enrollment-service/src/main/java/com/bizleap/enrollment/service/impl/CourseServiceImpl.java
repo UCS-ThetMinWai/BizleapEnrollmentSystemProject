@@ -44,6 +44,7 @@ public class CourseServiceImpl extends AbstractServiceImpl implements CourseServ
 		return null;
 	}
 
+	@Transactional(readOnly = false)
 	@Override
 	public void saveCourse(Course course) throws ServiceUnavailableException {
 		logger.info("Course" + course);

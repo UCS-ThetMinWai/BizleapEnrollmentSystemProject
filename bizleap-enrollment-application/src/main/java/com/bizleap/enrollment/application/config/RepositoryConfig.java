@@ -34,7 +34,6 @@ public class RepositoryConfig {
 	@Value("${hibernate.hbm2ddl.auto}")
 	private String hibernateHbm2ddlAuto;
 
-	
 	@Bean()
 	public DataSource getDataSource() {
 		DriverManagerDataSource ds = new DriverManagerDataSource();

@@ -1,5 +1,6 @@
 package com.bizleap.enrollment.loader.test;
 
+import java.text.ParseException;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -7,8 +8,12 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.bizleap.enrollment.domain.Section;
 import com.bizleap.enrollment.domain.Student;
+import com.bizleap.enrollment.domain.SystemConstant;
+import com.bizleap.enrollment.domain.SystemConstant.StudentStatus;
 import com.bizleap.enrollment.exception.ServiceUnavailableException;
+import com.bizleap.enrollment.service.SectionService;
 import com.bizleap.enrollment.service.StudentService;
 
 
@@ -16,6 +21,9 @@ public class StudentServiceImplTest extends ServiceTest {
 
 	@Autowired
 	StudentService studentService;
+	
+	@Autowired
+	SectionService sectionService;
 	
 	private static Logger logger = Logger.getLogger(StudentServiceImplTest.class);
 
@@ -33,7 +41,31 @@ public class StudentServiceImplTest extends ServiceTest {
 		}
 	}
 	
-	//@Ignore
+	@Test
+	public void testSaveStudent() throws ParseException {
+		
+		System.out.print("Save Student");
+		Student student = new Student();
+		student.setBoId(SystemConstant.BOID_REQUIRED);
+		student.setName("Thuzar");
+		student.setDescription("Hello student");
+		student.setStudentStatus(StudentStatus.ENROLLED);
+		
+		try {
+			logger.info("Save Student");
+			Section section = sectionService.findBySectionBoIdSingle("SECTION00001");
+			if (section == null)
+				return;
+			logger.info("Section found...........");
+			logger.info("Section" + section.getBoId());
+			student.setSection(section);
+			studentService.saveStudent(student);
+		} catch (ServiceUnavailableException e) {
+			logger.error("Error is:::" + e);
+		}
+	}
+
+	@Ignore
 	@Test
 	public void testFindByStudentBoId() {
 		try {

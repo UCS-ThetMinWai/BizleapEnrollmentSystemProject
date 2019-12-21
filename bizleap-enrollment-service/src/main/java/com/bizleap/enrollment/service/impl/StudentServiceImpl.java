@@ -69,7 +69,8 @@ public class StudentServiceImpl extends AbstractServiceImpl implements StudentSe
 		}
 		return null;
 	}
-
+	
+	@Transactional(readOnly = false)
 	@Override
 	public void saveStudent(Student student) throws ServiceUnavailableException {
 		logger.info("Student" + student);
