@@ -1,5 +1,6 @@
 package com.bizleap.enrollment.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -64,6 +65,8 @@ public class Student extends Person {
 	}
 
 	public List<Payment> getPaymentList() {
+		if(paymentList == null) 
+			paymentList = new ArrayList<Payment>();
 		return paymentList;
 	}
 

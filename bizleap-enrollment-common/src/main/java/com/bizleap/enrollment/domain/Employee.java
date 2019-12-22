@@ -1,5 +1,6 @@
 package com.bizleap.enrollment.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -34,7 +35,8 @@ public class Employee extends Person {
 	@Enumerated(EnumType.STRING)
 	private Position position;
 	@Column(name = "password")
-    private String password;
+	private String password;
+
 	public Employee() {
 
 	}
@@ -42,8 +44,10 @@ public class Employee extends Person {
 	public Employee(String boId) {
 		super(boId);
 	}
+
 	public List<Section> getSectionList() {
-		
+		if (sectionList == null)
+			sectionList = new ArrayList<Section>();
 		return sectionList;
 	}
 
@@ -58,6 +62,7 @@ public class Employee extends Person {
 	public void setSectionList(List<Section> sectionList) {
 		this.sectionList = sectionList;
 	}
+
 	public Position getPosition() {
 		return position;
 	}
@@ -65,8 +70,6 @@ public class Employee extends Person {
 	public void setPosition(Position position) {
 		this.position = position;
 	}
-
-
 
 	public Double getSalary() {
 		return salary;
@@ -76,12 +79,10 @@ public class Employee extends Person {
 		this.salary = salary;
 	}
 
-
 	@Override
 	public String toString() {
 		return new ToStringBuilder(this).appendSuper(super.toString()).append("Salary", salary)
-				.append("password", password)
-				.toString();
+				.append("password", password).toString();
 	}
 
 }

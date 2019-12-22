@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bizleap.enrollement.util.Parser;
 import com.bizleap.enrollment.domain.Course;
+import com.bizleap.enrollment.domain.Section;
 import com.bizleap.enrollment.exception.ServiceUnavailableException;
 import com.bizleap.enrollment.service.BatchService;
 import com.bizleap.enrollment.service.CourseService;
@@ -55,11 +56,14 @@ public class DetailController {
 			model.addAttribute("course", course);
 			break;
 
-//		case "MAJOR":
-//			Major major = majorService.findByMajorBoId(boId).get(0);
-//			model.addAttribute("major", major);
-//			break;
-//
+		case "SECTION":
+			Section section = sectionService.findBySectionBoId(boId).get(0);
+			model.addAttribute("section", section);
+			break;
+		case "REGISTER":
+			Section register = sectionService.findBySectionBoId(boId).get(0);
+			model.addAttribute("register", register);
+			break;
 //		case "TEACHER":
 //			Teacher teacher = teacherService.findByTeacherBoId(boId).get(0);
 //			model.addAttribute("teacher", teacher);

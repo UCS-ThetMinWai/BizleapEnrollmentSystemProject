@@ -1,5 +1,6 @@
 package com.bizleap.enrollment.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -127,6 +128,8 @@ public class Section extends AbstractEntity {
 	}
 
 	public List<Employee> getEmployeeList() {
+		if(employeeList == null)
+			employeeList = new ArrayList<Employee>();
 		return employeeList;
 	}
 
@@ -135,6 +138,8 @@ public class Section extends AbstractEntity {
 	}
 
 	public List<Student> getStudentList() {
+		if(studentList == null) 
+			studentList = new ArrayList<Student>();
 		return studentList;
 	}
 

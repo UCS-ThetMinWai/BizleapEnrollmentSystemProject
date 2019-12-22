@@ -1,5 +1,8 @@
 package com.bizleap.enrollment.domain.utils;
 
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.log4j.Logger;
+
 import com.bizleap.enrollment.domain.Batch;
 import com.bizleap.enrollment.domain.Course;
 import com.bizleap.enrollment.domain.Employee;
@@ -15,32 +18,54 @@ import com.bizleap.enrollment.domain.simple.SimpleStudent;
 
 public class ConvensionUtils {
 
+	private static final Logger logger = Logger.getLogger(ConvensionUtils.class);
+
 	public static Section toSection(SimpleSection simpleSection) {
+		logger.info("Here ConvensionUtils---1");
 		Section section = new Section();
 		if (simpleSection == null) {
+			logger.info("Section is null.");
 			return null;
 		}
 		section.setName(simpleSection.getName());
+		logger.info("name: " + simpleSection.getName());
 		section.setStartTime(simpleSection.getStartTime());
+		logger.info("start time : " + simpleSection.getStartTime());
 		section.setEndTime(simpleSection.getEndTime());
-		section.setStartDate(simpleSection.getEndDate());
+		logger.info("end time : " + simpleSection.getStartDate());
+		section.setStartDate(simpleSection.getStartDate());
+		logger.info("start date : " + simpleSection.getStartDate());
 		section.setEndDate(simpleSection.getEndDate());
-		for (SimpleStudent simpleStudent : simpleSection.getSimpleStudentList()) {
-			Student student = toStudent(simpleStudent);
-			section.getStudentList().add(student);
+		logger.info("end date : " + simpleSection.getEndDate());
+		logger.info("Student: " + simpleSection.getSimpleStudentList().get(0).getName());
+		if (!simpleSection.getSimpleStudentList().isEmpty()) {
+			logger.info("Section: ");
+			for (SimpleStudent simpleStudent : simpleSection.getSimpleStudentList()) {
+				logger.info("Simple Student:" + simpleStudent.getName());
+				Student student = toStudent(simpleStudent);
+				logger.info("real student : " + student.toString());
+				section.getStudentList().add(student);
+			}
 		}
-		for (SimpleEmployee simpleEmployee : simpleSection.getSimpleEmployeeList()) {
-			Employee employee = new Employee();
-			employee.setName(simpleEmployee.getName());
-			employee.setAddress(simpleEmployee.getAddress());
-			employee.setAge(simpleEmployee.getAge());
-			employee.setEmail(simpleEmployee.getEmail());
-			employee.setPhoneNumber(simpleEmployee.getPhoneNumber());
-			employee.setSalary(simpleEmployee.getSalary());
-			employee.setPosition(simpleEmployee.getPosition());
-			section.getEmployeeList().add(employee);
-			employee.getSectionList().add(section);
+		logger.info("Here ConvensionUtils--2");
+		if (!simpleSection.getSimpleEmployeeList().isEmpty()) {
+			for (SimpleEmployee simpleEmployee : simpleSection.getSimpleEmployeeList()) {
+				logger.info("employee : " +simpleEmployee);
+				Employee employee = new Employee();
+				employee.setName(simpleEmployee.getName());
+				employee.setAddress(simpleEmployee.getAddress());
+				employee.setAge(simpleEmployee.getAge());
+				employee.setEmail(simpleEmployee.getEmail());
+				employee.setPhoneNumber(simpleEmployee.getPhoneNumber());
+				employee.setSalary(simpleEmployee.getSalary());
+				employee.setPosition(simpleEmployee.getPosition());
+				section.getEmployeeList().add(employee);
+				logger.info("section's employee list : " +section.getEmployeeList().get(0).getName());
+				employee.getSectionList().add(section);
+				logger.info("employee's section list: " + employee.getSectionList().get(0).getName());
+			}
 		}
+		logger.info("Here ConvensionUtils---3");
 		return section;
 	}
 
@@ -66,19 +91,30 @@ public class ConvensionUtils {
 	}
 
 	public static Student toStudent(SimpleStudent simpleStudent) {
+		logger.info("SimpleStudent:" + simpleStudent);
 		Student student = new Student();
-		if (simpleStudent == null) {
+		if (simpleStudent==null) {
+			logger.info("Student is null.");
 			return null;
 		}
 		student.setName(simpleStudent.getName());
+		logger.info("Student Name:"+simpleStudent.getName());
 		student.setDescription(simpleStudent.getDescription());
+		logger.info("Student desc : " + simpleStudent.getDescription());
 		student.setSection(simpleStudent.getSection());
-		for (SimplePayment simplePayment : simpleStudent.getPaymentList()) {
-			Payment payment = toPayment(simplePayment);
-			payment.setStudent(student);
-			student.getPaymentList().add(payment);
-		}
+		logger.info("student's section : " + simpleStudent);
 		student.setStudentStatus(simpleStudent.getStudentStatus());
+		logger.info("payment list:"+ simpleStudent.getPaymentList().isEmpty());
+		if (!simpleStudent.getPaymentList().isEmpty()) {
+			for (SimplePayment simplePayment : simpleStudent.getPaymentList()) {
+				logger.info("payment: "+simplePayment.toString());
+				Payment payment = toPayment(simplePayment);
+				payment.setStudent(student);
+				student.getPaymentList().add(payment);
+			}
+		}
+
+		logger.info("to student success");
 		return student;
 	}
 

@@ -14,6 +14,10 @@ public class SimpleBatch extends AbstractEntity {
 
 	List<SimpleSection> simpleSectionList;
 	
+	public SimpleBatch() {
+		super();
+	}
+	
 	public SimpleBatch(String boId) {
 		super(boId);
 	}

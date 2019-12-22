@@ -1,5 +1,6 @@
 package com.bizleap.enrollment.domain.simple;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -41,6 +42,8 @@ public class SimpleStudent extends AbstractEntity{
 	}
 
 	public List<SimplePayment> getPaymentList() {
+		if(paymentList==null)
+			paymentList = new ArrayList<SimplePayment>();
 		return paymentList;
 	}
 

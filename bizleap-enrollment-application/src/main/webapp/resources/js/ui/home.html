@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Bizleap Enrollement Application</title>
+<title>Bizleap DS</title>
 <link rel="shoutcut icon" th:href="${titleLogo}" />
 <link rel="stylesheet" th:href="@{/resources/css/shwepazon.css}"
 	type="text/css" />
+
 <link rel="stylesheet" th:href="@{/resources/css/homepage.css}"
 	type="text/css" />
+
+
 <link rel="stylesheet" th:href="@{/resources/css/spin.css}"
 	type="text/css" />
 <link rel="stylesheet" th:href="@{/resources/js/ui/jquery-ui.theme.css}"
@@ -16,7 +19,6 @@
 <link rel="stylesheet" th:href="@{/resources/css/formdesign.css}"
 	type="text/css" />
 <script th:src="@{/resources/js/shwepazon.js}" type="text/javascript"></script>
-<script th:src="@{/resources/js/loader.js}" type="text/javascript"></script>
 <script th:src="@{/resources/js/newprocess.js}" type="text/javascript"></script>
 <script th:src="@{/resources/js/jQuery.js}" type="text/javascript"></script>
 <script th:src="@{/resources/js/ui/jquery-ui.js}" type="text/javascript"></script>
@@ -30,29 +32,32 @@
 <script th:src="@{/resources/js/spin.min.js}" type="text/javascript" />
 <script th:src="@{/resources/js/menu.js}" type="text/javascript"></script>
 </head>
-<body onload= "loadSection();">
+<body>
 	<div class="hide" id="dialog-temp" />
 
 	<div id="workspace">
 		<div>
-			<div id="container">
-				<div class="inner-workspace">
-					<div class="detail" id="detail"></div>
-				</div>
+			<div class="cards">
+				<div class="card">ONE</div>
+				<div class="card">TWO</div>
+				<div class="card">THREE</div>
+				<div class="card">FOUR</div>
+				<div class="card">FIVE</div>
+				<div class="card">SIX</div>
+				<div class="card">SEVEN</div>
+				<div class="card">EIGHT</div>
+				<div class="card">NINE</div>
+				<div class="card">TEN</div>
+				<div class="card">ELEVEN</div>
+				<div class="card">TWELVE</div>
 			</div>
+
 		</div>
 	</div>
 
 	<footer>
-		<div id="completedProcesses"
-			style="float: left; padding: 2px 5px; color: rgb(0, 128, 0); background: #fff; border-radius: 15px; margin-top: 3px;">Completed:
-			0/0</div>
-		<div id="totalTimeLeftInMin"
-			style="float: left; padding: 5px 15px 5px 5px;">Total Time
-			Left: 0s</div>
-		<div id="averageTime" style="float: left; padding: 5px 15px 5px 5px;">Average
-			Time per order: 0s</div>
-		&copy; Copyright All rights Reserved by BizLeap Technology.
+		&copy; Copyright All rights Reserved by BizLeap Technology. This is
+		Home
 		<!-- span th:text="#{title.name}" ></span> -->
 		<div style="float: right; padding: 5px 15px 5px 5px;">
 			<img th:src="@{resources/img/BizLeap.png}" width="200" height="25"

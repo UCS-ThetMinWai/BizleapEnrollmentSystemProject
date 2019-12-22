@@ -40,6 +40,8 @@ public class SimpleSection extends AbstractEntity {
 	}
 
 	public List<SimpleEmployee> getSimpleEmployeeList() {
+		if(simpleEmployeeList==null)
+			simpleEmployeeList = new ArrayList<SimpleEmployee>();
 		return simpleEmployeeList;
 	}
 
@@ -48,6 +50,8 @@ public class SimpleSection extends AbstractEntity {
 	}
 
 	public List<SimpleStudent> getSimpleStudentList() {
+		if(simpleStudentList == null) 
+			simpleStudentList = new ArrayList<SimpleStudent>();
 		return simpleStudentList;
 	}
 

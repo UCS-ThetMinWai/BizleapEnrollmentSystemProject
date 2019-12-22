@@ -41,7 +41,8 @@ function loadAction(currentElement, activeId) {
 	request.send();
 }
 
-function loadCourse() {
+function loadSection() {
+	
 	var detail = document.getElementById("detail");
 	detail.innerHTML = "";
 	var request = new XMLHttpRequest;
@@ -53,79 +54,65 @@ function loadCourse() {
 			alert("Error return " + request.status);
 			return;
 		}
+		alert(request.responseText);
 		var divisionContainer = document.createElement("div");
 		divisionContainer.setAttribute("class","cards");
-		var courseJSON = JSON.parse(request.responseText);
-		courseJSON.forEach(data => {
+		var sectionJSON = JSON.parse(request.responseText);
+		sectionJSON.forEach(data => {
 			
 			var panel = document.createElement("div");
 			panel.setAttribute("class","card");
 			panel.setAttribute("id",data.boId);
-			panel.setAttribute("onclick","getDetail(this,'COURSE')");
-			//var br = document.createElement("br");
-			//var boId = document.createElement("span");
+			panel.setAttribute("onclick","getDetail(this,'SECTION')");
+			// var br = document.createElement("br");
+			// var boId = document.createElement("span");
 			var nameSpan = document.createElement("span");
-			nameSpan.innerHTML = data.name;
-			//boId.innerHTML = data.boId;
-			//major.append(boId);
-			//major.append(br);
+			nameSpan.innerHTML = data.course.name;
+			// boId.innerHTML = data.boId;
+			// major.append(boId);
+			// major.append(br);
 			panel.append(nameSpan);
-			//major.style.margin="20px";
+			// major.style.margin="20px";
 			divisionContainer.append(panel);
 			detail.append(divisionContainer);
-			//document.getElementById("detail-table").className = "hide";
+			// document.getElementById("detail-table").className = "hide";
 
 		});
 
-//		document.getElementById("major-content").onmouseover = function(){
-//				this.style.background = "grey";
-//		}
+// document.getElementById("major-content").onmouseover = function(){
+// this.style.background = "grey";
+// }
 
 	}
-	request.open("GET", "courses/list", true);
+	request.open("GET", "sections/list", true);
 	request.send();
 }
 
-function loadMajor() {
-	var content = document.getElementById("content");
-	content.innerHTML = "";
-	var request = new XMLHttpRequest;
-
-	request.onreadystatechange = function() {
-		if(request.readyState != 4)
-			return;
-		if(request.status != 200) {
-			alert("Error return " + request.status);
-			return;
-		}
-		
-		var majorJSON = JSON.parse(request.responseText);
-		majorJSON.forEach(data => {
-			var major = document.createElement("div");
-			major.setAttribute("id",data.boId);
-			major.setAttribute("onclick","getDetail(this,'MAJOR')");
-			var br = document.createElement("br");
-			var boId = document.createElement("span");
-			var name = document.createElement("span");
-			name.innerHTML = data.name;
-			boId.innerHTML = data.boId;
-			major.append(boId);
-			major.append(br);
-			major.append(name);
-			major.style.margin="20px";
-			content.append(major);
-			document.getElementById("detail-table").className = "hide";
-
-		});
-
-//		document.getElementById("major-content").onmouseover = function(){
-//				this.style.background = "grey";
-//		}
-
-	}
-	request.open("GET", "majors/list", true);
-	request.send();
-}
+// function loadSection() {
+//	
+// var request = new XMLHttpRequest;
+// request.onreadystatechange = function() {
+// if(request.readyState != 4)
+// return;
+// if(request.status != 200) {
+// alert("Error return " + request.status);
+// return;
+// }
+// console.log("Section List : " + request.respnoseText);
+// var sectionJSON = JSON.parse(request.responseText);
+// sectionJSON.forEach(data => {
+// var boId = data.boId;
+// var name = data.name;
+// var courseName = data.course.name;
+// console.log("Section List inside for loop: " + boId + "section name : " +
+// name + "course name ; " + courseName);
+//
+// });
+//
+// }
+// request.open("GET", "sections/list", true);
+// request.send();
+// }
 
 function loadStudent() {
 	var content = document.getElementById("content");
@@ -159,9 +146,9 @@ function loadStudent() {
 
 		});
 
-//		document.getElementById("student-content").onmouseover = function(){
-//		    this.style.background = "grey";
-//		}
+// document.getElementById("student-content").onmouseover = function(){
+// this.style.background = "grey";
+// }
 
 	}
 	request.open("GET", "students/list", true);
@@ -170,7 +157,7 @@ function loadStudent() {
 
 var detailId;
 function getDetail(element, entityType) {
-
+	
 	var request = new XMLHttpRequest;
 
 	request.onreadystatechange = function() {
@@ -182,8 +169,12 @@ function getDetail(element, entityType) {
 		}
 		document.getElementById("detail").innerHTML = request.responseText;
 		document.getElementById("detail-table").className = "show";
-		if(entityType == "COURSE") {
-			document.getElementById("course-detail-table").className = "show";
+		if(entityType == "SECTION") {
+			document.getElementById("section-detail-table").className = "show";
+		}
+		else if(entityType == "REGISTER") {
+			document.getElementById("registerForm").className = "show";
+			document.getElementById("section-detail-table").className = "hide";	
 		}
 		else if(entityType == "TEACHER") {
 			document.getElementById("teacher-detail-table").className = "show";
@@ -199,9 +190,15 @@ function getDetail(element, entityType) {
 		}
 	}
 	detailId = element;
-	var boId = element.id;
 	parameter = {};
+	if(entityType !="REGISTER") {
+	var boId = element.id;
 	parameter["boId"] = boId;
+	}
+	else 
+		parameter["boId"] = element;
+	alert(entityType+":"+parameter.boId);
+	alert(entityType+":"+parameter);
 	request.open("GET", "detail/"+ entityType + "?input=" + JSON.stringify(parameter), true);
 	request.send();
 }
@@ -248,7 +245,7 @@ function getNewTeacherForm(){
 		document.getElementById("detail").innerHTML = request.responseText;
 		document.getElementById("detail-table").className = "show";
 		document.getElementById("teacherForm").className = "show";
-		//document.getElementById("teacher-detail-table").className = "hide";
+		// document.getElementById("teacher-detail-table").className = "hide";
 		
 	}
 	request.open("GET","new/teachers",true);
@@ -294,7 +291,7 @@ function getNewStaffForm(){
 		document.getElementById("detail").innerHTML = request.responseText;
 		document.getElementById("detail-table").className = "show";
 		document.getElementById("staffForm").className = "show";
-		//document.getElementById("teacher-detail-table").className = "hide";
+		// document.getElementById("teacher-detail-table").className = "hide";
 		
 	}
 	request.open("GET","new/staffs",true);
@@ -330,6 +327,11 @@ function saveStaff(){
 function addNewMajor() {
 	document.getElementById("majorForm").className = "show";
 	document.getElementById("major-detail-table").className = "hide";
+}
+
+function addNewStudentForm() {
+	document.getElementById("registerForm").className = "show";
+	document.getElementById("section-detail-table").className = "hide";	
 }
 
 function saveMajor() {
@@ -369,7 +371,7 @@ function getNewStudentForm(){
 		document.getElementById("detail").innerHTML = request.responseText;
 		document.getElementById("detail-table").className = "show";
 		document.getElementById("studentForm").className = "show";
-		//document.getElementById("teacher-detail-table").className = "hide";
+		// document.getElementById("teacher-detail-table").className = "hide";
 		
 	}
 	request.open("GET","new/students",true);

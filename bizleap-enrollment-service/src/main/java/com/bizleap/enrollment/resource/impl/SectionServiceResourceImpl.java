@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bizleap.enrollment.domain.Section;
 import com.bizleap.enrollment.domain.simple.SimpleSection;
+import com.bizleap.enrollment.domain.utils.ConvensionUtils;
 import com.bizleap.enrollment.exception.ServiceUnavailableException;
 import com.bizleap.enrollment.resource.SectionServiceResource;
 import com.bizleap.enrollment.service.SectionService;
@@ -30,20 +32,27 @@ public class SectionServiceResourceImpl extends AbstractServiceResourceImpl impl
 	public @ResponseBody  List<Section> getAllSection(HttpServletRequest request) throws ServiceUnavailableException {
 		return sectionService.getAllSection();
 	}
-
-//	@RequestMapping(method=RequestMethod.POST,value="/create")
-//	public @ResponseBody Boolean createSection(HttpServletRequest request,@RequestBody SimpleSection simpleSection) {
-//		
-//		logger.info("Create Section>>>>>>>>>>>>>>>>>>>>>");
-//		try {
-//		//	sectionService.saveSection(C.toSection(simpleSection));
-//			
-//		} catch(ServiceUnavailableException e) {
-//			return false;
-//		}
-//		return true;
-//    
-//	}
+    
+	@RequestMapping(method=RequestMethod.POST,value="/create")
+	public @ResponseBody Boolean createSection(HttpServletRequest request,@RequestBody SimpleSection simpleSection) {
+		if(simpleSection.equals(null)){
+			logger.info("simpel section is null.");
+		}
+		else {
+		logger.info("Create Section>>>>>>>>>>>>>>>>>>>>>"+simpleSection.toString());
+		logger.info("Simple Section: "+simpleSection);
+		try {
+			logger.info("In the resource,before save.");
+			sectionService.saveSection(ConvensionUtils.toSection(simpleSection));
+			
+		} catch(ServiceUnavailableException e) {
+			logger.info("can't create section.");
+			return false;
+		}
+		}
+		return true;
+    
+	}
 
 	@RequestMapping(method=RequestMethod.GET,value="/find/{boId}")
 	public @ResponseBody Section findBySectionBoId(HttpServletRequest request,@PathVariable("boId") String boId)

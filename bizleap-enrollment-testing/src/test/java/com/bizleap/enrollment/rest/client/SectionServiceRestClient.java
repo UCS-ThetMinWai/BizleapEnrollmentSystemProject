@@ -8,8 +8,11 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import com.bizleap.enrollment.domain.simple.SimpleSection;
 
 public class SectionServiceRestClient {
 	private static final Logger logger = Logger.getLogger(SectionServiceRestClient.class);
@@ -67,35 +70,34 @@ public class SectionServiceRestClient {
 		}
 	}
 
-//	public void saveSection(SimpleSection section) {
-//
-//		// Prepare the header
-//		HttpHeaders headers = new HttpHeaders();
-//		headers.setContentType(MediaType.APPLICATION_JSON);
-//		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-//		HttpEntity<SimpleSection> entityHeader = new HttpEntity<SimpleSection>(section, headers);
-//		logger.info("Request is: " + entityHeader);
-//
-//		// Prepare the URL
-//		String url = SERVICEURL + "/sections/create";
-//		logger.info("service url is: " + url);
-//
-//		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url);
-//		logger.info("calling webservice..." + builder);
-//
-//		// RESTTemplate to call the service
-//		RestTemplate restTemplate = new RestTemplate();
-//
-//		// Data type for response
-//		HttpEntity<String> response = null;
-//		try {
-//			response = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.POST, entityHeader,
-//					String.class);
-//			logger.info("after service");
-//
-//		} catch (Exception e) {
-//			logger.error("ERRROR is - " + e.getMessage() + ", " + response);
-//		}
-//
-//	}
+	public void saveSection(SimpleSection section) {
+
+		// Prepare the header
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+		HttpEntity<SimpleSection> entityHeader = new HttpEntity<SimpleSection>(section, headers);
+		logger.info("Request is: " + entityHeader);
+
+		// Prepare the URL
+		String url = SERVICEURL + "/sections/create";
+		logger.info("service url is: " + url);
+
+		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url);
+		logger.info("calling webservice..." + builder);
+
+		// RESTTemplate to call the service
+		RestTemplate restTemplate = new RestTemplate();
+
+		// Data type for response
+		HttpEntity<String> response = null;
+		try {
+			logger.info("Before calling resource.");
+			response = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.POST, entityHeader,
+					String.class);
+		} catch (Exception e) {
+			logger.error("ERRROR is - " + e.getMessage() + ", " + response);
+		}
+
+	}
 }
