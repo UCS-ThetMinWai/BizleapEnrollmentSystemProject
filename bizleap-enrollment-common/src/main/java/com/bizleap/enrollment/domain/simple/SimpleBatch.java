@@ -1,5 +1,6 @@
 package com.bizleap.enrollment.domain.simple;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -39,6 +40,8 @@ public class SimpleBatch extends AbstractEntity {
 	}
 	
 	 public List<SimpleSection> getSectionList() {
+		     if(simpleSectionList == null) 
+		    	 simpleSectionList = new ArrayList<SimpleSection>();
 			 return simpleSectionList;
 	 }
 	

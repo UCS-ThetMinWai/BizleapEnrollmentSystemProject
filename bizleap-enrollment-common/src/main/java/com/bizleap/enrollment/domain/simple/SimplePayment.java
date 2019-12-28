@@ -10,6 +10,10 @@ public class SimplePayment extends AbstractEntity {
 	private String discription;
 	//private SimpleStudent student;
 	
+	public SimplePayment() {
+		super();
+	}
+	
 	public SimplePayment(String boId) {
 		super(boId);
 	}

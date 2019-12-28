@@ -41,7 +41,7 @@ public class CourseServiceImplTest extends ServiceTest {
 		
 		Course course = new Course();
 		course.setBoId(SystemConstant.BOID_REQUIRED);
-		course.setName("PHP");
+		course.setName("Web Development");
 		course.setFee(250000);
 		try {
 			courseService.saveCourse(course);

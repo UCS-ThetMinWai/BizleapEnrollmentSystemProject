@@ -1,5 +1,6 @@
 package com.bizleap.enrollment.domain.simple;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -19,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class SimpleEmployee extends Person  {
 	private Double salary;
 	private Position position;
+	private String password;
 	private List<SimpleSection> simpleSectionList;
 	
 	public SimpleEmployee() {
@@ -27,8 +29,21 @@ public class SimpleEmployee extends Person  {
 	public SimpleEmployee(String boId) {
 		super(boId);
 	}
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setSimpleSectionList(List<SimpleSection> simpleSectionList) {
+		this.simpleSectionList = simpleSectionList;
+	}
+
 	public List<SimpleSection> getSimpleSectionList() {
-		
+		if(simpleSectionList == null) 
+			simpleSectionList = new ArrayList<SimpleSection>();
 		return simpleSectionList;
 	}
 

@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import com.bizleap.enrollment.dao.EmployeeDao;
+import com.bizleap.enrollment.domain.Batch;
+import com.bizleap.enrollment.domain.Course;
 import com.bizleap.enrollment.domain.Employee;
 import com.bizleap.enrollment.domain.Payment;
 import com.bizleap.enrollment.domain.Section;
@@ -29,8 +31,11 @@ public class EmployeeServiceImpl extends AbstractServiceImpl implements Employee
 	@Autowired
 	SectionService sectionService;
 	private static final Logger logger = Logger.getLogger(SectionServiceImpl.class);
-	public void ensureBoIdEmployee(Employee employee) {
 
+
+	
+	public void ensureBoIdEmployee(Employee employee) {
+	
 		if (!CollectionUtils.isEmpty(employee.getSectionList())) {
 			for (Section section : employee.getSectionList()) {
 				if (section.isBoIdRequired()) {
@@ -39,6 +44,9 @@ public class EmployeeServiceImpl extends AbstractServiceImpl implements Employee
 			}
 		}
 	}
+	
+	
+
 	
 	@Override
 	public List<Employee> findByEmployeeBoId(String boId) throws ServiceUnavailableException {
@@ -52,13 +60,12 @@ public class EmployeeServiceImpl extends AbstractServiceImpl implements Employee
    
 	
 	@Override
-	public List<Employee> findByEmployeePassword(String email,String password) throws ServiceUnavailableException {
-		String queryStr = "select employee from Employee employee where employee.email=:dataInput,employee.password=:dataInput1";
+	public Boolean authorize(String email,String password) throws ServiceUnavailableException {
+		String queryStr = "select employee from Employee employee where employee.email=:dataInput and employee.password=:dataInput1";
 		List<Employee> employeeList = employeeDao.findByString(queryStr, email,password);
 		if (CollectionUtils.isEmpty(employeeList))
-			return null;
-		hibernateInitializeEmployeeList(employeeList);
-		return employeeList;
+			return false;
+		return true;
 	}
 
 	@Override
@@ -74,6 +81,7 @@ public class EmployeeServiceImpl extends AbstractServiceImpl implements Employee
 	}
 	
 
+	@Transactional(readOnly = false)
 	@Override
 	public void saveEmployee(Employee employee) throws ServiceUnavailableException {
 		logger.info("Employee" + employee);
@@ -96,7 +104,7 @@ public class EmployeeServiceImpl extends AbstractServiceImpl implements Employee
 	}
 
 	private String getNextBoId() {
-		return getNextBoId(EntityType.STUDENT);
+		return getNextBoId(EntityType.EMPLOYEE);
 	}
 
 	@Override

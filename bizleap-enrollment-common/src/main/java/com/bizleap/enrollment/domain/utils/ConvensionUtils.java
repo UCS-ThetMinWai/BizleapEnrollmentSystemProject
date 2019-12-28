@@ -1,6 +1,5 @@
 package com.bizleap.enrollment.domain.utils;
 
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.log4j.Logger;
 
 import com.bizleap.enrollment.domain.Batch;
@@ -27,8 +26,10 @@ public class ConvensionUtils {
 			logger.info("Section is null.");
 			return null;
 		}
+		section.setBoId(simpleSection.getBoId());
 		section.setName(simpleSection.getName());
 		logger.info("name: " + simpleSection.getName());
+		section.setDayType(simpleSection.getDayType());
 		section.setStartTime(simpleSection.getStartTime());
 		logger.info("start time : " + simpleSection.getStartTime());
 		section.setEndTime(simpleSection.getEndTime());
@@ -37,21 +38,38 @@ public class ConvensionUtils {
 		logger.info("start date : " + simpleSection.getStartDate());
 		section.setEndDate(simpleSection.getEndDate());
 		logger.info("end date : " + simpleSection.getEndDate());
-		logger.info("Student: " + simpleSection.getSimpleStudentList().get(0).getName());
+		// logger.info("Student: " +
+		// simpleSection.getSimpleStudentList().get(0).getName());
 		if (!simpleSection.getSimpleStudentList().isEmpty()) {
 			logger.info("Section: ");
 			for (SimpleStudent simpleStudent : simpleSection.getSimpleStudentList()) {
-				logger.info("Simple Student:" + simpleStudent.getName());
-				Student student = toStudent(simpleStudent);
-				logger.info("real student : " + student.toString());
+				Student student = new Student();
+				student.setBoId(simpleStudent.getBoId());
+				student.setName(simpleStudent.getName());
+				// logger.info("Student Name:"+simpleStudent.getName());
+				student.setDescription(simpleStudent.getDescription());
+				// logger.info("Student desc : " +
+				// simpleStudent.getDescription());
+				student.setAddress(simpleStudent.getAddress());
+				student.setDescription(simpleStudent.getDescription());
+				student.setEmail(simpleStudent.getEmail());
+				student.setPhoneNumber(simpleStudent.getPhoneNumber());
+				student.setStudentStatus(simpleStudent.getStudentStatus());
+
+				// logger.info("Simple Student:" + simpleStudent.getName());
+				// Student student = toStudent(simpleStudent);
+				// logger.info("real student : " + student.toString());
+
 				section.getStudentList().add(student);
+				student.setSection(section);
 			}
 		}
 		logger.info("Here ConvensionUtils--2");
 		if (!simpleSection.getSimpleEmployeeList().isEmpty()) {
 			for (SimpleEmployee simpleEmployee : simpleSection.getSimpleEmployeeList()) {
-				logger.info("employee : " +simpleEmployee);
+				logger.info("employee : " + simpleEmployee);
 				Employee employee = new Employee();
+				employee.setBoId(simpleEmployee.getBoId());
 				employee.setName(simpleEmployee.getName());
 				employee.setAddress(simpleEmployee.getAddress());
 				employee.setAge(simpleEmployee.getAge());
@@ -60,10 +78,18 @@ public class ConvensionUtils {
 				employee.setSalary(simpleEmployee.getSalary());
 				employee.setPosition(simpleEmployee.getPosition());
 				section.getEmployeeList().add(employee);
-				logger.info("section's employee list : " +section.getEmployeeList().get(0).getName());
+				logger.info("section's employee list : " + section.getEmployeeList().get(0).getName());
 				employee.getSectionList().add(section);
 				logger.info("employee's section list: " + employee.getSectionList().get(0).getName());
 			}
+		}
+		if (simpleSection.getSimpleCourse() != null) {
+			Course course = new Course();
+			course.setId((simpleSection.getSimpleCourse().getId()));
+			course.setBoId(simpleSection.getSimpleCourse().getBoId());
+			course.setName(simpleSection.getSimpleCourse().getName());
+			course.setFee(simpleSection.getSimpleCourse().getFee());
+			section.setCourse(course);
 		}
 		logger.info("Here ConvensionUtils---3");
 		return section;
@@ -86,6 +112,8 @@ public class ConvensionUtils {
 			section.setEndTime(simpleSection.getEndTime());
 			section.setStartDate(simpleSection.getEndDate());
 			section.setEndDate(simpleSection.getEndDate());
+			employee.getSectionList().add(section);
+			section.getEmployeeList().add(employee);
 		}
 		return employee;
 	}
@@ -93,21 +121,23 @@ public class ConvensionUtils {
 	public static Student toStudent(SimpleStudent simpleStudent) {
 		logger.info("SimpleStudent:" + simpleStudent);
 		Student student = new Student();
-		if (simpleStudent==null) {
+		if (simpleStudent == null) {
 			logger.info("Student is null.");
 			return null;
 		}
+		student.setBoId(simpleStudent.getBoId());
 		student.setName(simpleStudent.getName());
-		logger.info("Student Name:"+simpleStudent.getName());
+		// logger.info("Student Name:"+simpleStudent.getName());
 		student.setDescription(simpleStudent.getDescription());
-		logger.info("Student desc : " + simpleStudent.getDescription());
-		student.setSection(simpleStudent.getSection());
-		logger.info("student's section : " + simpleStudent);
+		// logger.info("Student desc : " + simpleStudent.getDescription());
+		student.setAddress(simpleStudent.getAddress());
+		student.setDescription(simpleStudent.getDescription());
+		student.setEmail(simpleStudent.getEmail());
+		student.setPhoneNumber(simpleStudent.getPhoneNumber());
 		student.setStudentStatus(simpleStudent.getStudentStatus());
-		logger.info("payment list:"+ simpleStudent.getPaymentList().isEmpty());
+
 		if (!simpleStudent.getPaymentList().isEmpty()) {
 			for (SimplePayment simplePayment : simpleStudent.getPaymentList()) {
-				logger.info("payment: "+simplePayment.toString());
 				Payment payment = toPayment(simplePayment);
 				payment.setStudent(student);
 				student.getPaymentList().add(payment);
@@ -135,6 +165,7 @@ public class ConvensionUtils {
 		if (simpleCourse == null) {
 			return null;
 		}
+		course.setBoId(simpleCourse.getBoId());
 		course.setName(simpleCourse.getName());
 		course.setFee(simpleCourse.getFee());
 		return course;
@@ -153,6 +184,6 @@ public class ConvensionUtils {
 			section.setBatch(batch);
 			batch.getSectionList().add(section);
 		}
-		return null;
+		return batch;
 	}
 }

@@ -9,15 +9,27 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bizleap.enrollment.dao.PaymentDao;
 import com.bizleap.enrollment.domain.Payment;
+import com.bizleap.enrollment.domain.Section;
+import com.bizleap.enrollment.domain.Student;
+import com.bizleap.enrollment.domain.SystemConstant.EntityType;
 import com.bizleap.enrollment.exception.ServiceUnavailableException;
 import com.bizleap.enrollment.service.PaymentService;
+import com.bizleap.enrollment.service.StudentService;
 
 @Service("paymentService")
 public class PaymentServiceImpl extends AbstractServiceImpl implements PaymentService {
 	
 	@Autowired
 	PaymentDao paymentDao;
+	@Autowired
+	StudentService studentService;
+	
+	public void ensureBoIdStudent(Payment payment) {
 
+		Student student = payment.getStudent();
+		student.setBoId(studentService.getNextBoId(EntityType.STUDENT));
+	}
+	
 	@Override
 	public List<Payment> findByPaymentBoId(String boId) throws ServiceUnavailableException {
 		String queryStr = "select payment from Payment payment where payment.boId=:dataInput";
@@ -36,13 +48,15 @@ public class PaymentServiceImpl extends AbstractServiceImpl implements PaymentSe
 		return null;
 	}
 	
-//	@Transactional(readOnly = true)
-//	public void savePayment(Payment payment) throws ServiceUnavailableException {
-//			if (payment.isBoIdRequired()) {
-//				payment.setBoId(getNextBoId());
-//			}
-//			paymentDao.save(payment);
-//	}
+	@Transactional(readOnly = false)
+	@Override
+	public void savePayment(Payment payment) throws ServiceUnavailableException {
+			if (payment.isBoIdRequired()) {
+				payment.setBoId(getNextBoId());
+				ensureBoIdStudent(payment);
+			}
+			paymentDao.save(payment);
+	}
 
 	@Override
 	public List<Payment> getAllPayment() throws ServiceUnavailableException {
@@ -50,6 +64,10 @@ public class PaymentServiceImpl extends AbstractServiceImpl implements PaymentSe
 		return paymentList;
 	}
 
+	private String getNextBoId() {
+		return getNextBoId(EntityType.PAYMENT);
+	}
+	
 	@Override
 	public long getCount() {
 		return paymentDao.getCount("select count(payment) from Payment payment");

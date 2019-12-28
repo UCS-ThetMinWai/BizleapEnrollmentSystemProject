@@ -46,7 +46,7 @@ function loadSection() {
 	var detail = document.getElementById("detail");
 	detail.innerHTML = "";
 	var request = new XMLHttpRequest;
-
+	
 	request.onreadystatechange = function() {
 		if(request.readyState != 4)
 			return;
@@ -54,7 +54,7 @@ function loadSection() {
 			alert("Error return " + request.status);
 			return;
 		}
-		alert(request.responseText);
+		//document.getElementById("detail-table").className = "show";
 		var divisionContainer = document.createElement("div");
 		divisionContainer.setAttribute("class","cards");
 		var sectionJSON = JSON.parse(request.responseText);
@@ -88,31 +88,7 @@ function loadSection() {
 	request.send();
 }
 
-// function loadSection() {
-//	
-// var request = new XMLHttpRequest;
-// request.onreadystatechange = function() {
-// if(request.readyState != 4)
-// return;
-// if(request.status != 200) {
-// alert("Error return " + request.status);
-// return;
-// }
-// console.log("Section List : " + request.respnoseText);
-// var sectionJSON = JSON.parse(request.responseText);
-// sectionJSON.forEach(data => {
-// var boId = data.boId;
-// var name = data.name;
-// var courseName = data.course.name;
-// console.log("Section List inside for loop: " + boId + "section name : " +
-// name + "course name ; " + courseName);
-//
-// });
-//
-// }
-// request.open("GET", "sections/list", true);
-// request.send();
-// }
+
 
 function loadStudent() {
 	var content = document.getElementById("content");
@@ -168,13 +144,12 @@ function getDetail(element, entityType) {
 			return;
 		}
 		document.getElementById("detail").innerHTML = request.responseText;
-		document.getElementById("detail-table").className = "show";
+	//	document.getElementById("detail-table").className = "show";
 		if(entityType == "SECTION") {
 			document.getElementById("section-detail-table").className = "show";
 		}
 		else if(entityType == "REGISTER") {
 			document.getElementById("registerForm").className = "show";
-			document.getElementById("section-detail-table").className = "hide";	
 		}
 		else if(entityType == "TEACHER") {
 			document.getElementById("teacher-detail-table").className = "show";
@@ -195,13 +170,52 @@ function getDetail(element, entityType) {
 	var boId = element.id;
 	parameter["boId"] = boId;
 	}
-	else 
+	else { 
 		parameter["boId"] = element;
-	alert(entityType+":"+parameter.boId);
-	alert(entityType+":"+parameter);
+	}
 	request.open("GET", "detail/"+ entityType + "?input=" + JSON.stringify(parameter), true);
 	request.send();
 }
+
+
+
+function getAllEntityDetail(entityType) {
+	
+	var request = new XMLHttpRequest;
+
+	request.onreadystatechange = function() {
+		if(request.readyState != 4)
+			return;
+		if(request.status != 200) {
+			alert("Error return " + request.status);
+			return;
+		}
+		document.getElementById("detail").innerHTML = request.responseText;
+		//document.getElementById("detail-table").className = "show";
+		if(entityType == "SECTION") {
+			document.getElementById("section-list-detail-table").className = "show";
+		}
+		else if(entityType == "STUDENT") {
+			document.getElementById("student-list-detail-table").className = "show";
+		}
+		else if(entityType == "EMPLOYEE") {
+			document.getElementById("employee-list-detail-table").className += "show";
+		}
+		else if(entityType == "COURSE") {
+			document.getElementById("course-list-detail-table").className = "show";
+		}
+		else if(entityType == "PAYMENT") {
+			document.getElementById("payment-list-detail-table").className = "show";
+		}
+		else if(entityType == "BATCH") {
+			document.getElementById("batch-list-detail-table").className = "show";
+		}
+	}
+	request.open("GET", "getAll/"+ entityType, true);
+	request.send();
+}
+
+
 
 function addNewDepartment() {
 	document.getElementById("departmentForm").className = "show";
@@ -404,3 +418,98 @@ function saveStudent(){
 	request.send();
 }
 
+function showLoginPanel() {
+	
+	document.getElementById('instructor-login-label').className = 'hide';
+	document.getElementById('employee-login-panel').className = 'show'; 
+	var workspace = document.getElementById("workspace");
+	var footer = document.getElementById("home-footer");
+	var detail = document.getElementById("detail");
+	detail.setAttribute("disabled","true");
+	workspace.style.top = "20px";
+	detail.style.top="0px";
+	footer.style.height="200px";
+}
+
+function hideLoginPanel(){
+	var workspace = document.getElementById("workspace");
+	var footer = document.getElementById("home-footer");
+	var detail = document.getElementById("detail");
+	workspace.style.top = "70px";
+	detail.style.top="25px";
+	footer.style.height="40px";
+	document.getElementById("employee-login-panel").className = "hide";
+	document.getElementById("instructor-login-label").className = "show";
+}
+
+
+function authorization() {
+	var email=document.getElementById("employee-email").value;
+	var password=document.getElementById("emplyee-password").value;
+	alert("email:"+email+" password:"+password);
+	var request = new XMLHttpRequest;
+	request.onreadystatechange = function() {
+		if(request.readyState != 4)
+			return;
+		if(request.status != 200) {
+			alert("Error return " + request.status);
+			return;
+		}
+		document.getElementById("detail").innerHTML = "";
+		alert(request.responseText);
+		if(request.responseText == "true") {
+			hideLoginPanel();
+			document.getElementById("menu").className = "show";
+			document.getElementById("instructor-login-label").innerHTML = "Now Login : "+email;
+			document.getElementById("instructor-login-label").onclick = null;	
+		}
+	}
+	request.open("GET", "employees/authorize/"+email+"/"+password, true);
+	request.send();
+}
+
+function saveItem(entityType) {
+	// document.getElementById("section-list-detail-table").className = "hide";
+//	 document.getElementById("detail-table").className = "show";
+	 document.getElementById("saveButton").className = "show";
+	 document.getElementById("saveButton").value="Create New " + entityType;
+	 alert(document.getElementById("saveButton").value);
+}
+//
+//
+//	else if(entityType == "STUDENT") {
+//		document.getElementById("student-list-detail-table").className = "show";
+//	}
+//	else if(entityType == "EMPLOYEE") {
+//		document.getElementById("employee-list-detail-table").className += "show";
+//	}
+//	else if(entityType == "COURSE") {
+//		document.getElementById("course-list-detail-table").className = "show";
+//	}
+//	else if(entityType == "PAYMENT") {
+//		document.getElementById("payment-list-detail-table").className = "show";
+//	}
+//	else if(entityType == "BATCH") {
+//		document.getElementById("batch-list-detail-table").className = "show";
+//	}
+//}
+
+function showForm() {
+	
+	 if(document.getElementById("saveButton").value == "CREATE NEW SECTION") {
+		 document.getElementById("section-form").className = "show";
+//		 document.getElementById("employee-form").className = "show";
+//		 document.getElementById("student-form").className = "show";
+//		 document.getElementById("payment-form").className = "show";
+//		 document.getElementById("course-form").className = "show";
+	 }
+}
+function logout() {
+	
+	document.getElementById("menu").className = "hide";
+	loadSection();
+	document.getElementById("instructor-login-label").innerHTML = "Instructor click here...";
+	 document.getElementById("instructor-login-label").onclick="shwLogiPanel()";
+	document.getElementById("instructor-login-label").onclick =showLoginPanel();
+	
+}

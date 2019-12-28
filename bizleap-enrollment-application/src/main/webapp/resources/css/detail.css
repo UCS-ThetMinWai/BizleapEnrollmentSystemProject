@@ -1,0 +1,99 @@
+
+input.button::before {
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-box-shadow: #959595 0 2px 5px;
+	-moz-box-shadow: #959595 0 2px 5px;
+	border-radius: 3px;
+	box-shadow: #959595 0 2px 5px;
+	content: "";
+	display: block;
+	height: 100%;
+	left: 0;
+	padding: 2px 0 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+}
+
+input.button:active::before {
+	padding: 1px 0 0;
+}
+
+input.button.blue {
+	background: #abe4f8;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#abe4f8),
+		to(#74d0f4));
+	background: -moz-linear-gradient(#abe4f8, #74d0f4);
+	background: linear-gradient(#abe4f8, #74d0f4);
+	border: solid 1px #8cc5d9;
+	border-bottom: solid 3px #589cb6;
+	box-shadow: inset 0 0 0 1px #cdeffb;
+	color: #42788e;
+	text-shadow: 0 1px 0 #b6e6f9;
+}
+
+input.button.blue:hover {
+	background: #80d4f5;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#80d4f5),
+		to(#92dbf6));
+	background: -moz-linear-gradient(#80d4f5, #92dbf6);
+	background: linear-gradient(#80d4f5, #92dbf6);
+	border: solid 1px #79acbe;
+	border-bottom: solid 3px #589cb6;
+	box-shadow: inset 0 0 0 1px #b2e6f8;
+}
+
+input.button.blue:active {
+	background: #89d2ee;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#89d2ee),
+		to(#84cae6));
+	background: -moz-linear-gradient(#89d2ee, #84cae6);
+	background: linear-gradient(#89d2ee, #84cae6);
+	border: solid 1px #5c8d9f;
+	box-shadow: inset 0 10px 15px 0 #79b9d2;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+.form-inline {
+	display: block;
+    flex-flow: row wrap;	
+	align-items: center;
+}
+
+.form-inline label {
+	margin: 5px 10px 5px 0;
+}
+
+.form-inline input {
+	vertical-align: middle;
+	margin: 5px 10px 5px 0;
+	padding: 10px;
+	background-color: #fff;
+	border: 1px solid #ddd;
+}
+
+.form-inline button {
+	padding: 10px 20px;
+	background-color: dodgerblue;
+	border: 1px solid #ddd;
+	color: white;
+	cursor: pointer;
+}
+
+.form-inline button:hover {
+	background-color: royalblue;
+}
+
+@media ( max-width : 800px) {
+	.form-inline input {
+		margin: 10px 0;
+	}
+	.form-inline {
+		flex-direction: column;
+		align-items: stretch;
+	}
+}

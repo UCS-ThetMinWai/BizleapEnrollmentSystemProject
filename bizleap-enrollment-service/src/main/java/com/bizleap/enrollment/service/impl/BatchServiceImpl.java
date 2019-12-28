@@ -6,10 +6,12 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.bizleap.enrollment.dao.BatchDao;
 import com.bizleap.enrollment.domain.Batch;
 import com.bizleap.enrollment.domain.Section;
+import com.bizleap.enrollment.domain.SystemConstant.EntityType;
 import com.bizleap.enrollment.exception.ServiceUnavailableException;
 import com.bizleap.enrollment.service.BatchService;
 import com.bizleap.enrollment.service.SectionService;
@@ -23,12 +25,12 @@ public class BatchServiceImpl extends AbstractServiceImpl implements BatchServic
 	@Autowired
 	BatchDao batchDao;
 	
-	public void ensureBoIdDepartment(Batch batch) {
-//		for(Section section : batch.getSectionList()) {
-//			if(section.isBoIdRequired()) {
-//				section.setBoId(sectionService.getNextBoId());
-//			}
-//		}
+	public void ensureBoIdBatch(Batch batch) {
+		for(Section section : batch.getSectionList()) {
+			if(section.isBoIdRequired()) {
+				section.setBoId(sectionService.getNextBoId(EntityType.SECTION));
+			}
+		}
 	}
 	
 	@Override
@@ -48,14 +50,16 @@ public class BatchServiceImpl extends AbstractServiceImpl implements BatchServic
 		Hibernate.initialize(batch);
 		
 		for(Section section : batch.getSectionList()) {
-			//sectionService.hibernateInitializeSection(section);
 			Hibernate.initialize(section);
+			//sectionService.hibernateInitializeSection(section);
+			//sectionService.hibernateInitializeSection(section);
+
 		}
 	}
 
 	@Override
 	public List<Batch> findByBatchBoId(String boId) throws ServiceUnavailableException {
-		String queryStr = "select department from Department department where department.boId=:dataInput";
+		String queryStr = "select batch from Batch batch where batch.boId=:dataInput";
 		List<Batch> batchList=batchDao.findByString(queryStr, boId);	
 		if(CollectionUtils.isEmpty(batchList)) 
 			return null;
@@ -75,14 +79,19 @@ public class BatchServiceImpl extends AbstractServiceImpl implements BatchServic
 		return null;
 	}
 
-//	@Override
-//	public void saveBatch(Batch batch) throws ServiceUnavailableException {
-//		if(batch.isBoIdRequired()) {
-//			batch.setBoId(getNextBoId());
-//			ensureBoIdBatch(batch);
-//		}
-//		batchDao.save(batch);
-//	}
+	@Transactional(readOnly=false)
+	@Override
+	public void saveBatch(Batch batch) throws ServiceUnavailableException {
+		if(batch.isBoIdRequired()) {
+			batch.setBoId(getNextBoId());
+			ensureBoIdBatch(batch);
+		}
+		batchDao.save(batch);
+	}
+	
+	private String getNextBoId() {
+		return getNextBoId(EntityType.BATCH);
+	}
 
 	@Override
 	public List<Batch> getAllBatch() throws ServiceUnavailableException {

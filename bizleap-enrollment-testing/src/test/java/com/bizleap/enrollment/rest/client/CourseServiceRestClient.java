@@ -11,6 +11,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.bizleap.enrollment.domain.simple.SimpleCourse;
+
 public class CourseServiceRestClient {
 	private static final Logger logger = Logger.getLogger(CourseServiceRestClient.class);
 
@@ -67,36 +69,36 @@ public class CourseServiceRestClient {
 		}
 	}
 
-//	public void saveCourse(SimpleCourse course) {
-//
-//		// Prepare the header
-//		HttpHeaders headers = new HttpHeaders();
-//		headers.setContentType(MediaType.APPLICATION_JSON);
-//		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-//		HttpEntity<SimpleCourse> entityHeader = new HttpEntity<SimpleCourse>(course, headers);
-//		logger.info("Request is: " + entityHeader);
-//
-//		// Prepare the URL
-//		String url = SERVICEURL + "/courses/create";
-//		logger.info("service url is: " + url);
-//
-//		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url);
-//		logger.info("calling webservice..." + builder);
-//
-//		// RESTTemplate to call the service
-//		RestTemplate restTemplate = new RestTemplate();
-//
-//		// Data type for response
-//		HttpEntity<String> response = null;
-//		try {
-//			response = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.POST, entityHeader,
-//					String.class);
-//			logger.info("after service");
-//
-//		} catch (Exception e) {
-//			logger.error("ERRROR is - " + e.getMessage() + ", " + response);
-//		}
-//
-//	}
+	public void saveCourse(SimpleCourse simpleCourse) {
+
+		// Prepare the header
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+		HttpEntity<SimpleCourse> entityHeader = new HttpEntity<SimpleCourse>(simpleCourse, headers);
+		logger.info("Request is: " + entityHeader);
+
+		// Prepare the URL
+		String url = SERVICEURL + "/courses/create";
+		logger.info("service url is: " + url);
+
+		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url);
+		logger.info("calling webservice..." + builder);
+
+		// RESTTemplate to call the service
+		RestTemplate restTemplate = new RestTemplate();
+
+		// Data type for response
+		HttpEntity<String> response = null;
+		try {
+			response = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.POST, entityHeader,
+					String.class);
+			logger.info("after service");
+
+		} catch (Exception e) {
+			logger.error("ERRROR is - " + e.getMessage() + ", " + response);
+		}
+
+	}
 }
 

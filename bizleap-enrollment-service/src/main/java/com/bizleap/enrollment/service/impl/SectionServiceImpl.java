@@ -59,11 +59,33 @@ public class SectionServiceImpl extends AbstractServiceImpl implements SectionSe
 				}
 			}
 		}
-		Course course = new Course();
-		course.setBoId(courseService.getNextBoId(EntityType.COURSE));
-		;
-		Batch batch = new Batch();
-		batch.setBoId(batchService.getNextBoId(EntityType.BATCH));
+
+		if (!CollectionUtils.isEmpty(section.getStudentList())) {
+			for (Employee employee : section.getEmployeeList()) {
+				if (employee.isBoIdRequired()) {
+					employee.setBoId(employeeService.getNextBoId(EntityType.EMPLOYEE));
+				}
+			}
+		}
+
+		if (section.getCourse() == null)
+			return;
+		Course course = section.getCourse();
+		if (course != null) {
+			if (course.isBoIdRequired()) {
+				course.setBoId(courseService.getNextBoId(EntityType.COURSE));
+			}
+		}
+
+		if (section.getBatch() == null)
+			return;
+
+		Batch batch = section.getBatch();
+		if (batch != null) {
+			if (batch.isBoIdRequired()) {
+				batch.setBoId(batchService.getNextBoId(EntityType.BATCH));
+			}
+		}
 	}
 
 	@Override
@@ -93,11 +115,20 @@ public class SectionServiceImpl extends AbstractServiceImpl implements SectionSe
 	public void saveSection(Section section) throws ServiceUnavailableException {
 		logger.info("Section" + section);
 		if (section.isBoIdRequired()) {
+			logger.info("section boid required checking");
+			logger.info("create boid for section");
 			section.setBoId(getNextBoId());
+			logger.info("created boid for section");
+
+			logger.info("create boid for sub domain");
 			ensureBoIdSection(section);
+			logger.info("created boid for sub domain");
+
+			logger.info("ready to save section");
+			sectionDao.save(section);
+			logger.info("section saved success");
 		}
 
-		sectionDao.save(section);
 	}
 
 	@Override

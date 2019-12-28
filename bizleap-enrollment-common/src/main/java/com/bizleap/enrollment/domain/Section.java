@@ -26,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "section")
@@ -58,7 +59,7 @@ public class Section extends AbstractEntity {
 	@JoinColumn(name = "batchId")
 	private Batch batch;
 
-	//@JsonIgnore
+	
 	@ManyToMany(mappedBy = "sectionList", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Employee> employeeList;
 

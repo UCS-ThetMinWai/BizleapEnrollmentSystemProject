@@ -26,12 +26,11 @@ public class Student extends Person {
 
 	@Column(name = "description")
 	private String description;
-
+	
 	@JsonIgnore
 	@JoinColumn(name = "sectionId")
 	@ManyToOne
 	private Section section;
-
 	@JsonManagedReference
 	@OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Payment> paymentList;

@@ -1,5 +1,6 @@
 package com.bizleap.enrollment.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +15,8 @@ import javax.persistence.TemporalType;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "batch")
 public class Batch extends AbstractEntity {
@@ -25,7 +28,8 @@ public class Batch extends AbstractEntity {
 	@Temporal(TemporalType.TIME)
 	@Column(name = "endDate")
 	private Date endDate;
-
+	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "batch", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Section> sectionList;
 	
@@ -54,6 +58,8 @@ public class Batch extends AbstractEntity {
 	}
 	
 	public List<Section> getSectionList() {
+		if(sectionList==null)
+			sectionList=new ArrayList<Section>();
 		return sectionList;
 	}
 

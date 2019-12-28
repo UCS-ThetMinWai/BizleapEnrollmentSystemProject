@@ -49,7 +49,7 @@ public class CourseServiceImpl extends AbstractServiceImpl implements CourseServ
 	public void saveCourse(Course course) throws ServiceUnavailableException {
 		logger.info("Course" + course);
 		if (course.isBoIdRequired()) {
-			course.setBoId(getNextBoId(EntityType.COURSE));
+			course.setBoId(getNextBoId());
 		}
 
 		courseDao.save(course);		
@@ -63,6 +63,9 @@ public class CourseServiceImpl extends AbstractServiceImpl implements CourseServ
 		return courseList;
 	}
 
+	private String getNextBoId() {
+		return getNextBoId(EntityType.COURSE);
+	}
 	@Override
 	public long getCount() {
 		return courseDao.getCount("select count(course) from Course course");

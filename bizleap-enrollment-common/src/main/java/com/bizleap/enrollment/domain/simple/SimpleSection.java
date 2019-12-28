@@ -4,21 +4,34 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
 import com.bizleap.enrollment.domain.AbstractEntity;
+import com.bizleap.enrollment.domain.SystemConstant.DayType;
 
 public class SimpleSection extends AbstractEntity {
 	List<SimpleEmployee> simpleEmployeeList;
 	List<SimpleStudent> simpleStudentList;
+	SimpleCourse simpleCourse;
+	public SimpleCourse getSimpleCourse() {
+		return simpleCourse;
+	}
 
+	public void setSimpleCourse(SimpleCourse simpleCourse) {
+		this.simpleCourse = simpleCourse;
+	}
+
+	private DayType dayType;
+	
 	private Date startTime;
 
 	private Date endTime;
+
+	public DayType getDayType() {
+		return dayType;
+	}
+
+	public void setDayType(DayType dayType) {
+		this.dayType = dayType;
+	}
 
 	private Date startDate;
 
@@ -29,7 +42,7 @@ public class SimpleSection extends AbstractEntity {
 	}
 
 	public SimpleSection(List<SimpleEmployee> simpleEmployeeList, List<SimpleStudent> simpleStudentList, Date startTime,
-			Date endTime, Date startDate, Date endDate) {
+			Date endTime, Date startDate, Date endDate,DayType dayType) {
 		super();
 		this.simpleEmployeeList = simpleEmployeeList;
 		this.simpleStudentList = simpleStudentList;
@@ -37,6 +50,7 @@ public class SimpleSection extends AbstractEntity {
 		this.endTime = endTime;
 		this.startDate = startDate;
 		this.endDate = endDate;
+		this.dayType=dayType;
 	}
 
 	public List<SimpleEmployee> getSimpleEmployeeList() {

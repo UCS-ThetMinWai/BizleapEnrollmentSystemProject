@@ -43,9 +43,10 @@ public class StudentServiceImpl extends AbstractServiceImpl implements StudentSe
 				}
 			}
 		}
-		Section section = new Section();
+		if(student.getSection() == null) 
+			return;
+		Section section = student.getSection();
 		section.setBoId(sectionService.getNextBoId(EntityType.SECTION));
-		
 	}
 
 	@Override

@@ -17,7 +17,9 @@ import javax.persistence.Table;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import com.bizleap.enrollment.domain.SystemConstant.Position;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "Employee")

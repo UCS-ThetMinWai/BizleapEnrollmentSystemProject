@@ -5,15 +5,14 @@ import java.util.List;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import com.bizleap.enrollment.domain.AbstractEntity;
-import com.bizleap.enrollment.domain.Payment;
+import com.bizleap.enrollment.domain.Person;
 import com.bizleap.enrollment.domain.Section;
 import com.bizleap.enrollment.domain.SystemConstant.StudentStatus;
 
-public class SimpleStudent extends AbstractEntity{
+public class SimpleStudent extends Person{
 	
 	private String description;
-	private Section section;
+	private SimpleSection simpleSection;
 	private List<SimplePayment> paymentList;
 	private StudentStatus studentStatus;
 	
@@ -33,12 +32,12 @@ public class SimpleStudent extends AbstractEntity{
 		this.description = description;
 	}
 
-	public Section getSection() {
-		return section;
+	public SimpleSection getSimpleSection() {
+		return simpleSection;
 	}
 
-	public void setSection(Section section) {
-		this.section = section;
+	public void setSimpleSection(SimpleSection simpleSection) {
+		this.simpleSection = simpleSection;
 	}
 
 	public List<SimplePayment> getPaymentList() {
@@ -62,7 +61,7 @@ public class SimpleStudent extends AbstractEntity{
 	@Override
 	 public String toString() {
 	 return new ToStringBuilder(this).appendSuper(super.toString())
-	 .append("description",description).append("Section",section)
+	 .append("description",description).append("Section",simpleSection)
 	 .append("paymentList",paymentList).append("studentStatus",studentStatus)
 	 .toString();
 	 }
