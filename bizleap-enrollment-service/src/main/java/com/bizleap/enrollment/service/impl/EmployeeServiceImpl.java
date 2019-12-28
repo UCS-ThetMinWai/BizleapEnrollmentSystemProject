@@ -13,14 +13,11 @@ import com.bizleap.enrollment.dao.EmployeeDao;
 import com.bizleap.enrollment.domain.Batch;
 import com.bizleap.enrollment.domain.Course;
 import com.bizleap.enrollment.domain.Employee;
-import com.bizleap.enrollment.domain.Payment;
 import com.bizleap.enrollment.domain.Section;
-import com.bizleap.enrollment.domain.Student;
 import com.bizleap.enrollment.domain.SystemConstant.EntityType;
 import com.bizleap.enrollment.exception.ServiceUnavailableException;
 import com.bizleap.enrollment.service.EmployeeService;
 import com.bizleap.enrollment.service.SectionService;
-import com.bizleap.enrollment.service.StudentService;
 
 @Service("employeeService")
 @Transactional(readOnly = true)
@@ -80,8 +77,7 @@ public class EmployeeServiceImpl extends AbstractServiceImpl implements Employee
 		return null;
 	}
 	
-
-	@Transactional(readOnly = false)
+    @Transactional(readOnly = false)
 	@Override
 	public void saveEmployee(Employee employee) throws ServiceUnavailableException {
 		logger.info("Employee" + employee);

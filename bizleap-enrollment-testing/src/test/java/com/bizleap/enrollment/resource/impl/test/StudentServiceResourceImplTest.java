@@ -8,10 +8,8 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.bizleap.enrollment.domain.Section;
 import com.bizleap.enrollment.domain.SystemConstant;
 import com.bizleap.enrollment.domain.SystemConstant.StudentStatus;
-import com.bizleap.enrollment.domain.simple.SimpleCourse;
 import com.bizleap.enrollment.domain.simple.SimplePayment;
 import com.bizleap.enrollment.domain.simple.SimpleSection;
 import com.bizleap.enrollment.domain.simple.SimpleStudent;
@@ -23,6 +21,7 @@ import com.bizleap.enrollment.service.SectionService;
 public class StudentServiceResourceImplTest extends ServiceTest {
 	StudentServiceRestClient studentServiceRestClient = new StudentServiceRestClient();
 	private static Logger logger = Logger.getLogger(StudentServiceResourceImplTest.class);
+
 
 	@Autowired
 	SectionService sectionService;
@@ -51,6 +50,7 @@ public class StudentServiceResourceImplTest extends ServiceTest {
 			simplePayment.setFee(200000.00);
 			simplePayment.setDiscription("final Time Payment For student hlaing myar hta nae tae");
 			simpleStudent.getPaymentList().add(simplePayment);			
+
 			studentServiceRestClient.saveStudent(simpleStudent);
 	 }
 	

@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
-
 import com.bizleap.enrollment.domain.Person;
-import com.bizleap.enrollment.domain.Section;
 import com.bizleap.enrollment.domain.SystemConstant.StudentStatus;
 
 public class SimpleStudent extends Person{

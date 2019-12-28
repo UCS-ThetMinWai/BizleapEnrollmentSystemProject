@@ -69,13 +69,16 @@ public class StudentServiceRestClient {
 		}
 	}
 
+
 	public void saveStudent(SimpleStudent simpleStudent) {
 
 		// Prepare the header
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+
 		HttpEntity<SimpleStudent> entityHeader = new HttpEntity<SimpleStudent>(simpleStudent, headers);
+
 		logger.info("Request is: " + entityHeader);
 
 		// Prepare the URL

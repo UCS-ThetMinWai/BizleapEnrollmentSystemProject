@@ -40,14 +40,13 @@ public class EmployeeServiceImplTest extends ServiceTest {
 		}
 	}
 
-	
+	//@Ignore
 	@Test
 	public void testSaveEmployee() throws ParseException {
 
 		Employee employee = new Employee();
 		employee.setBoId(SystemConstant.BOID_REQUIRED);
 		employee.setName("Daw Mya Mya");
-		employee.setPosition(Position.ADMINISTRATOR);
 		employee.setSalary(500000.0);
 		employee.setAddress("Yangon");
 		employee.setEmail("myamya@gmail.com");
@@ -65,6 +64,7 @@ public class EmployeeServiceImplTest extends ServiceTest {
 		section.setEndTime(new SimpleDateFormat("HH:mm:ss").parse("12:00:00"));
 		section.getEmployeeList().add(employee);
 		employee.getSectionList().add(section);
+		employee.setSalary(500000.0);				
 		try {
 			employeeService.saveEmployee(employee);
 			logger.info("Saved Employee Success");
