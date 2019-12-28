@@ -81,6 +81,10 @@ public class EntityListController {
 			List<Payment> paymentList = paymentService.getAllPayment();
 			model.addAttribute("paymentList", paymentList);
 			break;
+		case "COURSE-EMPLOYEE":
+			List<Course> courseLists = courseService.getAllCourse();
+			model.addAttribute("courseList", courseLists);
+			break;
 		default:
 			break;
 		}

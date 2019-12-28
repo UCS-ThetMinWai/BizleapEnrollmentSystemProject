@@ -54,7 +54,6 @@ function loadSection() {
 			alert("Error return " + request.status);
 			return;
 		}
-		//document.getElementById("detail-table").className = "show";
 		var divisionContainer = document.createElement("div");
 		divisionContainer.setAttribute("class","cards");
 		var sectionJSON = JSON.parse(request.responseText);
@@ -78,7 +77,7 @@ function loadSection() {
 			// document.getElementById("detail-table").className = "hide";
 
 		});
-
+		document.getElementById("detail-table").className = "show";
 // document.getElementById("major-content").onmouseover = function(){
 // this.style.background = "grey";
 // }
@@ -144,7 +143,7 @@ function getDetail(element, entityType) {
 			return;
 		}
 		document.getElementById("detail").innerHTML = request.responseText;
-	//	document.getElementById("detail-table").className = "show";
+		document.getElementById("detail-table").className = "show";
 		if(entityType == "SECTION") {
 			document.getElementById("section-detail-table").className = "show";
 		}
@@ -191,7 +190,7 @@ function getAllEntityDetail(entityType) {
 			return;
 		}
 		document.getElementById("detail").innerHTML = request.responseText;
-		//document.getElementById("detail-table").className = "show";
+		document.getElementById("detail-table").className = "show";
 		if(entityType == "SECTION") {
 			document.getElementById("section-list-detail-table").className = "show";
 		}
@@ -470,38 +469,43 @@ function authorization() {
 
 function saveItem(entityType) {
 	// document.getElementById("section-list-detail-table").className = "hide";
-//	 document.getElementById("detail-table").className = "show";
+// document.getElementById("detail-table").className = "show";
 	 document.getElementById("saveButton").className = "show";
-	 document.getElementById("saveButton").value="Create New " + entityType;
+	 document.getElementById("saveButton").value="Create" + entityType;
 	 alert(document.getElementById("saveButton").value);
 }
 //
 //
-//	else if(entityType == "STUDENT") {
-//		document.getElementById("student-list-detail-table").className = "show";
-//	}
-//	else if(entityType == "EMPLOYEE") {
-//		document.getElementById("employee-list-detail-table").className += "show";
-//	}
-//	else if(entityType == "COURSE") {
-//		document.getElementById("course-list-detail-table").className = "show";
-//	}
-//	else if(entityType == "PAYMENT") {
-//		document.getElementById("payment-list-detail-table").className = "show";
-//	}
-//	else if(entityType == "BATCH") {
-//		document.getElementById("batch-list-detail-table").className = "show";
-//	}
-//}
+// else if(entityType == "STUDENT") {
+// document.getElementById("student-list-detail-table").className = "show";
+// }
+// else if(entityType == "EMPLOYEE") {
+// document.getElementById("employee-list-detail-table").className += "show";
+// }
+// else if(entityType == "COURSE") {
+// document.getElementById("course-list-detail-table").className = "show";
+// }
+// else if(entityType == "PAYMENT") {
+// document.getElementById("payment-list-detail-table").className = "show";
+// }
+// else if(entityType == "BATCH") {
+// document.getElementById("batch-list-detail-table").className = "show";
+// }
+// }
 
 function showForm() {
-	
-	 if(document.getElementById("saveButton").value == "CREATE NEW SECTION") {
+	 alert("show form btn clicked");
+	 alert("before if statement : "+document.getElementById("saveButton").value);
+	 if(document.getElementById("saveButton").value === "CreateSECTION") {
+		 alert(document.getElementById("saveButton").value);
+//		 document.getElementById("detail-table").className = "show";
+		 document.getElementById("section-list-detail-table").className = "hide";
 		 document.getElementById("section-form").className = "show";
-//		 document.getElementById("employee-form").className = "show";
-//		 document.getElementById("student-form").className = "show";
-//		 document.getElementById("payment-form").className = "show";
-//		 document.getElementById("course-form").className = "show";
+		 document.getElementById("employee-form").className = "show";
+		 document.getElementById("course-form").className = "show";
+// document.getElementById("student-form").className = "show";
+// document.getElementById("payment-form").className = "show";
+// document.getElementById("course-form").className = "show";
 	 }
 }
 function logout() {

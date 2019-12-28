@@ -35,15 +35,13 @@
 	<div class="hide" id="dialog-temp" />
 	<div id="workspace">
 		<div>
-			<input onclick="showForm();" type="button" id="saveButton" name="" class="hide" value="Create New" style="float: right; padding: 1px 15px 5px 5px;"/>
 			<div class="hide" id="menu">
 				<nav>
 					<span class="nav-header"></span>
 					<ul id="action-menu" class="menu1">
 
 						<li onclick="getAllEntityDetail('SECTION');saveItem('SECTION')"
-							id="sectionmenu"><span class="ti-home"></span>
-							<span>SECTION</span></li>
+							id="sectionmenu"><span class="ti-home"></span> <span>SECTION</span></li>
 
 						<li onclick="getAllEntityDetail('COURSE');"
 							onkeypress="loadSectionDetail(this,'department');"
@@ -82,7 +80,12 @@
 				</nav>
 			</div>
 			<div id="container">
-				<div class="inner-workspace">
+				<div>
+					<div class="inner-workspace">
+						<input type="button" onclick="showForm();" id="saveButton" name=""
+							class="hide" value="Create"
+							style="float: right; padding: 1px 15px 5px 5px;" />
+					</div>
 					<div class="detail" id="detail"></div>
 				</div>
 			</div>
