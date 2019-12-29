@@ -36,7 +36,7 @@ public class EmployeeServiceResourceImpl extends AbstractServiceResourceImpl imp
     
 
 	@RequestMapping(method=RequestMethod.POST,value="/create")
-	public @ResponseBody Boolean createStudent(HttpServletRequest request,@RequestBody SimpleEmployee simpleEmployee) {
+	public @ResponseBody Boolean createEmployee(HttpServletRequest request,@RequestBody SimpleEmployee simpleEmployee) {
 				logger.info("Create Student>>>>>>>>>>>>>>>>>>>>>");
 		try {
 			employeeService.saveEmployee(ConvensionUtils.toEmployee(simpleEmployee));		

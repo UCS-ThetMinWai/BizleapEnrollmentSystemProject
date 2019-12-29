@@ -53,6 +53,10 @@ public abstract interface SystemConstant {
 		public String getValue() {
 			return this.value;
 		}	
+		
+		public void setValue(String value) {
+			this.value = value;
+		}
 	}
 	
 	public static enum SectionStatus{
@@ -69,6 +73,9 @@ public abstract interface SystemConstant {
 			return this.value;
 		}	
 		
+		public void setValue(String value) {
+			this.value = value;
+		}
 		
 	}
 	
@@ -85,6 +92,10 @@ public abstract interface SystemConstant {
 		public String getValue() {
 			return this.value;
 		}	
+		
+		public void setValue(String value) {
+			this.value = value;
+		}
 	}
 	
 	public static enum Position{
@@ -100,6 +111,10 @@ public abstract interface SystemConstant {
 		public String getValue() {
 			return this.value;
 		}	
+		
+		public void setValue(String value) {
+			this.value = value;
+		}
 	}
 
 }

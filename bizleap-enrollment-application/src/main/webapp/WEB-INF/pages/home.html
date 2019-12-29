@@ -17,7 +17,7 @@
 	type="text/css" />
 
 <script th:src="@{/resources/js/loader.js}" type="text/javascript"></script>
-
+<script th:src="@{/resources/js/shwepazon.js}" type="text/javascript"></script>
 <script th:src="@{/resources/js/jQuery.js}" type="text/javascript"></script>
 <script th:src="@{/resources/js/ui/jquery-ui.js}" type="text/javascript"></script>
 <script th:src="@{/resources/js/ui/jquery-ui.min.js}"
@@ -43,32 +43,28 @@
 						<li onclick="getAllEntityDetail('SECTION');saveItem('SECTION')"
 							id="sectionmenu"><span class="ti-home"></span> <span>SECTION</span></li>
 
-						<li onclick="getAllEntityDetail('COURSE');"
-							onkeypress="loadSectionDetail(this,'department');"
-							id="coursemenu" tabindex="1"><span class="ti-home"></span> <span>COURSE</span></li>
+						<li onclick="getAllEntityDetail('COURSE');saveItem('COURSE')"
+							id="coursemenu" tabindex="1"><span class="ti-home">
+							</span> <span>COURSE</span></li>
 
 
 						<li onclick="getAllEntityDetail('STUDENT');"
-							onkeypress="loadSectionDetail(this,'department');"
 							id="studentmenu" tabindex="1"><span class="ti-home"></span>
 							<span>STUDENT</span></li>
 
-						<li onclick="getAllEntityDetail('EMPLOYEE');"
-							onkeypress="loadSectionDetail(this,'department');"
+						<li onclick="getAllEntityDetail('EMPLOYEE');saveItem('EMPLOYEE')"
 							id="employeemenu" tabindex="1"><span class="ti-home"></span>
 							<span>EMPLOYEE</span></li>
 
-						<li onclick="getAllEntityDetail('PAYMENT');"
-							onkeypress="loadSectionDetail(this,'department');"
+						<li onclick="getAllEntityDetail('PAYMENT');saveItem('PAYMENT')"
 							id="paymentmenu" tabindex="1"><span class="ti-home"></span>
 							<span>PAYMENT</span></li>
 
-						<li onclick="getAllEntityDetail('BATCH');"
-							onkeypress="loadSectionDetail(this,'department');" id="batchmenu"
+						<li onclick="getAllEntityDetail('BATCH');saveItem('BATCH')"
 							tabindex="1"><span class="ti-home"></span> <span>BATCH</span></li>
 
 						<li onclick="logout();"
-							onkeypress="loadSectionDetail(this,'department');" id="batchmenu"
+							 id="batchmenu"
 							tabindex="1"><span class="ti-home"></span> <span>Log
 								out</span></li>
 

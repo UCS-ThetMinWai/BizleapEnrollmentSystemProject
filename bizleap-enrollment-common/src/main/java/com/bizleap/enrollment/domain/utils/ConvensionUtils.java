@@ -104,6 +104,9 @@ public class ConvensionUtils {
 		employee.setAge(simpleEmployee.getAge());
 		employee.setAddress(simpleEmployee.getAddress());
 		employee.setPhoneNumber(simpleEmployee.getPhoneNumber());
+		employee.setEmail(simpleEmployee.getEmail());
+		employee.setPassword(simpleEmployee.getPassword());
+		employee.setPosition(simpleEmployee.getPosition());
 		employee.setSalary(simpleEmployee.getSalary());
 		for (SimpleSection simpleSection : simpleEmployee.getSimpleSectionList()) {
 			Section section = new Section();
