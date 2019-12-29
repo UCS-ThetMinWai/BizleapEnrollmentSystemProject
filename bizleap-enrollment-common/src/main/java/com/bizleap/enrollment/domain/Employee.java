@@ -30,8 +30,8 @@ public class Employee extends Person {
 
 	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinTable(name = "Employee_Section", joinColumns = { @JoinColumn(name = "section_id") }, inverseJoinColumns = {
-			@JoinColumn(name = "employee_id") })
+	@JoinTable(name = "Employee_Section", joinColumns = { @JoinColumn(name = "employee_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "section_id") })
 	private List<Section> sectionList;
 
 	@Enumerated(EnumType.STRING)

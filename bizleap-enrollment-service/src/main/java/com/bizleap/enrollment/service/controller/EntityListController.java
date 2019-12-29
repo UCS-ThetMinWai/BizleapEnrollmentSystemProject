@@ -2,6 +2,8 @@ package com.bizleap.enrollment.service.controller;
 
 import java.util.List;
 
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,8 +25,6 @@ import com.bizleap.enrollment.service.PaymentService;
 import com.bizleap.enrollment.service.SectionService;
 import com.bizleap.enrollment.service.StudentService;
 
-
-
 @Controller
 public class EntityListController {
 
@@ -41,12 +41,12 @@ public class EntityListController {
 	@Autowired
 	private StudentService studentService;
 
-	//private static Logger logger = Logger.getLogger(DetailController.class);
+	private static Logger logger = Logger.getLogger(EntityListController.class);
 
 	@RequestMapping(value = "getAll/{entityType}", method = RequestMethod.GET)
-	public String getAllEntitydetail(@PathVariable("entityType") String entityType,
-			Model model) throws ServiceUnavailableException {
-		
+	public String getAllEntitydetail(@PathVariable("entityType") String entityType, Model model)
+			throws ServiceUnavailableException {
+
 		if (entityType == null) {
 			model.addAttribute("status", "Error");
 			return "detail";
@@ -61,7 +61,7 @@ public class EntityListController {
 			List<Section> sectionList = sectionService.getAllSection();
 			model.addAttribute("sectionList", sectionList);
 			break;
-		
+
 		case "EMPLOYEE":
 			List<Employee> employeeList = employeeService.getAllEmployee();
 			model.addAttribute("employeeList", employeeList);
@@ -80,9 +80,19 @@ public class EntityListController {
 			List<Payment> paymentList = paymentService.getAllPayment();
 			model.addAttribute("paymentList", paymentList);
 			break;
-		case "COURSE-EMPLOYEE":
+		case "COURSE_EMPLOYEE":
 			List<Course> courseLists = courseService.getAllCourse();
-			model.addAttribute("courseList", courseLists);
+			logger.info("before condition courseList size" + courseLists.size());
+			if (!CollectionUtils.isEmpty(courseLists)) {
+				logger.info("course size" + courseLists.size());
+				model.addAttribute("courseLists", courseLists);
+			}
+			List<Employee> employeeLists = employeeService.getAllEmployee();
+			logger.info("before condition employeeList size" + employeeLists.size());
+			if (!CollectionUtils.isEmpty(employeeLists)) {
+				logger.info("employee size" + employeeLists.size());
+				model.addAttribute("employeeLists", employeeLists);
+			}
 			break;
 		default:
 			break;
@@ -90,4 +100,3 @@ public class EntityListController {
 		return "detail";
 	}
 }
-

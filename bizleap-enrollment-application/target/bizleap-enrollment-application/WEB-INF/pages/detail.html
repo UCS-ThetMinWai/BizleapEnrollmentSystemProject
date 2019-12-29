@@ -29,7 +29,7 @@
 	<!-- Registeration Form -->
 	<div class="hide" id="registerForm">
 
-		<form action="javascript:saveStudent();" id="newStudentForm"
+		<form action="javascript:register();" id="newStudentForm"
 			class="form-inline">
 
 
@@ -45,7 +45,7 @@
 						<th>Finish Time</th>
 					</tr>
 					<tr th:if="${register!='INVALID'}" th:value="${register.id}"
-						id="detail-register-id">
+						id="detail-register-section-id">
 						<td th:text="${register.name}"></td>
 						<td th:text="${register.dayType}"></td>
 						<td th:text="${register.startDate}"></td>
@@ -56,16 +56,20 @@
 				</table>
 			</div>
 
-			<label for="Course-form-title" id="label">You took</label> <label
-				for="course-name" id="label" th:if="${register!=NULL}"> :<span
-				th:if="${register.course!=NULL }" th:text="${register.course.name}">&nbsp;Course</span>
-			</label> <label for="course-name" id="label" th:if="${register!=NULL}">
+			<label for="Course-form-title" id="label">You took</label> 
+			
+			<label for="course-name" id="label" th:if="${register!=NULL}">Course is:<span
+				id = "course-input-id" th:if="${register.course!=NULL }" th:text="${register.course.name}" th:value="${register.course.id}">&nbsp;Course</span>
+			</label> 
+			
+			<label for="course-name" id="label" th:if="${register!=NULL}">
 				Fee is:<span th:if="${register.course!=NULL }"
-				th:text="${register.course.fee}"></span>
-			</label> <label for="Employee-form-title" id="label">Instructors :</label>
+				th:text="${register.course.fee}" id = "course-input-fee"></span>
+			</label>	
+				
+			 <label for="Employee-form-title" id="label">Instructors :</label>
 
 			<div th:if="${register!=NULL}" id="register-detail-table">
-
 
 				<span><u>Teach By</u></span>
 				<table style="width: 50%;">
@@ -73,11 +77,11 @@
 						<th>Name:</th>
 						<th>Position</th>
 					</tr>
-					<tr th:if="${register!='INVALID'}" th:value="${register.id}"
-						id="detail-employee-id"
-						th:each="employee:${register.employeeList}">
-						<td th:text="${employee.name}"></td>
-						<td th:text="${employee.position}"></td>
+					<tr th:if="${register!='INVALID'}"
+						id="employee-input-id"
+						th:each="employee:${register.employeeList}" th:value="${employee.id}">
+						<td id="employee-input-name" th:text="${employee.name}"></td>
+						<td id="employee-input-position" th:text="${employee.position}"></td>
 					</tr>
 				</table>
 			</div>
@@ -111,6 +115,27 @@
 					<td><input type="number" id="student-age" style="width: 200px" /></td>
 				</tr>
 			</table>
+
+
+			<!-- <table>
+				<tr>
+					<td><label for="Course-form-title" id="label">The Course you took:</label></td>
+				</tr>
+				<tr>
+				<td><label for="course-name" id="label" th:if="${register!=NULL}">
+					Name:<span th:if="${register.course!=NULL }"
+					th:text="${register.course.name}"></span>
+				</label></td>
+				</tr>
+				
+				<tr>
+				<td><label for="course-name" id="label" th:if="${register!=NULL}">
+					Fee:<span th:if="${register.course!=NULL }"
+					th:text="${register.course.fee}"></span>
+				</label></td>
+				</tr>
+				
+			</table> -->
 			<input type="submit" value="REGISTER" id="saveStudentForm" /> <input
 				type="button" value="Cancel" id="cancelStudenttForm"
 				onclick="document.getElementById('registerForm').className = 'hide'; document.getElementById('section-detail-table').className = 'show';" />
@@ -159,6 +184,35 @@
 		</form>
 	</div>
 	<!-- Batch Form -->
+
+
+	<!-- Course Form-->
+
+
+	<div class="hide" id="courseForm">
+		
+			<table align="center">
+				<tr>
+					<td colspan="2"><label for="Course-form-title"></label></td>
+
+				</tr>
+				<tr>
+					<td><label for="course-name">Name:</label></td>
+					<td><input type="text" id="course-name" style="width: 200px"/></td>
+				</tr>
+
+				<tr>
+					<td><label for="course-fee">Fee:</label></td>
+					<td><input type="text" id="fee" style="width: 200px"/></td>
+				</tr>
+
+		</table>
+		<div id="coure-form-button">
+			<input type="button" onclick="saveCourse()" value="Save" id="saveCourseForm"/>
+			<input type="button" value="Cancel" id="cancelCourseForm" onclick="document.getElementById('courseForm').className='hide';document.getElementById('course-list-detail-table').className='show';"/>
+	    </div>
+	</div>
+
 
 	<!--Payment Form -->
 	<div class="hide" id="payment-form">
@@ -319,9 +373,9 @@
 				</table>
 			</div>
 		</div>
-
+</div>
 		<div class="container">
-			<input type="submit" value="Register" id="addNewButton1"
+			<input type="submit" value="Register" id="addNewButton1" th:if="${section !=NULL}"
 				class="button blue"
 				th:onclick="'getDetail(\''+${section.boId}+'\',\''+'REGISTER'+'\')'" />
 
@@ -547,7 +601,19 @@
 					<td><input type="date" id="endTime" style="width: 200px" /></td>
 				</tr>
 			</table>
-	
+			<label for="course-label" id="label-for-course" th:if="${courseLists!=NULL}"> Select Course:</label>
+			<select name="course" th:if="${courseLists!=NULL}"
+				id="course">
+				<option th:each="course:${courseLists}"
+					th:value="${course.boId}" th:text="${course.name}"></option>
+			</select> 
+			<label for="employee-label" id="label-for-employee" th:if="${employeeLists!=NULL}"> Select Employee:</label>
+			<select name="employee"
+				th:if="${employeeLists!=NULL}" id="employee">
+				<option th:each="employee:${employeeLists}"
+					th:value="${employee.boId}" th:text="${employee.name}"></option>
+			</select> 
+			<input type="button" value="Save Section" onclick="saveSection()"/>
 	</div>
 	
 	<div  id="employee-form" class="hide">
@@ -605,82 +671,4 @@
 			    document.getElementById('employee-list-detail-table').className = 'show';" />
 			</div>
 	</div>
-	
-<!--	<div  id="course-form" class="hide">
-			<table align="center">
-				<tr>
-					<td colspan="2"><label for="course-form-title">
-							Course Form</label></td>
-				</tr>
-				<tr>
-					<td><label for="course-name" id="label"> Name:</label></td>
-					<td><input type="text" id="course-name" style="width: 200px" /></td>
-				</tr>
-				<tr>
-					<td><label for="course-fee" id="label">Fee:</label></td>
-					<td><input type="number" id="fee"
-						style="width: 200px" /></td>
-				</tr>
-
-			</table>
-			<div id="course-form-button">
-			    <input type="button" onclick="saveCourse()" value="Save" id="saveCourseForm" /> 
-			    
-				<input type="button" value="Cancel" id="cancelCourseForm"
-				onclick="document.getElementById('courseForm').className = 'hide'; 
-			    document.getElementById('course-list-detail-table').className = 'show';" />
-			</div>
-	</div>
-	
-		  <div  id="payment-form" class="hide">
-			<table align="center">
-				<tr>
-					<td colspan="2"><label for="course-form-title">
-							Payment Form</label></td>
-				</tr>
-				<tr>
-					<td><label for="payment-name" id="label"> Name:</label></td>
-					<td><input type="text" id="name" style="width: 200px" /></td>
-				</tr>
-				<tr>
-					<td><label for="payment-fee" id="label">Fee:</label></td>
-					<td><input type="number" id="fee"
-						style="width: 200px" /></td>
-				</tr>
-				<tr>
-					<td><label for="payment-discount" id="label"> Discount:</label></td>
-					<td><input type="text" id="discount" style="width: 200px" /></td>
-				</tr>
-				<tr>
-					<td><label for="payment-description" id="label">Description:</label></td>
-					<td><textarea rows="4" cols="50" id="description">
-					</textarea></td>
-				</tr>
-			</table>
-	</div>
-	
-	<div  id="batch-form" class="hide">
-			<table align="center">
-				<tr>
-					<td colspan="2"><label for="Student-form-title">
-							Batch  Form</label></td>
-				</tr>
-				<tr>
-					<td><label for="batch-name" id="label"> Name:</label></td>
-					<td><input type="text" id="name" style="width: 200px" /></td>
-				</tr>
-				<tr>
-					<td><label for="start-date" id="label"> Start Date:</label></td>
-					<td><input type="date" id="startDate"
-						style="width: 200px" /></td>
-				</tr>
-				<tr>
-					<td><label for="end-date" id="label"> End Date:</label></td>
-					<td><input type="date" id="endDate"
-						style="width: 200px" /></td>
-				</tr>
-				</table> -->
-	
-	<!-- </div> -->
-	
 </div>

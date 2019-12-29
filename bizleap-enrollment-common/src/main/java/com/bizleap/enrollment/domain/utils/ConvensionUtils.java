@@ -64,25 +64,25 @@ public class ConvensionUtils {
 				student.setSection(section);
 			}
 		}
-		logger.info("Here ConvensionUtils--2");
-		if (!simpleSection.getSimpleEmployeeList().isEmpty()) {
-			for (SimpleEmployee simpleEmployee : simpleSection.getSimpleEmployeeList()) {
-				logger.info("employee : " + simpleEmployee);
-				Employee employee = new Employee();
-				employee.setBoId(simpleEmployee.getBoId());
-				employee.setName(simpleEmployee.getName());
-				employee.setAddress(simpleEmployee.getAddress());
-				employee.setAge(simpleEmployee.getAge());
-				employee.setEmail(simpleEmployee.getEmail());
-				employee.setPhoneNumber(simpleEmployee.getPhoneNumber());
-				employee.setSalary(simpleEmployee.getSalary());
-				employee.setPosition(simpleEmployee.getPosition());
-				section.getEmployeeList().add(employee);
-				logger.info("section's employee list : " + section.getEmployeeList().get(0).getName());
-				employee.getSectionList().add(section);
-				logger.info("employee's section list: " + employee.getSectionList().get(0).getName());
-			}
-		}
+//		logger.info("Here ConvensionUtils--2");
+//		if (!simpleSection.getSimpleEmployeeList().isEmpty()) {
+//			for (SimpleEmployee simpleEmployee : simpleSection.getSimpleEmployeeList()) {
+//				logger.info("employee : " + simpleEmployee);
+////				Employee employee = new Employee();
+////				employee.setBoId(simpleEmployee.getBoId());
+////				employee.setName(simpleEmployee.getName());
+////				employee.setAddress(simpleEmployee.getAddress());
+////				employee.setAge(simpleEmployee.getAge());
+////				employee.setEmail(simpleEmployee.getEmail());
+////				employee.setPhoneNumber(simpleEmployee.getPhoneNumber());
+////				employee.setSalary(simpleEmployee.getSalary());
+////				employee.setPosition(simpleEmployee.getPosition());
+//				section.getEmployeeList().add(employeeService.);
+//				logger.info("section's employee list : " + section.getEmployeeList().get(0).getName());
+//				employee.getSectionList().add(section);
+//				logger.info("employee's section list: " + employee.getSectionList().get(0).getName());
+//			}
+//		}
 		if (simpleSection.getSimpleCourse() != null) {
 			Course course = new Course();
 			course.setId((simpleSection.getSimpleCourse().getId()));

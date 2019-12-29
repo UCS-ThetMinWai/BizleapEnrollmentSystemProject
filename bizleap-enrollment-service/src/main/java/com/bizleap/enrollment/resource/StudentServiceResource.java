@@ -10,7 +10,7 @@ import com.bizleap.enrollment.exception.ServiceUnavailableException;
 
 public interface StudentServiceResource {
 	List<Student> getAllStudent(HttpServletRequest request) throws ServiceUnavailableException;
-	// createSection(HttpServletRequest request,SimpleSection section);
+	Boolean createStudent(HttpServletRequest request,String input);
     Student findByStudentBoId(HttpServletRequest request,String boId)throws ServiceUnavailableException;
 }
 
