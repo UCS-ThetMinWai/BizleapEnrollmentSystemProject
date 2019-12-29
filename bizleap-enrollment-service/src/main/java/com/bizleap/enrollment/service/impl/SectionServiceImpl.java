@@ -173,7 +173,7 @@ public class SectionServiceImpl extends AbstractServiceImpl implements SectionSe
 		}
 		Hibernate.initialize(section.getCourse());
 		// Hibernate.initialize(section.getBatch());
-		batchService.hibernateInitializeBatch(section.getBatch());
+		//batchService.hibernateInitializeBatch(section.getBatch());
 	}
 
 }

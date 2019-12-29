@@ -17,6 +17,7 @@ import com.bizleap.enrollment.service.BatchService;
 import com.bizleap.enrollment.service.SectionService;
 
 @Service("batchService")
+@Transactional(readOnly = true)
 public class BatchServiceImpl extends AbstractServiceImpl implements BatchService {
 	
 	@Autowired
@@ -51,7 +52,7 @@ public class BatchServiceImpl extends AbstractServiceImpl implements BatchServic
 		
 		for(Section section : batch.getSectionList()) {
 			Hibernate.initialize(section);
-			//sectionService.hibernateInitializeSection(section);
+			sectionService.hibernateInitializeSection(section);
 			//sectionService.hibernateInitializeSection(section);
 
 		}

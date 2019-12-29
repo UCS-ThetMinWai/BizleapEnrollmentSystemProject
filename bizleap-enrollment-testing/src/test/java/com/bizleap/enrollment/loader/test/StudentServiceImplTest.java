@@ -42,7 +42,7 @@ public class StudentServiceImplTest extends ServiceTest {
 			logger.info("Error is" + e);
 		}
 	}
-	@Ignore
+
 	@Test
 	public void testSaveStudent() throws ParseException {
 		

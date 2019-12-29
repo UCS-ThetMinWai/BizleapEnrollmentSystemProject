@@ -96,6 +96,31 @@
 </table>
 </div>
 
+<div id="batch-content" class="hide">
+<table class="content-table" id="content-table">
+	<tr th:each="batch : ${batchList}" onclick="getDetail(this,'BATCH')" th:attr="id=${batch.boId}" >
+		<td>
+			<span th:text="${batch.name}"></span>&nbsp;
+			<span th:text="${batch.start-date}"></span>&nbsp;
+			<span th:text="${batch.end-date}"></span><br /> 
+		</td>
+	</tr>
+</table>
+</div>
+
+<!--<div id="payment-content" class="hide">
+<table class="content-table" id="content-table">
+	<tr th:each="payment : ${paymentList}" onclick="getDetail(this,'PAYMENT')" th:attr="id=${payment.boId}" >
+		<td>
+			<span th:text="${payment.name}"></span>&nbsp;
+			<span th:text="${payment.fee}"></span>&nbsp;
+			<span th:text="${batch.discount}"></span><br /> 
+			<span th:text="${batch.discription}"></span><br /> 
+		</td>
+	</tr>
+</table>
+</div> -->
+
 <!-- <div id="address-content" class="hide">
 <table class="content-table" id="content-table">
 	<tr th:each="address : ${addressList}" onclick="getDetail(this,'ADDRESS')" th:attr="id=${address.boId}" >

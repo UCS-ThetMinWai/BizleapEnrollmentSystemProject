@@ -117,6 +117,121 @@
 		</form>
 	</div>
 
+	<!-- Department Form -->
+
+	<!-- Teacher Form -->
+	<div class="hide" id="teacherForm">
+		<form action="javascript:saveTeacher();" id="newTeacherForm">
+			<label for="Teacher-name" id="label">Teacher Name:</label> <input
+				type="text" id="teacher-name" style="width: 200px" /><br /> <label
+				for="selectDepartment" id="label1">Select Department:</label> <select
+				id="department" name="department">
+				<option th:each="department : ${departmentList}"
+					th:value="${department.boId}" th:text="${department.name}">
+				</option>
+			</select> <input type="submit" value="Save" id="saveTeacherForm" /> <input
+				type="button" value="Cancel" id="cancelTeacherForm"
+				onclick="document.getElementById('teacherForm').className = 'hide';
+			document.getElementById('teacher-detail-table').className = 'show';" />
+		</form>
+	</div>
+	<!-- Teacher Form -->
+
+	<!-- Batch Form -->
+	<div class="hide" id="batch-form">
+		<form action="javascript:saveBatch();" id="newBatchForm">
+			<label for="Batch-name" id="label">Batch Name:</label>
+			 <input type="text" id="batch-name" style="width: 200px" /><br /> 
+			 <tr>
+					<td><label for="start-date" id="label"> Start Date:</label></td>
+					<td><input type="date" id="start-date"
+						style="width: 200px" /></td>
+				</tr><br />
+			 <tr>
+					<td><label for="end-date" id="label"> End Date:</label></td>
+					<td><input type="date" id="end-date"
+						style="width: 200px" /></td>
+				</tr>  
+			 <input type="submit" value="Save" id="saveBatchForm" /> 
+			 <input type="button" value="Cancel" id="cancelBatchForm"
+				onclick="document.getElementById('batchForm').className = 'hide';
+			document.getElementById('batch-list-detail-table').className = 'show';" />
+		</form>
+	</div>
+	<!-- Batch Form -->
+
+	<!--Payment Form -->
+	<div class="hide" id="payment-form">
+		<span id="studentBoId" class = "hide"></span>
+		<form action="javascript:savePayment();" id="newPaymentForm">
+			<label for="Payment-name" id="label">Payment Name:</label>
+			 <input type="text" id="payment-name" style="width: 200px" /><br /> 
+			 <label for="Payment-fee" id="label">Fee:</label>
+			 <input type="text" id="payment-fee" style="width: 200px" /><br />
+			 <label for="Payment-discount" id="label">Payment Discount:</label>
+			 <input type="text" id="payment-discount" style="width: 200px" /><br />  
+			 <label for="Payment-discription" id="label">Payment Discription:</label>
+			 <input type="text" id="payment-discription" style="width: 200px" /><br />  
+			 <!-- <select id="student" name="student">
+				<option th:each="student : ${studentList}"
+					th:value="${student.boId}" th:text="${student.name}">
+				</option>
+			</select>  -->
+			<input type="submit" value="Save" id="savePaymentForm" />
+			<input type="button" value="Cancel" id="cancelPaymentForm" 
+			onclick="getAllEntityDetail('STUDENT');" />
+		</form>
+	</div>
+
+
+
+	<!-- Staff Form -->
+	<div class="hide" id="staffForm">
+		<form action="javascript:saveStaff();" id="newStaffForm">
+			<label for="Staff-name" id="label">Staff Name:</label> <input
+				type="text" id="staff-name" style="width: 200px" /><br /> <label
+				for="selectDepartment" id="label2">Select Department:</label> <select
+				id="department1" name="department">
+				<option th:each="department : ${departmentList}"
+					th:value="${department.boId}" th:text="${department.name}">
+				</option>
+			</select> <input type="submit" value="Save" id="saveStaffForm" /> <input
+				type="button" value="Cancel" id="cancelStaffForm"
+				onclick="document.getElementById('staffForm').className = 'hide';
+			document.getElementById('staff-detail-table').className = 'show';" />
+		</form>
+	</div>
+	<!-- Staff Form -->
+
+	<!-- Major Form -->
+	<div class="hide" id="majorForm">
+		<form action="javascript:saveMajor();" id="newMajorForm">
+			<label for="Major-name" id="label">Major Name:</label> <input
+				type="text" id="major-name" style="width: 200px" /><br /> <input
+				type="submit" value="Save" id="saveMajorForm" /> <input
+				type="button" value="Cancel" id="cancelMajorForm"
+				onclick="document.getElementById('majorForm').className = 'hide';
+			document.getElementById('major-detail-table').className = 'show';" />
+		</form>
+	</div>
+	<!-- Major Form -->
+
+	<!-- Student Form -->
+	<div class="hide" id="studentForm">
+		<form action="javascript:saveStudent();" id="newStudentForm">
+			<label for="Student-name" id="label">Student Name:</label> <input
+				type="text" id="student-name" style="width: 200px" /><br /> <label
+				for="selectMajor" id="label3">Select Major:</label> <select
+				id="major" name="major">
+				<option th:each="major : ${majorList}" th:value="${major.boId}"
+					th:text="${major.name}"></option>
+			</select> <input type="submit" value="Save" id="saveStudentForm" /> <input
+				type="button" value="Cancel" id="cancelStudentForm"
+				onclick="document.getElementById('studentForm').className = 'hide'; document.getElementById('student-detail-table').className = 'show';" />
+		</form>
+	</div>
+	<!-- Student Form -->
+
 	<!--  get detail course -->
 	<div th:if="${course!=NULL}" id="course-detail-table" class="hide">
 		<table style="width: 40%;">
@@ -137,6 +252,8 @@
 
 		</table>
 	</div>
+
+	
 
 	<!-- section detail table -->
 	<div th:if="${section!=NULL}" id="section-detail-table" class="hide">
@@ -164,6 +281,7 @@
 				</table>
 			</div>
 		</div>
+
 
 		<div class="cardPannel">
 			<div class="cardContainer">
@@ -303,18 +421,19 @@
 		<span><u>Student Details</u></span>
 		<table style="width: 100%;">
 			<tr>
-				<th>Id</th>
-				<th>BoId</th>
-				<th>Name</th>
-				<th>Address</th>
-				<th>Age</th>
-				<th>Email</th>
-				<th>Phone Number</th>
-				<th>Description</th>
-				<th>Enroll Type</th>
+				<th>Id:</th>
+				<th>BoId:</th>
+				<th>Name:</th>
+				<th>Address:</th>
+				<th>Age:</th>
+				<th>Email:</th>
+				<th>Phone Number:</th>
+				<th>Description:</th>
+				<th>Enroll Type:</th>
+				<th>Payment</th>
 			</tr>
 			<tr th:if="${studentList!='INVALID'}"
-				th:each="student:${studentList}" id="detail-student-list-id">
+				th:each="student:${studentList}" id="detail-student-list-id" th:value="${student.boId}">
 				<td th:text="${student.id}"></td>
 				<td th:text="${student.boId}"></td>
 				<td th:text="${student.name}"></td>
@@ -324,8 +443,46 @@
 				<td th:text="${student.phoneNumber}"></td>
 				<td th:text="${student.description}"></td>
 				<td th:text="${student.studentStatus}"></td>
+				<td><input type="button" value="Add" id="add-payment"
+				onclick="showForm(this.parentNode.parentNode.children[1].innerHTML)"/></td>
+				<tr>
+					<th>Payment Name</th>
+					<th>Fee</th>
+					<th>Discount</th>
+					<th>Discription</th>
+				</tr>
+				<tr th:each="payment:${student.paymentList}">
+					<td th:text="${payment.name}"></td>
+					<td th:text="${payment.fee}"></td>
+					<td th:text="${payment.discount}"></td>
+					<td th:text="${payment.discription}"></td>
+				</tr>
 			</tr>
 		</table>
+	</div>
+
+	<!--get all batch detail -->
+	<div th:if="${batchList!=NULL}" id="batch-list-detail-table"
+		class="hide">
+		<span><u>Batch Details</u></span>
+		<table style="width: 100%;">
+			<tr>
+				<th>Id:</th>
+				<th>BoId:</th>
+				<th>Name:</th>
+				<th>Start Date:</th>
+				<th>End Date:</th>
+			</tr>
+			<tr th:if="${batchList!='INVALID'}"
+				th:each="batch:${batchList}" id="detail-batch-list-id">
+				<td th:text="${batch.id}"></td>
+				<td th:text="${batch.boId}"></td>
+				<td th:text="${batch.name}"></td>
+				<td th:text="${batch.startDate}"></td>
+				<td th:text="${batch.endDate}"></td>
+			</tr>
+		</table>
+
 	</div>
 
 	<!-- get All Payment Detail Table -->
@@ -448,8 +605,8 @@
 			    document.getElementById('employee-list-detail-table').className = 'show';" />
 			</div>
 	</div>
-		
-	<div  id="courseForm" class="hide">
+	
+<!--	<div  id="course-form" class="hide">
 			<table align="center">
 				<tr>
 					<td colspan="2"><label for="course-form-title">
@@ -475,9 +632,7 @@
 			</div>
 	</div>
 	
-
-	<div  id="payment-form" class="hide">
-
+		  <div  id="payment-form" class="hide">
 			<table align="center">
 				<tr>
 					<td colspan="2"><label for="course-form-title">
@@ -515,16 +670,17 @@
 					<td><input type="text" id="name" style="width: 200px" /></td>
 				</tr>
 				<tr>
-					<td><label for="batch-start-date" id="label"> Start Date:</label></td>
+					<td><label for="start-date" id="label"> Start Date:</label></td>
 					<td><input type="date" id="startDate"
 						style="width: 200px" /></td>
 				</tr>
 				<tr>
-					<td><label for="batch-end-date" id="label">End Date:
-							</label></td>
+					<td><label for="end-date" id="label"> End Date:</label></td>
 					<td><input type="date" id="endDate"
 						style="width: 200px" /></td>
 				</tr>
-				</table>
-	</div>
+				</table> -->
+	
+	<!-- </div> -->
+	
 </div>

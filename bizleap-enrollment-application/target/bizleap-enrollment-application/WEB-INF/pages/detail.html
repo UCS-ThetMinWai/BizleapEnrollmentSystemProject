@@ -1,6 +1,7 @@
 <link rel="stylesheet" th:href="@{/resources/css/detail.css}"
 	type="text/css" />
-<div id="detail-table" class="show">
+
+<div id="detail-table" class="hide">
 
 	<!-- Employee Login Form  -->
 
@@ -36,7 +37,7 @@
 				<span><u>Section</u></span>
 				<table style="width: 100%;">
 					<tr>
-						<th>Name:</th>
+						<th>Name</th>
 						<th>Weekly Open</th>
 						<th>Start Date</th>
 						<th>Finish Date</th>
@@ -110,39 +111,11 @@
 					<td><input type="number" id="student-age" style="width: 200px" /></td>
 				</tr>
 			</table>
-
-
-
-
-
-
-
-
-			<!-- <table>
-				<tr>
-					<td><label for="Course-form-title" id="label">The Course you took:</label></td>
-				</tr>
-				<tr>
-				<td><label for="course-name" id="label" th:if="${register!=NULL}">
-					Name:<span th:if="${register.course!=NULL }"
-					th:text="${register.course.name}"></span>
-				</label></td>
-				</tr>
-				
-				<tr>
-				<td><label for="course-name" id="label" th:if="${register!=NULL}">
-					Fee:<span th:if="${register.course!=NULL }"
-					th:text="${register.course.fee}"></span>
-				</label></td>
-				</tr>
-				
-			</table> -->
 			<input type="submit" value="REGISTER" id="saveStudentForm" /> <input
 				type="button" value="Cancel" id="cancelStudenttForm"
 				onclick="document.getElementById('registerForm').className = 'hide'; document.getElementById('section-detail-table').className = 'show';" />
 		</form>
 	</div>
-
 
 	<!-- Department Form -->
 
@@ -163,6 +136,54 @@
 		</form>
 	</div>
 	<!-- Teacher Form -->
+
+	<!-- Batch Form -->
+	<div class="hide" id="batch-form">
+		<form action="javascript:saveBatch();" id="newBatchForm">
+			<label for="Batch-name" id="label">Batch Name:</label>
+			 <input type="text" id="batch-name" style="width: 200px" /><br /> 
+			 <tr>
+					<td><label for="start-date" id="label"> Start Date:</label></td>
+					<td><input type="date" id="start-date"
+						style="width: 200px" /></td>
+				</tr><br />
+			 <tr>
+					<td><label for="end-date" id="label"> End Date:</label></td>
+					<td><input type="date" id="end-date"
+						style="width: 200px" /></td>
+				</tr>  
+			 <input type="submit" value="Save" id="saveBatchForm" /> 
+			 <input type="button" value="Cancel" id="cancelBatchForm"
+				onclick="document.getElementById('batchForm').className = 'hide';
+			document.getElementById('batch-list-detail-table').className = 'show';" />
+		</form>
+	</div>
+	<!-- Batch Form -->
+
+	<!--Payment Form -->
+	<div class="hide" id="payment-form">
+		<span id="studentBoId" class = "hide"></span>
+		<form action="javascript:savePayment();" id="newPaymentForm">
+			<label for="Payment-name" id="label">Payment Name:</label>
+			 <input type="text" id="payment-name" style="width: 200px" /><br /> 
+			 <label for="Payment-fee" id="label">Fee:</label>
+			 <input type="text" id="payment-fee" style="width: 200px" /><br />
+			 <label for="Payment-discount" id="label">Payment Discount:</label>
+			 <input type="text" id="payment-discount" style="width: 200px" /><br />  
+			 <label for="Payment-discription" id="label">Payment Discription:</label>
+			 <input type="text" id="payment-discription" style="width: 200px" /><br />  
+			 <!-- <select id="student" name="student">
+				<option th:each="student : ${studentList}"
+					th:value="${student.boId}" th:text="${student.name}">
+				</option>
+			</select>  -->
+			<input type="submit" value="Save" id="savePaymentForm" />
+			<input type="button" value="Cancel" id="cancelPaymentForm" 
+			onclick="getAllEntityDetail('STUDENT');" />
+		</form>
+	</div>
+
+
 
 	<!-- Staff Form -->
 	<div class="hide" id="staffForm">
@@ -232,6 +253,8 @@
 		</table>
 	</div>
 
+	
+
 	<!-- section detail table -->
 	<div th:if="${section!=NULL}" id="section-detail-table" class="hide">
 		<div class="cardPannel">
@@ -239,7 +262,7 @@
 				<span><u>Section Details</u></span>
 				<table style="width: 100%;">
 					<tr>
-						<th>Name:</th>
+						<th>Name</th>
 						<th>Weekly Open</th>
 						<th>Start Date</th>
 						<th>Finish Date</th>
@@ -259,13 +282,14 @@
 			</div>
 		</div>
 
+
 		<div class="cardPannel">
 			<div class="cardContainer">
 
 				<span><u>Course Details</u></span>
 				<table style="width: 50%;">
 					<tr>
-						<th>Name:</th>
+						<th>Name</th>
 						<th>Fee</th>
 					</tr>
 					<tr th:if="${section.course!='INVALID'}" th:value="${section.id}"
@@ -282,7 +306,7 @@
 				<span><u>Instructors Details</u></span>
 				<table style="width: 50%;">
 					<tr>
-						<th>Name:</th>
+						<th>Name</th>
 						<th>Position</th>
 					</tr>
 
@@ -302,124 +326,6 @@
 				th:onclick="'getDetail(\''+${section.boId}+'\',\''+'REGISTER'+'\')'" />
 
 		</div>
-		<!-- <tr th:if="${section!='INVALID'}" th:value="${section.id}"
-				id="detail-section-id">
-				<td>Section BoId:</td>
-				<td th:text="${section.boId}" style=""></td>
-
-			</tr>
-
-			<tr th:if="${section!='INVALID'}">
-				<td>Section Name:</td>
-				<td th:text="${section.name}"></td>
-			</tr>
-
-			<tr th:if="${section!='INVALID'}">
-				<td>Open At:</td>
-				<td th:text="${section.dayType}"></td>
-			</tr>
-
-			<tr th:if="${section!='INVALID'}">
-				<td>State Date:</td>
-				<td th:text="${section.startDate}"></td>
-			</tr>
-
-			<tr th:if="${section!='INVALID'}">
-				<td>End Date:</td>
-				<td th:text="${section.endDate}"></td>
-			</tr>
-
-			<tr th:if="${section!='INVALID'}">
-				<td>State Time:</td>
-				<td th:text="${section.startTime}"></td>
-			</tr>
-
-			<tr th:if="${section!='INVALID'}">
-				<td>End Time:</td>
-				<td th:text="${section.endTime}"></td>
-			</tr>
-
-			<tr th:if="${section.course!='INVALID'}">
-				<td>Course Name:</td>
-				<td th:if="${section.course!=NULL}" th:text="${section.course.name}"></td>
-			</tr>
-
-
-			<tr th:if="${section.course!='INVALID'}">
-				<td>Course Fee:</td>
-				<td th:text="${section.course.fee}"></td>
-			</tr>
-
-			<tr th:if="${section.employeeList!='INVALID'} ">
-				<td>Teacher Name:</td>
-				<td th:each="employee:${section.employeeList}"><span
-					th:text="${employee.name}">:</span> Position:<span
-					th:text="${employee.position}"></span></td>
-			</tr>
-			<tr>
-				<td><input type="submit" value="Register" id="addNewButton1"
-					th:onclick="'getDetail(\''+${section.boId}+'\',\''+'REGISTER'+'\')'" /></td>
-			</tr>
-		</table>
- -->
-	</div>
-
-	<div th:if="${staff!=NULL}" id="staff-detail-table" class="show">
-		<table style="width: 40%;">
-			<tr th:if="${staff!='INVALID'}" th:value="${staff.id}"
-				id="detail-staff-id">
-				<td>Staff BoId:</td>
-				<td th:text="${staff.boId}" style=""></td>
-				<td><input type="submit" value="Add New" id="addNewButton2"
-					onclick="getNewStaffForm()" /></td>
-			</tr>
-			<tr th:if="${staff!='INVALID'}">
-				<td>Staff Name:</td>
-				<td th:text="${staff.name}"></td>
-			</tr>
-			<tr th:if="${staff!='INVALID'}">
-				<td>Staff Department Name:</td>
-				<td th:if="${staff.department!=NULL}"
-					th:text="${staff.department.name}"></td>
-			</tr>
-		</table>
-	</div>
-
-	<div th:if="${major!=NULL}" id="major-detail-table" class="hide">
-		<table style="width: 40%;">
-			<tr th:if="${major!='INVALID'}" th:value="${major.id}"
-				id="detail-major-id">
-				<td>Major BoId:</td>
-				<td th:text="${major.boId}"></td>
-				<td><input type="submit" value="Add New" id="addNewButton"
-					onclick="addNewMajor()" /></td>
-			</tr>
-			<tr th:if="${major!='INVALID'}">
-				<td>Major Name:</td>
-				<td th:text="${major.name}"></td>
-			</tr>
-		</table>
-	</div>
-
-	<div th:if="${student!=NULL}" id="student-detail-table" class="hide">
-		<table style="width: 40%;">
-			<tr th:if="${student!='INVALID'}" th:value="${student.id}"
-				id="detail-student-id">
-				<td>Student BoId:</td>
-				<td th:text="${student.boId}" style=""></td>
-				<td><input type="submit" value="Add New" id="addNewButton"
-					onclick="getNewStudentForm()" /></td>
-			</tr>
-			<tr th:if="${student!='INVALID'}">
-				<td>Student Name:</td>
-				<td th:text="${student.name}"></td>
-			</tr>
-			<tr th:if="${student!='INVALID'}">
-				<td>Student Major Name:</td>
-				<td th:if="${student.major!=NULL}" th:text="${student.major.name}"></td>
-			</tr>
-		</table>
-	</div>
 
 	<!-- get All Section Detail Table -->
 	<div th:if="${sectionList!=NULL}" id="section-list-detail-table"
@@ -427,7 +333,7 @@
 		<span><u>Section Details</u></span>
 		<table style="width: 100%;">
 			<tr>
-				<th>Name:</th>
+				<th>Name</th>
 				<th>Weekly Open</th>
 				<th>Start Date</th>
 				<th>Finish Date</th>
@@ -453,10 +359,10 @@
 		<span><u>Course Details</u></span>
 		<table style="width: 100%;">
 			<tr>
-				<th>Id:</th>
-				<th>BoId:</th>
-				<th>Name:</th>
-				<th>Fee:</th>
+				<th>Id</th>
+				<th>BoId</th>
+				<th>Name</th>
+				<th>Fee</th>
 			</tr>
 			<tr th:if="${courseList!='INVALID'}" th:each="course:${courseList}"
 				id="detail-section-list-id">
@@ -475,16 +381,16 @@
 		<span><u>Employee Details</u></span>
 		<table style="width: 100%;">
 			<tr>
-				<th>Id:</th>
-				<th>BoId:</th>
-				<th>Name:</th>
-				<th>Address:</th>
-				<th>Age:</th>
-				<th>Email:</th>
-				<th>Password:</th>
-				<th>Phone Number:</th>
-				<th>Position:</th>
-				<th>Salary:</th>
+				<th>Id</th>
+				<th>BoId</th>
+				<th>Name</th>
+				<th>Address</th>
+				<th>Age</th>
+				<th>Email</th>
+				<th>Password</th>
+				<th>Phone Number</th>
+				<th>Position</th>
+				<th>Salary</th>
 			</tr>
 			<tr th:if="${employeeList!='INVALID'}"
 				th:each="employee:${employeeList}" id="detail-employee-list-id">
@@ -524,9 +430,10 @@
 				<th>Phone Number:</th>
 				<th>Description:</th>
 				<th>Enroll Type:</th>
+				<th>Payment</th>
 			</tr>
 			<tr th:if="${studentList!='INVALID'}"
-				th:each="student:${studentList}" id="detail-student-list-id">
+				th:each="student:${studentList}" id="detail-student-list-id" th:value="${student.boId}">
 				<td th:text="${student.id}"></td>
 				<td th:text="${student.boId}"></td>
 				<td th:text="${student.name}"></td>
@@ -536,8 +443,46 @@
 				<td th:text="${student.phoneNumber}"></td>
 				<td th:text="${student.description}"></td>
 				<td th:text="${student.studentStatus}"></td>
+				<td><input type="button" value="Add" id="add-payment"
+				onclick="showForm(this.parentNode.parentNode.children[1].innerHTML)"/></td>
+				<tr>
+					<th>Payment Name</th>
+					<th>Fee</th>
+					<th>Discount</th>
+					<th>Discription</th>
+				</tr>
+				<tr th:each="payment:${student.paymentList}">
+					<td th:text="${payment.name}"></td>
+					<td th:text="${payment.fee}"></td>
+					<td th:text="${payment.discount}"></td>
+					<td th:text="${payment.discription}"></td>
+				</tr>
 			</tr>
 		</table>
+	</div>
+
+	<!--get all batch detail -->
+	<div th:if="${batchList!=NULL}" id="batch-list-detail-table"
+		class="hide">
+		<span><u>Batch Details</u></span>
+		<table style="width: 100%;">
+			<tr>
+				<th>Id:</th>
+				<th>BoId:</th>
+				<th>Name:</th>
+				<th>Start Date:</th>
+				<th>End Date:</th>
+			</tr>
+			<tr th:if="${batchList!='INVALID'}"
+				th:each="batch:${batchList}" id="detail-batch-list-id">
+				<td th:text="${batch.id}"></td>
+				<td th:text="${batch.boId}"></td>
+				<td th:text="${batch.name}"></td>
+				<td th:text="${batch.startDate}"></td>
+				<td th:text="${batch.endDate}"></td>
+			</tr>
+		</table>
+
 	</div>
 
 	<!-- get All Payment Detail Table -->
@@ -546,10 +491,10 @@
 		<span><u>Payment Details</u></span>
 		<table style="width: 100%;">
 			<tr>
-				<th>Id:</th>
-				<th>BoId:</th>
-				<th>Name:</th>
-				<th>Fee:</th>
+				<th>Id</th>
+				<th>BoId</th>
+				<th>Name</th>
+				<th>Fee</th>
 				<th>Discount</th>
 				<th>Description</th>
 			</tr>
@@ -605,8 +550,7 @@
 	
 	</div>
 	
-	
-	<!-- <div  id="employee-form" class="hide">
+	<div  id="employee-form" class="hide">
 			<table align="center">
 				<tr>
 					<td colspan="2"><label for="Student-form-title">
@@ -614,42 +558,55 @@
 				</tr>
 				<tr>
 					<td><label for="employee-name" id="label"> Name:</label></td>
-					<td><input type="text" id="name" style="width: 200px" /></td>
+					<td><input type="text" id="employee-name" style="width: 200px" /></td>
 				</tr>
 				<tr>
 					<td><label for="employee-address" id="label">Address:</label></td>
-					<td><input type="text" id="address"
+					<td><input type="text" id="employee-address"
 						style="width: 200px" /></td>
 				</tr>
 				<tr>
 					<td><label for="employee-age" id="label"> Age:</label></td>
-					<td><input type="number" id="age"
+					<td><input type="number" id="employee-age"
 						style="width: 200px" /></td>
 				</tr>
 				<tr>
 					<td><label for="employee-email" id="label">Email:
 							</label></td>
-					<td><input type="email" id="email"
+					<td><input type="email" id="employeeEmail"
 						style="width: 200px" /></td>
 				</tr>
 				<tr>
 					<td><label for="employee-password" id="label"> Password</label></td>
-					<td><input type="password" id="student-age" style="width: 200px" /></td>
+					<td><input type="password" id="employeePassword" style="width: 200px" /></td>
+				</tr>
+				<tr>
+					<td><label for="employee-phoneNumber" id="label"> PhoneNumber</label></td>
+					<td><input type="text" id="employee-phoneNumber" style="width: 200px" /></td>
 				</tr>
 				<tr>
 					<td><label for="employee-position" id="label"> Position</label></td>
-					<td><input type="text" id="position" style="width: 200px" /></td>
+					<td><select name="position" id="employee-position">
+					<option value="INSTRUCTOR">Instructor</option>
+					<option value="ADMINISTRATOR">Administrator</option>
+					<option value="ORGANIZER">Organizer</option>
+					</select></td>
 				</tr>
 				<tr>
 					<td><label for="employee-salary" id="label"> Salary:</label></td>
-					<td><input type="text" id="salary" style="width: 200px" /></td>
+					<td><input type="text" id="employee-salary" style="width: 200px" /></td>
 				</tr>
 			</table>
+			<div id="employee-form-button">
+			    <input type="button" onclick="saveEmployee()" value="Save" id="saveEmployeeForm" /> 
+			    
+				<input type="button" value="Cancel" id="cancelEmployeeForm"
+				onclick="document.getElementById('employee-form').className = 'hide'; 
+			    document.getElementById('employee-list-detail-table').className = 'show';" />
+			</div>
 	</div>
 	
-	
-	
-	<div  id="course-form" class="hide">
+<!--	<div  id="course-form" class="hide">
 			<table align="center">
 				<tr>
 					<td colspan="2"><label for="course-form-title">
@@ -657,7 +614,7 @@
 				</tr>
 				<tr>
 					<td><label for="course-name" id="label"> Name:</label></td>
-					<td><input type="text" id="name" style="width: 200px" /></td>
+					<td><input type="text" id="course-name" style="width: 200px" /></td>
 				</tr>
 				<tr>
 					<td><label for="course-fee" id="label">Fee:</label></td>
@@ -666,11 +623,16 @@
 				</tr>
 
 			</table>
+			<div id="course-form-button">
+			    <input type="button" onclick="saveCourse()" value="Save" id="saveCourseForm" /> 
+			    
+				<input type="button" value="Cancel" id="cancelCourseForm"
+				onclick="document.getElementById('courseForm').className = 'hide'; 
+			    document.getElementById('course-list-detail-table').className = 'show';" />
+			</div>
 	</div>
 	
-	
-	
-	<div  id="payment-form" class="hide">
+		  <div  id="payment-form" class="hide">
 			<table align="center">
 				<tr>
 					<td colspan="2"><label for="course-form-title">
@@ -691,7 +653,7 @@
 				</tr>
 				<tr>
 					<td><label for="payment-description" id="label">Description:</label></td>
-					<td><<textarea rows="4" cols="50" id="description">
+					<td><textarea rows="4" cols="50" id="description">
 					</textarea></td>
 				</tr>
 			</table>
@@ -708,18 +670,17 @@
 					<td><input type="text" id="name" style="width: 200px" /></td>
 				</tr>
 				<tr>
-					<td><label for="batch-start-date" id="label"> Start Date:</label></td>
+					<td><label for="start-date" id="label"> Start Date:</label></td>
 					<td><input type="date" id="startDate"
 						style="width: 200px" /></td>
 				</tr>
 				<tr>
-					<td><label for="batch-end-date" id="label">End Date:
-							</label></td>
+					<td><label for="end-date" id="label"> End Date:</label></td>
 					<td><input type="date" id="endDate"
 						style="width: 200px" /></td>
 				</tr>
-				</table>
+				</table> -->
 	
-	</div> -->
+	<!-- </div> -->
 	
 </div>

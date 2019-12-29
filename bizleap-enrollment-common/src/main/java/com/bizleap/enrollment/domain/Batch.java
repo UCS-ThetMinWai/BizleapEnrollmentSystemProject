@@ -21,11 +21,11 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Table(name = "batch")
 public class Batch extends AbstractEntity {
 	
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.DATE)
 	@Column(name = "startDate")
 	private Date startDate;
 	
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.DATE)
 	@Column(name = "endDate")
 	private Date endDate;
 	

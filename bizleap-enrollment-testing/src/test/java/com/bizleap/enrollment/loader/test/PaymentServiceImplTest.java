@@ -31,7 +31,7 @@ public class PaymentServiceImplTest extends ServiceTest {
 		payment.setDiscription("First Time Payment For student Mg Mg");
 		try {
 			
-			Student student = studentService.findByStudentBoIdSingle("STUDENT00001");
+			Student student = studentService.findByStudentBoIdSingle("STUDENT00003");
 			payment.setStudent(student);
 			student.getPaymentList().add(payment);
 			paymentService.savePayment(payment);

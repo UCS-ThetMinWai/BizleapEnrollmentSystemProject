@@ -28,7 +28,6 @@ public class BatchServiceImplTest extends ServiceTest {
 
 	private static Logger logger = Logger.getLogger(BatchServiceImplTest.class);
 
-	@Ignore
 	@Test
 	public void testGetAllBatch() {
 		try {
@@ -42,7 +41,7 @@ public class BatchServiceImplTest extends ServiceTest {
 		}
 	}
 
-	
+	@Ignore
 	@Test
 	public void testSaveBatch() throws ParseException {
 

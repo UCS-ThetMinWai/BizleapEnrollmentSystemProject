@@ -11,14 +11,14 @@ import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.bizleap.enrollment.domain.simple.SimpleBatch;
+import com.bizleap.enrollment.domain.simple.SimplePayment;
 
-public class BatchServiceRestClient {
-	private static final Logger logger = Logger.getLogger(BatchServiceRestClient.class);
+public class PaymentServiceRestClient {
+	private static final Logger logger = Logger.getLogger(PaymentServiceRestClient.class);
 
 	private final static String SERVICEURL = "http://localhost:8080/bizleap-enrollment-application";
 
-	public void getAllBatch() {
+	public void getAllPayment() {
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
@@ -26,7 +26,7 @@ public class BatchServiceRestClient {
 		HttpEntity<String> entity = new HttpEntity<String>(headers);
 		logger.info("Request is: " + entity);
 
-		String url = SERVICEURL + "/batchs/list";
+		String url = SERVICEURL + "/payments/list";
 		logger.info("Service url is: " + url);
 
 		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url);
@@ -37,14 +37,14 @@ public class BatchServiceRestClient {
 
 		try {
 			response = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.GET, entity, List.class);
-			logger.info("Batch List: " + response.getBody());
+			logger.info("Payment List: " + response.getBody());
 
 		} catch (Exception e) {
 			logger.error("ERRROR - " + e.getMessage() + ", " + response);
 		}
 	}
 
-	public void findByBatchBoId(String boId) {
+	public void findByPaymentBoId(String boId) {
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
@@ -52,7 +52,7 @@ public class BatchServiceRestClient {
 		HttpEntity<String> entity = new HttpEntity<String>(headers);
 
 		logger.info("Request is: " + entity);
-		String url = SERVICEURL + "/batchs/find/" + boId;
+		String url = SERVICEURL + "/payments/find/" + boId;
 		logger.info("service url is: " + url);
 
 		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url);
@@ -63,23 +63,23 @@ public class BatchServiceRestClient {
 
 		try {
 			response = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.GET, entity, String.class);
-			logger.info("Find Batch: " + response.getBody());
+			logger.info("Find Payment: " + response.getBody());
 		} catch (Exception e) {
 			logger.error("ERRROR - " + e.getMessage() + ", " + response);
 		}
 	}
 
-	public void saveBatch(SimpleBatch simpleBatch) {
+	public void savePayment(SimplePayment simplePayment) {
 
 		// Prepare the header
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-		HttpEntity<SimpleBatch> entityHeader = new HttpEntity<SimpleBatch>(simpleBatch, headers);
+		HttpEntity<SimplePayment> entityHeader = new HttpEntity<SimplePayment>(simplePayment, headers);
 		logger.info("Request is: " + entityHeader);
 
 		// Prepare the URL
-		String url = SERVICEURL + "/batchs/create";
+		String url = SERVICEURL + "/payments/create";
 		logger.info("service url is: " + url);
 
 		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url);
@@ -101,4 +101,3 @@ public class BatchServiceRestClient {
 
 	}
 }
-

@@ -37,7 +37,7 @@ public class BatchServiceResourceImpl extends AbstractServiceResourceImpl implem
 	@RequestMapping(method=RequestMethod.POST,value="/create")
 	public @ResponseBody Boolean createBatch(HttpServletRequest request,@RequestBody SimpleBatch simpleBatch) {
 		
-		logger.info("Create Department>>>>>>>>>>>>>>>>>>>>>");
+		//logger.info("Create Department>>>>>>>>>>>>>>>>>>>>>");
 		try {
 			batchService.saveBatch(ConvensionUtils.toBatch(simpleBatch));
 			
